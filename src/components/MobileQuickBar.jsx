@@ -70,7 +70,7 @@ export default function MobileQuickBar({ currentPage, setCurrentPage, t }) {
 
         {/* 5. LINE Official */}
         <a
-          href="https://lin.ee/9gpj1h4"
+          href="https://lin.ee/u14z1Oq"
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center py-1 px-1 rounded-xl text-slate-700 hover:text-emerald-600 transition-all"

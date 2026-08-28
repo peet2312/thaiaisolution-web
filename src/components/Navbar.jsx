@@ -231,7 +231,7 @@ export default function Navbar({ lang, setLang, t, currentPage, setPage, setCurr
               </a>
 
               <a
-                href="https://lin.ee/9gpj1h4"
+                href="https://lin.ee/u14z1Oq"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="py-2.5 px-3 rounded-xl bg-[#06C755]/10 border border-[#06C755]/30 text-[#06C755] text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95"

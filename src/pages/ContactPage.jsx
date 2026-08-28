@@ -295,13 +295,13 @@ export default function ContactPage({ t, prefillData }) {
             {/* Fast Track LINE OA */}
             <div className="pt-3 border-t border-slate-100">
               <a
-                href="https://lin.ee/9gpj1h4"
+                href="https://lin.ee/u14z1Oq"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-extrabold shadow-md shadow-emerald-500/20 transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>ปรึกษาด่วนผ่าน LINE Official Account (@9gpj1h4)</span>
+                <span>ปรึกษาด่วนผ่าน LINE Official Account (@319feyqj)</span>
               </a>
             </div>
           </div>
