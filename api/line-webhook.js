@@ -1,4 +1,4 @@
-const LINE_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN || '';
+const LINE_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN || 'yP1CscBeAmqnLS17FQlt4in3Oq3QzRtMZCSGedFrneSyZ0+tDFwNTHwPTuQi6mr4VbDfaEqBExYTV2TUM5d97UaEbKg1/XI04/guVk81I6P9HILfdml5bCEMdSDrP+VULWf3nB3tyUBAf/YcSxTEAgdB04t89/1O/w1cDnyilFU=';
 
 const defaultQuickReplies = {
   items: [
