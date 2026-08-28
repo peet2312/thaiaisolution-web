@@ -61,11 +61,24 @@ export default function Footer({ t, setPage, setCurrentPage, setSelectedServiceT
               </div>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-[11px] text-cyan-300 font-mono font-bold">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>เลขทะเบียนนิติบุคคล: 0905569007271</span>
               </div>
+              <a
+                href="https://dbdregistered.dbd.go.th/api/public/shopinfoReg?param=560A0F03DAD1F05E60FACE779017B18456F64EF1FE4CE7B4447D4CFB27DD8854"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center hover:opacity-90 transition-all hover:scale-105"
+                title="คลิกเพื่อตรวจสอบเครื่องหมาย DBD Registered กรมพัฒนาธุรกิจการค้า"
+              >
+                <img
+                  src="https://dbdregistered.dbd.go.th/api/public/bannerreg?param=560A0F03DAD1F05E60FACE779017B18456F64EF1FE4CE7B4447D4CFB27DD8854"
+                  alt="เครื่องหมายรับรอง DBD Registered กรมพัฒนาธุรกิจการค้า"
+                  className="h-10 w-auto object-contain rounded bg-white p-1 border border-slate-700 shadow-md"
+                />
+              </a>
             </div>
           </div>
 

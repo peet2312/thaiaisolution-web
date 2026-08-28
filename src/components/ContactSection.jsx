@@ -224,9 +224,27 @@ export default function ContactSection({ t, prefilledData }) {
                 <h3 className="text-lg font-bold text-white mb-1">
                   {t.contact.info.companyName}
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-400 mb-3">
                   {t.contact.info.companyNameEn}
                 </p>
+                <div className="flex flex-wrap items-center gap-2.5 pt-1">
+                  <a
+                    href="https://dbdregistered.dbd.go.th/api/public/shopinfoReg?param=560A0F03DAD1F05E60FACE779017B18456F64EF1FE4CE7B4447D4CFB27DD8854"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center hover:opacity-90 transition-all hover:scale-105"
+                    title="คลิกเพื่อตรวจสอบเครื่องหมาย DBD Registered กรมพัฒนาธุรกิจการค้า"
+                  >
+                    <img
+                      src="https://dbdregistered.dbd.go.th/api/public/bannerreg?param=560A0F03DAD1F05E60FACE779017B18456F64EF1FE4CE7B4447D4CFB27DD8854"
+                      alt="DBD Registered กรมพัฒนาธุรกิจการค้า"
+                      className="h-9 w-auto object-contain rounded bg-white p-1 border border-slate-700 shadow-md"
+                    />
+                  </a>
+                  <span className="text-[11px] text-emerald-400 font-mono font-bold bg-emerald-950/40 border border-emerald-800/60 px-2.5 py-1 rounded-md">
+                    ✓ จดทะเบียนพาณิชย์อิเล็กทรอนิกส์ถูกต้อง
+                  </span>
+                </div>
               </div>
 
               <div className="space-y-4 text-xs sm:text-sm text-slate-300">
