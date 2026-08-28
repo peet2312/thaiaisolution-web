@@ -266,13 +266,13 @@ export default function ContactSection({ t, prefilledData }) {
               {/* Quick Communication Buttons */}
               <div className="pt-4 border-t border-slate-800 space-y-2">
                 <a
-                  href="https://line.me"
+                  href="https://lin.ee/9gpj1h4"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#06C755]/20 hover:bg-[#06C755]/30 text-[#06C755] border border-[#06C755]/40 text-xs font-bold transition-colors"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold shadow-md shadow-emerald-500/20 transition-all active:scale-95"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>ปรึกษาด่วนผ่าน LINE Official Account</span>
+                  <span>ปรึกษาด่วนผ่าน LINE Official Account (@9gpj1h4)</span>
                 </a>
               </div>
             </div>
