@@ -1,27 +1,1491 @@
 <!DOCTYPE html>
 <html lang="th" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo-icon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>บริษัท ไทยเอไอ โซลูชั่น จำกัด | รับทำเว็บไซต์บริษัท ออกแบบสวย ติดหน้าแรก Google การตลาดออนไลน์ครบวงจร 24 ชม.</title>
-    <meta name="description" content="บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.) เลขทะเบียนนิติบุคคล 0905569007271 รับทำเว็บไซต์บริษัท ร้านค้าออนไลน์ E-Commerce เซลเพจ ซอฟต์แวร์ AI และการตลาดออนไลน์ Facebook/Google/TikTok/SEO เริ่มต้น ฿3,900/เดือน เปิดบริการ 24 ชม." />
-    <meta name="keywords" content="รับทำเว็บไซต์, ทำเว็บองค์กร, E-Commerce, ทำการตลาดออนไลน์, ยิงแอด, SEO, ซอฟต์แวร์ AI, ทะเบียนนิติบุคคล 0905569007271, ไทยเอไอ โซลูชั่น, บริการ 24 ชั่วโมง" />
-    
-    <!-- Open Graph / SEO -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.thaiaisolution.co.th/" />
-    <meta property="og:title" content="บริษัท ไทยเอไอ โซลูชั่น จำกัด | รับทำเว็บไซต์ & การตลาดออนไลน์ AI ครบวงจร 24 ชม." />
-    <meta property="og:description" content="รับทำเว็บไซต์บริษัท ออกแบบสวย ติดหน้าแรก Google ซอฟต์แวร์ AI และยิงแอด FB/Google/TikTok/SEO เริ่มต้น ฿3,900/เดือน เปิดบริการ 24 ชม." />
-    <meta property="og:image" content="/logo.png" />
-
-    <!-- Google Fonts: Kanit (Headlines), Prompt (Body), Plus Jakarta Sans -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION) - บริการรับเขียนโปรแกรม เว็บไซต์ และการตลาด AI บนมือถือ</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        primaryDark: '#1d4ed8',
+                        accent: '#06b6d4',
+                        aiGlow: '#8b5cf6',
+                        darkBg: '#0b0f19',
+                        darkCard: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Font Kanit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-500 selection:text-white overflow-x-hidden">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ai-gradient-bg {
+            background: linear-gradient(135deg, #0284c7 0%, #2563eb 40%, #7c3aed 100%);
+        }
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(90deg, #38bdf8, #8b5cf6, #ec4899);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        .pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.04); }
+        }
+        /* Mobile horizontal scrollbar hiding */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-purple-600 selection:text-white pb-20 md:pb-0 overflow-x-hidden">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/80 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Official Vector Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center gap-2 group" aria-label="Thai AI Solution Logo">
+                        <svg class="h-9 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105" viewBox="0 0 540 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logoBlueGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#38bdf8" />
+                                    <stop offset="50%" stop-color="#2563eb" />
+                                    <stop offset="100%" stop-color="#1d4ed8" />
+                                </linearGradient>
+                                <linearGradient id="logoCyanGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#38bdf8" />
+                                </linearGradient>
+                                <filter id="logoGlowNav" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feGaussianBlur stdDeviation="4" result="blur" />
+                                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                </filter>
+                            </defs>
+                            <g transform="translate(10, 5)">
+                                <!-- Globe Mesh Network on Left -->
+                                <g stroke="#38bdf8" stroke-width="1.8" opacity="0.85">
+                                    <path d="M 85 20 A 70 70 0 0 0 25 135" fill="none" stroke-dasharray="3 3"/>
+                                    <path d="M 70 28 A 60 60 0 0 0 40 125" fill="none"/>
+                                    <line x1="25" y1="45" x2="75" y2="30"/>
+                                    <line x1="18" y1="75" x2="85" y2="55"/>
+                                    <line x1="22" y1="105" x2="80" y2="90"/>
+                                    <line x1="45" y1="25" x2="32" y2="120"/>
+                                    <line x1="75" y1="30" x2="55" y2="130"/>
+                                    <line x1="30" y1="50" x2="70" y2="105"/>
+                                    <circle cx="75" cy="30" r="3.5" fill="#38bdf8" stroke="none"/>
+                                    <circle cx="45" cy="25" r="3" fill="#38bdf8" stroke="none"/>
+                                    <circle cx="25" cy="45" r="3.5" fill="#38bdf8" stroke="none"/>
+                                    <circle cx="60" cy="60" r="4.5" fill="#00f2fe" stroke="none"/>
+                                    <circle cx="18" cy="75" r="3" fill="#38bdf8" stroke="none"/>
+                                    <circle cx="22" cy="105" r="3.5" fill="#38bdf8" stroke="none"/>
+                                    <circle cx="40" cy="125" r="3" fill="#38bdf8" stroke="none"/>
+                                </g>
+
+                                <!-- Letter 'A' -->
+                                <path d="M 105 140 L 145 35 L 185 140 L 162 140 L 145 95 L 130 140 Z" fill="url(#logoBlueGradNav)" />
+                                <path d="M 145 35 L 185 140 L 163 140 L 145 80 Z" fill="url(#logoCyanGradNav)" opacity="0.95"/>
+                                <!-- Curved Swoosh across 'A' -->
+                                <path d="M 75 135 Q 125 100 190 105 Q 155 125 105 140 Z" fill="url(#logoCyanGradNav)"/>
+
+                                <!-- Letter 'i' Dot & Stem -->
+                                <circle cx="205" cy="38" r="13" fill="url(#logoCyanGradNav)" filter="url(#logoGlowNav)"/>
+                                <path d="M 196 58 L 214 58 L 214 140 L 196 140 Z" fill="url(#logoBlueGradNav)"/>
+
+                                <!-- Circuit Tracks on Right -->
+                                <g stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M 214 75 L 240 75 L 255 90 L 275 90"/>
+                                    <circle cx="278" cy="90" r="3.5" fill="#38bdf8"/>
+                                    
+                                    <path d="M 214 98 L 270 98 L 290 98"/>
+                                    <circle cx="293" cy="98" r="3.5" fill="#00f2fe"/>
+                                    
+                                    <path d="M 214 118 L 240 118 L 255 130 L 275 130"/>
+                                    <circle cx="278" cy="130" r="3.5" fill="#38bdf8"/>
+                                </g>
+                            </g>
+                            <!-- Typography -->
+                            <text x="315" y="68" font-family="'Kanit', sans-serif" font-weight="700" font-size="26" fill="#ffffff">
+                                บริษัท <tspan fill="#38bdf8">ไทยเอไอ</tspan>
+                            </text>
+                            <text x="315" y="100" font-family="'Kanit', sans-serif" font-weight="700" font-size="26" fill="#ffffff">
+                                โซลูชั่น จำกัด
+                            </text>
+                            <line x1="315" y1="113" x2="525" y2="113" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
+                            <text x="315" y="134" font-family="'Kanit', sans-serif" font-weight="600" font-size="13.5" letter-spacing="1" fill="#cbd5e1">
+                                THAI <tspan fill="#38bdf8" font-weight="700">AI</tspan> SOLUTION Co., Ltd.
+                            </text>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
+                    <a href="#services" class="hover:text-cyan-400 transition-colors">บริการของเรา</a>
+                    <a href="#ai-features" class="hover:text-purple-400 transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-sparkles text-purple-400 text-xs"></i> นวัตกรรม AI
+                    </a>
+                    <a href="#ai-demo" class="hover:text-cyan-400 transition-colors">ทดสอบระบบ AI</a>
+                    <a href="#estimator" class="hover:text-cyan-400 transition-colors">ประเมินราคา</a>
+                    <a href="#portfolio" class="hover:text-cyan-400 transition-colors">ตัวอย่างระบบจริง</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">ติดต่อเรา</a>
+                </nav>
+
+                <!-- Action Button Desktop -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-[#06C755]/15 hover:bg-[#06C755]/25 text-[#06C755] border border-[#06C755]/40 font-bold text-sm transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
+                        <i class="fa-brands fa-line text-lg"></i> แอด LINE OA
+                    </a>
+                    <a href="#estimator" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-medium text-sm hover:shadow-lg hover:shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
+                        <i class="fa-solid fa-calculator"></i> คำนวณราคาโปรเจกต์
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Menu Button -->
+                <div class="lg:hidden flex items-center gap-2">
+                    <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-[#06C755]/20 text-[#06C755] border border-[#06C755]/40 flex items-center justify-center text-lg" aria-label="LINE Official">
+                        <i class="fa-brands fa-line"></i>
+                    </a>
+                    <a href="tel:0971328145" class="w-10 h-10 rounded-xl bg-blue-600/20 text-cyan-400 border border-cyan-500/30 flex items-center justify-center text-sm" aria-label="Call direct">
+                        <i class="fa-solid fa-phone"></i>
+                    </a>
+                    <button type="button" id="mobile-menu-btn" class="w-10 h-10 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white flex items-center justify-center focus:outline-none" aria-label="Open menu">
+                        <i class="fa-solid fa-bars text-lg" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-slate-950/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-3 backdrop-blur-xl animate-fadeIn">
+            <a href="#services" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+                <i class="fa-solid fa-cubes text-blue-400 w-6"></i> บริการของเรา
+            </a>
+            <a href="#ai-features" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-purple-300 font-medium text-sm active:bg-purple-900/40">
+                <i class="fa-solid fa-sparkles text-purple-400 w-6"></i> นวัตกรรม Smart AI
+            </a>
+            <a href="#ai-demo" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+                <i class="fa-solid fa-robot text-cyan-400 w-6"></i> ทดสอบสั่งงาน AI จำลอง
+            </a>
+            <a href="#estimator" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+                <i class="fa-solid fa-calculator text-indigo-400 w-6"></i> คำนวณราคาโปรเจกต์
+            </a>
+            <a href="#portfolio" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+                <i class="fa-solid fa-laptop-code text-teal-400 w-6"></i> ตัวอย่างภาพระบบจริง
+            </a>
+            <a href="#contact" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+                <i class="fa-solid fa-envelope text-pink-400 w-6"></i> ติดต่อเรา / ขอใบเสนอราคา
+            </a>
+            
+            <div class="pt-2 grid grid-cols-3 gap-2">
+                <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer" class="py-3 rounded-xl bg-slate-900 border border-[#06C755]/40 text-[#06C755] font-bold text-xs text-center flex items-center justify-center gap-1.5">
+                    <i class="fa-brands fa-line text-sm"></i> LINE OA
+                </a>
+                <a href="tel:0971328145" class="py-3 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-300 font-medium text-xs text-center flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-phone"></i> โทรเลย
+                </a>
+                <a href="mailto:thaiaisolution@outlook.com" class="py-3 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-300 font-medium text-xs text-center flex items-center justify-center gap-1.5 truncate px-1">
+                    <i class="fa-solid fa-envelope"></i> อีเมล
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-16 sm:pt-40 sm:pb-28 overflow-hidden">
+        <!-- Background Ambient Glow -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] bg-purple-600/15 rounded-full blur-3xl pointer-events-none pulse-slow"></div>
+        <div class="absolute top-1/3 left-1/4 w-[240px] sm:w-[400px] h-[240px] sm:h-[400px] bg-cyan-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto space-y-5 sm:space-y-6">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-medium shadow-inner shadow-purple-500/10 max-w-full truncate">
+                    <span class="flex h-2 w-2 rounded-full bg-purple-400 animate-ping shrink-0"></span>
+                    <i class="fa-solid fa-sparkles text-xs shrink-0"></i> 
+                    <span class="truncate">ซอฟต์แวร์ เว็บไซต์ และการตลาด ยุคใหม่ ผสานพลัง Smart AI</span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-2xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-snug sm:leading-tight">
+                    บริการรับเขียนโปรแกรม เว็บไซต์ & ซอฟต์แวร์ <br class="hidden sm:inline">
+                    ยกระดับธุรกิจด้วย <span class="ai-gradient-text">ระบบ AI อัจฉริยะในทุกบริการ</span>
+                </h1>
+
+                <!-- Subheading -->
+                <p class="text-xs sm:text-lg text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
+                    <strong>บริษัท ไทยเอไอ โซลูชั่น จำกัด</strong> (THAI AI SOLUTION CO., LTD.) พัฒนาเว็บไซต์ เว็บแอป ซอฟต์แวร์ธุรกิจ โมบายล์แอป และการตลาดออนไลน์ครบวงจร 
+                    ด้วยจุดเด่น <span class="text-cyan-400 font-medium">"ติดตั้ง AI ในตัว"</span> เพื่อให้ระบบของคุณคิดแทน ทำงานอัตโนมัติ และสร้างยอดขายได้ตลอด 24 ชม.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <a href="#estimator" class="w-full sm:w-auto px-6 py-3.5 rounded-xl ai-gradient-bg text-white font-semibold text-sm sm:text-base shadow-xl shadow-purple-600/25 hover:shadow-purple-600/40 transition-all flex items-center justify-center gap-2 min-h-[48px]">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        ประเมินราคาพร้อมติดตั้ง AI
+                    </a>
+                    <a href="#portfolio" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm sm:text-base transition-all flex items-center justify-center gap-2 min-h-[48px]">
+                        <i class="fa-solid fa-laptop-code text-cyan-400"></i>
+                        ดูตัวอย่างภาพระบบและผลงานจริง
+                    </a>
+                </div>
+
+                <!-- Quick Highlights Grid (Scrollable on mobile) -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 text-left">
+                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                        <i class="fa-solid fa-brain text-purple-400 text-xl sm:text-2xl mb-1.5"></i>
+                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Chatbot & Support</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ตอบลูกค้าอัตโนมัติ 24 ชม.</p>
+                    </div>
+                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                        <i class="fa-solid fa-chart-line text-cyan-400 text-xl sm:text-2xl mb-1.5"></i>
+                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Smart Analytics</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">พยากรณ์สต็อกแม่นยำ</p>
+                    </div>
+                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                        <i class="fa-solid fa-bullhorn text-pink-400 text-xl sm:text-2xl mb-1.5"></i>
+                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Digital Marketing</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ยิง Ads ด้วย AI + คอนเทนต์</p>
+                    </div>
+                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                        <i class="fa-solid fa-shield-halved text-emerald-400 text-xl sm:text-2xl mb-1.5"></i>
+                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">Enterprise Security</h4>
+                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ปลอดภัย มาตรฐานองค์กร 100%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Services Section -->
+    <section id="services" class="py-14 sm:py-20 bg-slate-900/60 border-y border-slate-800/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-2">
+                <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Services & AI Solutions</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white">บริการพัฒนาซอฟต์แวร์และการตลาดครบวงจร</h2>
+                <p class="text-slate-400 text-xs sm:text-base">พัฒนาขึ้นตามมาตรฐาน Software House สากล ในราคาตลาดจริง พร้อมติดตั้งโมเดล AI อัจฉริยะ</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                <!-- Service 1: Website & E-Commerce -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-6 hover:border-purple-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-lg sm:text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-white mb-1">พัฒนาเว็บไซต์ & E-Commerce</h3>
+                        <div class="text-xs font-semibold text-purple-400 mb-2.5">เริ่มต้น ฿28,000</div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            รับทำเว็บไซต์องค์กร เว็บแอปพลิเคชัน และระบบร้านค้าออนไลน์ รองรับ SEO, ความเร็วสูง และ responsive สมบูรณ์แบบ
+                        </p>
+                        
+                        <!-- AI Feature Attached -->
+                        <div class="bg-slate-950/80 border border-purple-500/30 rounded-xl p-3 mb-4">
+                            <div class="flex items-center gap-1.5 text-purple-300 text-[11px] font-semibold mb-1">
+                                <i class="fa-solid fa-sparkles"></i> AI เพิ่มเติมที่ติดตั้งให้:
+                            </div>
+                            <ul class="text-[11px] text-slate-300 space-y-1">
+                                <li>• AI แนะนำสินค้าที่ตรงใจรายบุคคล</li>
+                                <li>• AI แชทบอทช่วยปิดการขาย & สรุปออเดอร์</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800/80 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Next.js, React, Tailwind</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Payment Gateway / PromptPay</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2: Custom Software & ERP -->
+                <div class="bg-slate-900 border border-purple-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 relative overflow-hidden group flex flex-col justify-between shadow-lg shadow-purple-500/5">
+                    <div class="absolute top-0 right-0 bg-purple-600 text-white text-[9px] font-bold px-2.5 py-1 rounded-bl-xl tracking-wider">
+                        POPULAR
+                    </div>
+                    <div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-lg sm:text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cubes-stacked"></i>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-white mb-1">ซอฟต์แวร์ ERP & CRM องค์กร</h3>
+                        <div class="text-xs font-semibold text-purple-400 mb-2.5">เริ่มต้น ฿85,000</div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            ออกแบบและเขียนโปรแกรมระบบคลังสินค้า บัญชี บุคลากร (HR) หรือเอกสารตาม Workflow ขององค์กรคุณ 100%
+                        </p>
+                        
+                        <!-- AI Feature Attached -->
+                        <div class="bg-slate-950/80 border border-purple-500/30 rounded-xl p-3 mb-4">
+                            <div class="flex items-center gap-1.5 text-purple-300 text-[11px] font-semibold mb-1">
+                                <i class="fa-solid fa-sparkles"></i> AI เพิ่มเติมที่ติดตั้งให้:
+                            </div>
+                            <ul class="text-[11px] text-slate-300 space-y-1">
+                                <li>• AI สรุปรายงานและเตือนแนวโน้มสต็อก</li>
+                                <li>• AI OCR อ่านใบเสร็จ/สลิปอัตโนมัติ</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800/80 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Dashboard & Multi-role Access</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Export PDF/Excel & Connect APIs</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3: Mobile Apps & LINE Integration -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-6 hover:border-cyan-500/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-lg sm:text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-white mb-1">โมบายล์แอป & LINE LIFF</h3>
+                        <div class="text-xs font-semibold text-purple-400 mb-2.5">เริ่มต้น ฿58,000</div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            พัฒนา Mobile App (iOS & Android) และ LINE OA / LINE LIFF แอปสะสมแต้ม หรือแจ้งเตือนสถานะเรียลไทม์
+                        </p>
+                        
+                        <!-- AI Feature Attached -->
+                        <div class="bg-slate-950/80 border border-purple-500/30 rounded-xl p-3 mb-4">
+                            <div class="flex items-center gap-1.5 text-purple-300 text-[11px] font-semibold mb-1">
+                                <i class="fa-solid fa-sparkles"></i> AI เพิ่มเติมที่ติดตั้งให้:
+                            </div>
+                            <ul class="text-[11px] text-slate-300 space-y-1">
+                                <li>• AI Assistant คอยช่วยเหลือใน LINE</li>
+                                <li>• ระบบสแกนและประมวลผลด้วยภาพ</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800/80 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Flutter / React Native</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Real-time Push Notification</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4: AI Digital Marketing & Growth -->
+                <div class="bg-slate-900 border border-pink-500/30 rounded-2xl sm:rounded-3xl p-5 sm:p-6 hover:border-pink-500/60 transition-all group flex flex-col justify-between shadow-lg shadow-pink-500/5">
+                    <div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center text-lg sm:text-xl mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h3 class="text-base sm:text-lg font-bold text-white mb-1">ทำการตลาดออนไลน์ AI Marketing</h3>
+                        <div class="text-xs font-semibold text-purple-400 mb-2.5">เริ่มต้น ฿18,000/เดือน</div>
+                        <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                            ยิงโฆษณา Google Ads, Facebook, TikTok, LINE Ads และทำ SEO ติดหน้าแรก เพิ่มยอดขายด้วยการวิเคราะห์ข้อมูล
+                        </p>
+                        
+                        <!-- AI Feature Attached -->
+                        <div class="bg-slate-950/80 border border-purple-500/30 rounded-xl p-3 mb-4">
+                            <div class="flex items-center gap-1.5 text-purple-300 text-[11px] font-semibold mb-1">
+                                <i class="fa-solid fa-sparkles"></i> AI เพิ่มเติมที่ติดตั้งให้:
+                            </div>
+                            <ul class="text-[11px] text-slate-300 space-y-1">
+                                <li>• AI ช่วยเขียน Copywriting & รูปภาพ</li>
+                                <li>• AI Optimizing งบโฆษณา Real-time</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="text-[11px] text-slate-400 space-y-1.5 border-t border-slate-800/80 pt-3">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> SEO & Performance Marketing</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-cyan-400"></i> Live Dashboard สรุปผลยอดขาย</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why AI Feature Deep Dive -->
+    <section id="ai-features" class="py-14 sm:py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <div class="lg:w-1/2 space-y-4 sm:space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-500/30 text-purple-300 text-xs font-semibold">
+                        <i class="fa-solid fa-bolt"></i> ทำไมต้องซอฟต์แวร์ที่มี AI จาก Thai AI Solution?
+                    </div>
+                    <h2 class="text-2xl sm:text-4xl font-bold leading-snug sm:leading-tight text-white">
+                        เปลี่ยนระบบธรรมดา ให้เป็น <br class="hidden sm:inline">
+                        <span class="ai-gradient-text">เครื่องจักรทำงานและปิดการขาย 24/7</span>
+                    </h2>
+                    <p class="text-slate-300 text-xs sm:text-base leading-relaxed">
+                        การเขียนโปรแกรมแบบเดิมมีข้อจำกัดที่ต้องให้คนป้อนข้อมูลและจัดการทุกขั้นตอน แต่ที่ <strong>บริษัท ไทยเอไอ โซลูชั่น จำกัด</strong> เราผสานโมเดล AI เพื่อให้โปรแกรมของคุณคิด วิเคราะห์ และช่วยทำงานแทนคุณได้อย่างสมบูรณ์แบบ
+                    </p>
+
+                    <div class="space-y-3 pt-1">
+                        <div class="flex items-start gap-3 bg-slate-900/80 border border-slate-800 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-xs sm:text-base">อำนวยความสะดวกให้ผู้ใช้งาน (Smart UX)</h4>
+                                <p class="text-slate-400 text-[11px] sm:text-sm mt-0.5">ผู้ใช้ไม่ต้องกดหลายเมนู เพียงแค่พิมพ์สั่งหรือสอบถาม AI ระบบจะค้นหาหรือดำเนินการสั่งซื้อให้อัตโนมัติ</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-slate-900/80 border border-slate-800 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-xs sm:text-base">สรุปข้อมูลเชิงลึกอัตโนมัติ (AI Insights)</h4>
+                                <p class="text-slate-400 text-[11px] sm:text-sm mt-0.5">ผู้บริหารไม่ต้องเปิดดูตารางตัวเลขยาวๆ AI สรุปประเด็นสำคัญและแนวโน้มธุรกิจให้อ่านง่ายใน 3 บรรทัด</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 bg-slate-900/80 border border-slate-800 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-shield-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-xs sm:text-base">ความปลอดภัยระดับ Private Enterprise</h4>
+                                <p class="text-slate-400 text-[11px] sm:text-sm mt-0.5">โมเดล AI ติดตั้งบน Cloud ส่วนตัวของลูกค้า (Private Deployment) ข้อมูลสำคัญไม่รั่วไหล 100%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Graphic / Interactive Visual -->
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4 sm:mb-6">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                                <span class="text-[10px] sm:text-xs text-slate-400 ml-1 font-mono truncate max-w-[140px] sm:max-w-none">thai-ai-engine-v2.5</span>
+                            </div>
+                            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono">ONLINE</span>
+                        </div>
+
+                        <!-- Simulated Flow -->
+                        <div class="space-y-3 font-mono text-[11px] sm:text-xs">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300">
+                                <span class="text-cyan-400 font-semibold">[INPUT]:</span> ผู้ใช้พิมพ์ "สรุปยอดขายเดือนนี้และสินค้าที่ต้องสั่งเพิ่ม"
+                            </div>
+                            <div class="flex justify-center my-1">
+                                <i class="fa-solid fa-arrow-down text-purple-400 animate-bounce text-xs sm:text-sm"></i>
+                            </div>
+                            <div class="bg-purple-950/40 p-3 rounded-xl border border-purple-500/40 text-purple-200">
+                                <span class="text-purple-400 font-semibold">[AI ENGINE]:</span> ดึงฐานข้อมูล SQL -> วิเคราะห์แนวโน้ม
+                            </div>
+                            <div class="flex justify-center my-1">
+                                <i class="fa-solid fa-arrow-down text-purple-400 animate-bounce text-xs sm:text-sm"></i>
+                            </div>
+                            <div class="bg-slate-950 p-3.5 rounded-xl border border-cyan-500/30 text-slate-200 space-y-2">
+                                <div class="flex items-center gap-1.5 text-cyan-300 font-semibold">
+                                    <i class="fa-solid fa-circle-check text-green-400"></i> [AI RESPONSE]:
+                                </div>
+                                <p class="text-slate-300 leading-relaxed font-sans text-xs">
+                                    "ยอดขายเดือนนี้รวม <span class="text-green-400 font-bold">฿1,420,000</span> (เติบโต +18%) 
+                                    สินค้าที่ใกล้หมดแนะนำให้สั่งผลิตด่วนคือ <strong>SKU-A102</strong> (เหลือ 12 ชิ้น)"
+                                </p>
+                                <div class="flex gap-2 pt-1">
+                                    <button class="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded text-[10px] sm:text-[11px]">ออกใบ PO ทันที</button>
+                                    <button class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-[10px] sm:text-[11px]">ดูรายละเอียด</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Sandbox / Demo Playground -->
+    <section id="ai-demo" class="py-14 sm:py-20 bg-slate-900/40 border-y border-slate-800/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12 space-y-2">
+                <span class="text-xs font-semibold text-purple-400 tracking-wider uppercase">Interactive Demonstration</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white">ทดลองสั่งงานระบบจำลอง Thai AI Solution</h2>
+                <p class="text-slate-400 text-xs sm:text-sm">เลื่อนปุ่มหรือพิมพ์คำสั่งเพื่อดูการตอบสนองของระบบผู้ช่วย AI บนมือถือ</p>
+            </div>
+
+            <!-- Demo Card -->
+            <div class="bg-slate-900 border border-purple-500/40 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-2xl shadow-purple-950/30">
+                <!-- Preset Buttons (Scrollable chips on mobile) -->
+                <div class="flex overflow-x-auto no-scrollbar gap-2 mb-4 sm:mb-6 pb-2 -mx-2 px-2">
+                    <button onclick="runAiDemo('sales')" class="demo-chip shrink-0 px-3.5 py-2 rounded-full bg-slate-800 hover:bg-purple-600 text-xs text-slate-200 border border-slate-700 hover:border-purple-500 transition-colors">
+                        📊 สรุปรายงานการขาย
+                    </button>
+                    <button onclick="runAiDemo('support')" class="demo-chip shrink-0 px-3.5 py-2 rounded-full bg-slate-800 hover:bg-purple-600 text-xs text-slate-200 border border-slate-700 hover:border-purple-500 transition-colors">
+                        💬 ตอบลูกค้าขอใบเสนอราคา
+                    </button>
+                    <button onclick="runAiDemo('inventory')" class="demo-chip shrink-0 px-3.5 py-2 rounded-full bg-slate-800 hover:bg-purple-600 text-xs text-slate-200 border border-slate-700 hover:border-purple-500 transition-colors">
+                        📦 ตรวจสอบสต็อกสินค้า
+                    </button>
+                    <button onclick="runAiDemo('marketing')" class="demo-chip shrink-0 px-3.5 py-2 rounded-full bg-slate-800 hover:bg-purple-600 text-xs text-slate-200 border border-slate-700 hover:border-purple-500 transition-colors">
+                        🚀 วางแผนการตลาดด้วย AI
+                    </button>
+                    <button onclick="runAiDemo('code')" class="demo-chip shrink-0 px-3.5 py-2 rounded-full bg-slate-800 hover:bg-purple-600 text-xs text-slate-200 border border-slate-700 hover:border-purple-500 transition-colors">
+                        ⚡ สแกนสลิปสร้างเอกสาร
+                    </button>
+                </div>
+
+                <!-- Simulation Chat Box -->
+                <div class="bg-slate-950 rounded-xl sm:rounded-2xl border border-slate-800 p-3.5 sm:p-6 min-h-[220px] max-h-[380px] overflow-y-auto flex flex-col justify-between" id="demo-chat-box">
+                    <div id="demo-conversation" class="space-y-3.5">
+                        <div class="flex items-start gap-2.5">
+                            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-purple-600 flex items-center justify-center text-white text-xs shrink-0 mt-0.5">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-none p-3 text-xs sm:text-sm text-slate-300">
+                                สวัสดีครับ ผมคือระบบ Thai AI Solution Assistant พร้อมช่วยอำนวยความสะดวกในระบบของคุณ กดเลือกปุ่มด้านบนหรือพิมพ์สั่งงานได้เลยครับ!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Bar -->
+                    <div class="mt-3 pt-3 border-t border-slate-800 flex gap-2">
+                        <input type="text" id="custom-ai-prompt" placeholder="พิมพ์คำสั่งหรือเลือกจากด้านบน..." class="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[40px]">
+                        <button onclick="handleCustomAiPrompt()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-medium transition-colors flex items-center justify-center shrink-0 min-h-[40px]">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Project & AI Cost Estimator -->
+    <section id="estimator" class="py-14 sm:py-20 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12 space-y-2">
+                <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Cost & AI Feature Estimator</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white">ระบบประเมินราคาโปรเจกต์เบื้องต้น</h2>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-2xl mx-auto">เลือกประเภทบริการหลักและฟังก์ชัน AI อัจฉริยะที่ต้องการติดตั้งเพื่อคำนวณงบประมาณ</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Option Selection (2 Columns) -->
+                <div class="lg:col-span-2 space-y-5">
+                    <!-- Step 1: Base Platform -->
+                    <div class="bg-slate-900 border border-slate-800 p-4 sm:p-6 rounded-2xl">
+                        <label class="block text-xs sm:text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                            <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-blue-600 text-white text-[11px] sm:text-xs flex items-center justify-center font-bold">1</span>
+                            เลือกประเภทบริการหลัก (Base Service)
+                        </label>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                            <label class="cursor-pointer border border-purple-500 bg-purple-950/20 p-3 rounded-xl flex flex-col justify-between hover:border-purple-500 transition-all platform-option min-h-[110px]" onclick="selectPlatform('web', 28000, 'เว็บไซต์องค์กร / แพลตฟอร์ม')">
+                                <div>
+                                    <i class="fa-solid fa-globe text-blue-400 text-base mb-1"></i>
+                                    <div class="font-medium text-xs text-white leading-tight">เว็บไซต์ / Web App</div>
+                                    <div class="text-[10px] text-slate-400 mt-1">เว็บองค์กร, E-Commerce</div>
+                                </div>
+                                <div class="text-[10px] text-purple-400 font-semibold mt-2">฿28,000</div>
+                            </label>
+
+                            <label class="cursor-pointer border border-slate-800 bg-slate-950 p-3 rounded-xl flex flex-col justify-between hover:border-purple-500 transition-all platform-option min-h-[110px]" onclick="selectPlatform('erp', 85000, 'ระบบจัดการองค์กร ERP/CRM')">
+                                <div>
+                                    <i class="fa-solid fa-cubes text-purple-400 text-base mb-1"></i>
+                                    <div class="font-medium text-xs text-white leading-tight">ซอฟต์แวร์ ERP / CRM</div>
+                                    <div class="text-[10px] text-slate-400 mt-1">คลังสินค้า, บัญชี</div>
+                                </div>
+                                <div class="text-[10px] text-purple-400 font-semibold mt-2">฿85,000</div>
+                            </label>
+
+                            <label class="cursor-pointer border border-slate-800 bg-slate-950 p-3 rounded-xl flex flex-col justify-between hover:border-purple-500 transition-all platform-option min-h-[110px]" onclick="selectPlatform('mobile', 58000, 'แอปมือถือ iOS & Android')">
+                                <div>
+                                    <i class="fa-solid fa-mobile-screen text-cyan-400 text-base mb-1"></i>
+                                    <div class="font-medium text-xs text-white leading-tight">โมบายล์แอป / LINE</div>
+                                    <div class="text-[10px] text-slate-400 mt-1">iOS, Android, LIFF</div>
+                                </div>
+                                <div class="text-[10px] text-purple-400 font-semibold mt-2">฿58,000</div>
+                            </label>
+
+                            <label class="cursor-pointer border border-slate-800 bg-slate-950 p-3 rounded-xl flex flex-col justify-between hover:border-purple-500 transition-all platform-option min-h-[110px]" onclick="selectPlatform('marketing', 18000, 'ทำการตลาดออนไลน์ + AI Marketing')">
+                                <div>
+                                    <i class="fa-solid fa-bullhorn text-pink-400 text-base mb-1"></i>
+                                    <div class="font-medium text-xs text-white leading-tight">การตลาดออนไลน์</div>
+                                    <div class="text-[10px] text-slate-400 mt-1">SEO, Ads, Content</div>
+                                </div>
+                                <div class="text-[10px] text-purple-400 font-semibold mt-2">฿18,000/เดือน</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: AI Modules -->
+                    <div class="bg-slate-900 border border-slate-800 p-4 sm:p-6 rounded-2xl">
+                        <label class="block text-xs sm:text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                            <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-600 text-white text-[11px] sm:text-xs flex items-center justify-center font-bold">2</span>
+                            เลือกฟังก์ชัน AI อัจฉริยะที่ต้องการติดตั้ง (AI Add-ons)
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <label class="flex items-start gap-3 p-3 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer hover:border-purple-500/60 min-h-[56px]">
+                                <input type="checkbox" class="mt-1 ai-feature-cb accent-purple-600 w-4 h-4" value="18000" data-name="AI Smart Chatbot & CRM Support" onchange="calculateEstimate()">
+                                <div>
+                                    <div class="text-xs font-semibold text-slate-200">AI Chatbot ผู้ช่วยตอบลูกค้า 24/7</div>
+                                    <div class="text-[10px] text-slate-400">ตอบข้อมูลแม่นยำ ปิดการขาย บันทึกข้อมูล</div>
+                                    <div class="text-[10px] text-purple-400 font-medium mt-0.5">+฿18,000</div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer hover:border-purple-500/60 min-h-[56px]">
+                                <input type="checkbox" class="mt-1 ai-feature-cb accent-purple-600 w-4 h-4" value="25000" data-name="AI OCR & Document Extraction" onchange="calculateEstimate()">
+                                <div>
+                                    <div class="text-xs font-semibold text-slate-200">AI OCR สแกนเอกสาร/ใบเสร็จ</div>
+                                    <div class="text-[10px] text-slate-400">อ่านสลิปและใบกำกับภาษีลงระบบอัตโนมัติ</div>
+                                    <div class="text-[10px] text-purple-400 font-medium mt-0.5">+฿25,000</div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer hover:border-purple-500/60 min-h-[56px]">
+                                <input type="checkbox" class="mt-1 ai-feature-cb accent-purple-600 w-4 h-4" value="30000" data-name="AI Analytics & Forecasting" onchange="calculateEstimate()">
+                                <div>
+                                    <div class="text-xs font-semibold text-slate-200">AI สรุปข้อมูล & ทำนายแนวโน้ม</div>
+                                    <div class="text-[10px] text-slate-400">พยากรณ์สต็อก ยอดขาย และพฤติกรรมลูกค้า</div>
+                                    <div class="text-[10px] text-purple-400 font-medium mt-0.5">+฿30,000</div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start gap-3 p-3 bg-slate-950 border border-slate-800 rounded-xl cursor-pointer hover:border-purple-500/60 min-h-[56px]">
+                                <input type="checkbox" class="mt-1 ai-feature-cb accent-purple-600 w-4 h-4" value="15000" data-name="AI Content & Auto Messenger" onchange="calculateEstimate()">
+                                <div>
+                                    <div class="text-xs font-semibold text-slate-200">AI ระบบแจ้งเตือนและเขียนข้อความ</div>
+                                    <div class="text-[10px] text-slate-400">สร้างข้อความแจ้งเตือนตามบุคคลอัตโนมัติ</div>
+                                    <div class="text-[10px] text-purple-400 font-medium mt-0.5">+฿15,000</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estimation Summary Card (1 Column) -->
+                <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-purple-500/40 p-5 sm:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                            <h3 class="font-bold text-white text-base sm:text-lg">สรุปการประมาณการ</h3>
+                            <span class="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded">Real-time</span>
+                        </div>
+
+                        <div class="space-y-3 text-xs">
+                            <div>
+                                <span class="text-slate-400">บริการหลัก:</span>
+                                <div class="font-semibold text-slate-200 mt-0.5" id="summary-platform">เว็บไซต์องค์กร / แพลตฟอร์ม</div>
+                            </div>
+
+                            <div>
+                                <span class="text-slate-400">ฟังก์ชัน AI ที่เลือก:</span>
+                                <ul class="text-slate-300 space-y-1 mt-1 font-light" id="summary-ai-list">
+                                    <li class="text-slate-500 italic text-[11px]">- ยังไม่ได้เลือกฟังก์ชัน AI -</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-t border-slate-800 pt-3">
+                                <span class="text-slate-400">ระยะเวลาพัฒนาโดยประมาณ:</span>
+                                <div class="font-semibold text-cyan-400 text-xs sm:text-sm mt-0.5" id="summary-duration">15 - 25 วันทำการ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-slate-800 pt-5 mt-5">
+                        <div class="text-[11px] text-slate-400">งบประมาณประมาณการ</div>
+                        <div class="text-2xl sm:text-3xl font-bold text-white mt-0.5 ai-gradient-text" id="summary-price">฿28,000</div>
+                        <p class="text-[10px] text-slate-400 mt-1 mb-3">*ประเมินตามราคามาตรฐานตลาดจริง</p>
+                        
+                        <a href="#contact" class="w-full block text-center py-3 rounded-xl ai-gradient-bg text-white font-medium text-xs sm:text-sm hover:opacity-95 transition-opacity min-h-[44px] flex items-center justify-center">
+                            ขอใบเสนอราคาอย่างเป็นทางการ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section with Real Website Previews -->
+    <section id="portfolio" class="py-14 sm:py-20 bg-slate-900/40 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2">
+                <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Live System & Website Portfolio</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white">ตัวอย่างหน้าตาเว็บไซต์และระบบจริงที่เราพัฒนา</h2>
+                <p class="text-slate-400 text-xs sm:text-sm">รวมภาพหน้าจออินเทอร์เฟซจริงของแพลตฟอร์ม E-Commerce, ERP, โมบายล์แอป และแดชบอร์ด AI Marketing</p>
+            </div>
+
+            <!-- Portfolio Filter Tabs (Horizontal Scrollable on Mobile) -->
+            <div class="flex overflow-x-auto no-scrollbar gap-2 mb-8 pb-2 -mx-2 px-2 sm:justify-center">
+                <button onclick="filterPortfolio('all')" class="portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-purple-600 text-white border border-purple-500 shadow-md shadow-purple-600/20" data-cat="all">
+                    <i class="fa-solid fa-border-all mr-1"></i> ทั้งหมด (6 ระบบ)
+                </button>
+                <button onclick="filterPortfolio('web')" class="portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800" data-cat="web">
+                    <i class="fa-solid fa-globe mr-1 text-blue-400"></i> เว็บไซต์ & E-Commerce
+                </button>
+                <button onclick="filterPortfolio('erp')" class="portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800" data-cat="erp">
+                    <i class="fa-solid fa-cubes mr-1 text-purple-400"></i> ซอฟต์แวร์ ERP & CRM
+                </button>
+                <button onclick="filterPortfolio('mobile')" class="portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800" data-cat="mobile">
+                    <i class="fa-solid fa-mobile-screen mr-1 text-cyan-400"></i> โมบายล์แอป & LINE
+                </button>
+                <button onclick="filterPortfolio('marketing')" class="portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800" data-cat="marketing">
+                    <i class="fa-solid fa-bullhorn mr-1 text-pink-400"></i> AI Digital Marketing
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="portfolio-grid">
+                <!-- Portfolio Item 1: E-Commerce Store -->
+                <div class="portfolio-card bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between shadow-xl" data-category="web">
+                    <div>
+                        <!-- Browser Header Frame Bar -->
+                        <div class="bg-slate-950 px-3 sm:px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <div class="bg-slate-900 px-2 py-0.5 rounded text-[9px] font-mono text-slate-400 w-3/5 text-center truncate border border-slate-800">
+                                https://store.thai-ai-solution.com
+                            </div>
+                            <span class="text-[9px] text-purple-400 font-mono"><i class="fa-solid fa-lock text-[8px]"></i> SSL</span>
+                        </div>
+                        <!-- Real Website Screenshot Picture -->
+                        <div class="relative overflow-hidden group cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=1200&q=80', 'เว็บไซต์ E-Commerce แพลตฟอร์มค้าส่ง & ค้าปลีก (ติดตั้ง AI Chatbot ปิดการขาย)')">
+                            <img src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=800&q=80" 
+                                 alt="เว็บไซต์ E-Commerce แพลตฟอร์มค้าส่งค้าปลีก" 
+                                 class="w-full h-44 sm:h-52 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/800x450/1e293b/38bdf8?text=E-Commerce+AI+Platform';" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                            <span class="absolute top-2.5 right-2.5 bg-purple-600/90 text-white text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur border border-purple-400/30">
+                                <i class="fa-solid fa-robot mr-1"></i> AI Order Assistant
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40">
+                                <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium shadow-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> ขยายรูป
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-1.5">แพลตฟอร์ม E-Commerce ค้าส่ง & ค้าปลีก</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+                                เว็บไซต์ขายสินค้าออนไลน์ดีไซน์พรีเมียม ตอบสนองรวดเร็ว และมี AI Chatbot สรุปรายการสั่งซื้อพร้อมออกลิงก์ชำระเงินอัตโนมัติ 24 ชม.
+                            </p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Next.js 14</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Tailwind</span>
+                                <span class="text-[9px] bg-purple-950/80 text-purple-300 px-2 py-0.5 rounded border border-purple-500/30">AI Order Assistant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 2: Enterprise ERP -->
+                <div class="portfolio-card bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between shadow-xl" data-category="erp">
+                    <div>
+                        <!-- Browser Header Frame Bar -->
+                        <div class="bg-slate-950 px-3 sm:px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <div class="bg-slate-900 px-2 py-0.5 rounded text-[9px] font-mono text-slate-400 w-3/5 text-center truncate border border-slate-800">
+                                https://erp.thai-ai-solution.com/dashboard
+                            </div>
+                            <span class="text-[9px] text-cyan-400 font-mono"><i class="fa-solid fa-shield-halved text-[8px]"></i> SECURE</span>
+                        </div>
+                        <!-- Real System Screenshot Picture -->
+                        <div class="relative overflow-hidden group cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80', 'ซอฟต์แวร์ ERP บริหารคลังสินค้าและจัดซื้อองค์กร (ติดตั้ง AI OCR สแกนเอกสาร)')">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" 
+                                 alt="ระบบซอฟต์แวร์ ERP บริหารจัดการคลังสินค้า" 
+                                 class="w-full h-44 sm:h-52 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/800x450/1e293b/8b5cf6?text=Enterprise+ERP+System';" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                            <span class="absolute top-2.5 right-2.5 bg-cyan-600/90 text-white text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur border border-cyan-400/30">
+                                <i class="fa-solid fa-file-invoice mr-1"></i> AI Document OCR
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40">
+                                <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium shadow-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> ขยายรูป
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-1.5">ซอฟต์แวร์ ERP คลังสินค้า & จัดซื้อองค์กร</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+                                โปรแกรมคลังสินค้าแบบเรียลไทม์ พร้อมติดตั้ง AI OCR อ่านเอกสารใบส่งสินค้า สลิปโอนเงิน และใบกำกับภาษี บันทึกเข้าคลังสินค้าโดยไม่ต้องพิมพ์มือ
+                            </p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">React Dashboard</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Python FastAPI</span>
+                                <span class="text-[9px] bg-cyan-950/80 text-cyan-300 px-2 py-0.5 rounded border border-cyan-500/30">AI OCR Engine</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 3: LINE Mobile App -->
+                <div class="portfolio-card bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between shadow-xl" data-category="mobile">
+                    <div>
+                        <!-- Browser Header Frame Bar -->
+                        <div class="bg-slate-950 px-3 sm:px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <div class="bg-slate-900 px-2 py-0.5 rounded text-[9px] font-mono text-slate-400 w-3/5 text-center truncate border border-slate-800">
+                                https://line.me/R/app/thai-ai-crm
+                            </div>
+                            <span class="text-[9px] text-green-400 font-mono"><i class="fa-brands fa-line text-[9px]"></i> LINE LIFF</span>
+                        </div>
+                        <!-- Real Mobile App Screenshot Picture -->
+                        <div class="relative overflow-hidden group cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=1200&q=80', 'โมบายล์แอป LINE OA สมาชิกลูกค้า & สะสมแต้ม (ติดตั้ง Predictive AI)')">
+                            <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=800&q=80" 
+                                 alt="แอปพลิเคชันมือถือ LINE LIFF สะสมแต้ม" 
+                                 class="w-full h-44 sm:h-52 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/800x450/1e293b/06b6d4?text=LINE+LIFF+Mobile+App';" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                            <span class="absolute top-2.5 right-2.5 bg-emerald-600/90 text-white text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur border border-emerald-400/30">
+                                <i class="fa-solid fa-user-gear mr-1"></i> AI Personalization
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40">
+                                <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium shadow-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> ขยายรูป
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-1.5">โมบายล์แอป LINE OA สมาชิกลูกค้า & สะสมแต้ม</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+                                ระบบ CRM สะสมแต้ม คูปองส่วนลด และจองคิวบน LINE LIFF พร้อมโมเดล AI คัดเลือกคูปองโปรโมชันที่เหมาะกับลูกค้าแต่ละราย
+                            </p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Flutter Mobile</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">LINE API</span>
+                                <span class="text-[9px] bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30">Predictive AI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 4: AI Marketing Dashboard -->
+                <div class="portfolio-card bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between shadow-xl" data-category="marketing">
+                    <div>
+                        <div class="bg-slate-950 px-3 sm:px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <div class="bg-slate-900 px-2 py-0.5 rounded text-[9px] font-mono text-slate-400 w-3/5 text-center truncate border border-slate-800">
+                                https://marketing.thai-ai-solution.com
+                            </div>
+                            <span class="text-[9px] text-pink-400 font-mono"><i class="fa-solid fa-chart-line text-[8px]"></i> REALTIME</span>
+                        </div>
+                        <div class="relative overflow-hidden group cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80', 'แดชบอร์ดทำการตลาดออนไลน์ & AI Ads Suite (วิเคราะห์ผลโฆษณา Real-time)')">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
+                                 alt="แดชบอร์ด AI Digital Marketing และยิงโฆษณา" 
+                                 class="w-full h-44 sm:h-52 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/800x450/1e293b/ec4899?text=AI+Marketing+Dashboard';" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                            <span class="absolute top-2.5 right-2.5 bg-pink-600/90 text-white text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur border border-pink-400/30">
+                                <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> AI Ads Optimizer
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40">
+                                <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium shadow-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> ขยายรูป
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-1.5">แดชบอร์ดทำการตลาดออนไลน์ & AI Ads Suite</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+                                แดชบอร์ดรวมสถิติโฆษณา Google, Facebook, TikTok และ SEO ที่มี AI ช่วยปรับแต่งงบประมาณโฆษณาอัตโนมัติ
+                            </p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Google & FB Ads API</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">SEO Tracking</span>
+                                <span class="text-[9px] bg-pink-950/80 text-pink-300 px-2 py-0.5 rounded border border-pink-500/30">AI Budget Optimizer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 5: Corporate Web Portal -->
+                <div class="portfolio-card bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between shadow-xl" data-category="web">
+                    <div>
+                        <div class="bg-slate-950 px-3 sm:px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <div class="bg-slate-900 px-2 py-0.5 rounded text-[9px] font-mono text-slate-400 w-3/5 text-center truncate border border-slate-800">
+                                https://corporate.thai-ai-solution.com
+                            </div>
+                            <span class="text-[9px] text-blue-400 font-mono"><i class="fa-solid fa-globe text-[8px]"></i> PORTAL</span>
+                        </div>
+                        <div class="relative overflow-hidden group cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80', 'เว็บไซต์พอร์ทัลองค์กรธุรกิจ (ติดตั้ง AI Multi-language & Smart Search)')">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" 
+                                 alt="เว็บไซต์องค์กรธุรกิจพรีเมียม" 
+                                 class="w-full h-44 sm:h-52 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/800x450/1e293b/2563eb?text=Corporate+AI+Portal';" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                            <span class="absolute top-2.5 right-2.5 bg-blue-600/90 text-white text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur border border-blue-400/30">
+                                <i class="fa-solid fa-language mr-1"></i> AI Multi-Language
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40">
+                                <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium shadow-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> ขยายรูป
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-1.5">เว็บไซต์องค์กร & สถาบันธุรกิจชั้นนำ</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+                                เว็บไซต์ภาพลักษณ์องค์กรระดับสากล ดีไซน์หรูหรา รองรับระบบ AI แปลภาษาอัตโนมัติหลายภาษา และระบบค้นหาอัจฉริยะ
+                            </p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">React Portal</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">SEO Optimized</span>
+                                <span class="text-[9px] bg-blue-950/80 text-blue-300 px-2 py-0.5 rounded border border-blue-500/30">AI Search Engine</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Item 6: Booking & Clinic CRM -->
+                <div class="portfolio-card bg-slate-900 border border-slate-800 rounded-2xl sm:rounded-3xl overflow-hidden group hover:border-purple-500/60 transition-all duration-300 flex flex-col justify-between shadow-xl" data-category="erp">
+                    <div>
+                        <div class="bg-slate-950 px-3 sm:px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <div class="bg-slate-900 px-2 py-0.5 rounded text-[9px] font-mono text-slate-400 w-3/5 text-center truncate border border-slate-800">
+                                https://booking.thai-ai-solution.com
+                            </div>
+                            <span class="text-[9px] text-teal-400 font-mono"><i class="fa-solid fa-calendar-check text-[8px]"></i> BOOKING</span>
+                        </div>
+                        <div class="relative overflow-hidden group cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80', 'ระบบจองคิวและบริหารจัดการคลินิก/สถานบริการ (ติดตั้ง AI Smart Schedule Management)')">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" 
+                                 alt="ระบบจองคิวและบริหารบริการคลินิก" 
+                                 class="w-full h-44 sm:h-52 object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/800x450/1e293b/14b8a6?text=Booking+AI+System';" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity"></div>
+                            <span class="absolute top-2.5 right-2.5 bg-teal-600/90 text-white text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-full backdrop-blur border border-teal-400/30">
+                                <i class="fa-solid fa-clock mr-1"></i> AI Smart Schedule
+                            </span>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-slate-950/40">
+                                <span class="px-3 py-1.5 rounded-lg bg-purple-600 text-white text-xs font-medium shadow-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> ขยายรูป
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-base sm:text-lg font-bold text-white mb-1.5">ระบบจองคิว & บริหารคลินิก/สถานบริการ</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-3">
+                                ระบบจองคิวออนไลน์ ล็อคเวลาและตารางนัดหมายที่มี AI คอยวิเคราะห์ช่วงเวลาหนาแน่นและแจ้งเตือนลูกค้ายืนยันคิวอัตโนมัติ
+                            </p>
+                            <div class="flex flex-wrap gap-1">
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Vue.js / Tailwind</span>
+                                <span class="text-[9px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded">SMS / LINE Notify</span>
+                                <span class="text-[9px] bg-teal-950/80 text-teal-300 px-2 py-0.5 rounded border border-teal-500/30">AI Scheduling</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-14 sm:py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-purple-950/50 border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-2xl">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-medium">
+                            <i class="fa-solid fa-envelope"></i> ติดต่อเราเพื่อรับคำปรึกษาฟรี
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-bold text-white leading-snug sm:leading-tight">
+                            พร้อมยกระดับธุรกิจของคุณด้วย <br>
+                            <span class="ai-gradient-text">ซอฟต์แวร์ติดปีกพลัง AI แล้วหรือยัง?</span>
+                        </h2>
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                            ทีมผู้เชี่ยวชาญจาก <strong>บริษัท ไทยเอไอ โซลูชั่น จำกัด</strong> ยินดีให้คำปรึกษาด้านเทคนิค การออกแบบระบบ และการเลือกใช้ AI ให้ตอบโจทย์เป้าหมายธุรกิจอย่างคุ้มค่าที่สุด
+                        </p>
+
+                        <div class="space-y-3.5 pt-2 text-xs sm:text-sm text-slate-300">
+                            <!-- Registration Number -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-id-card"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] sm:text-xs text-slate-400 block">เลขนิติบุคคล (Tax ID)</span>
+                                    <span class="font-medium text-white font-mono text-xs sm:text-sm">0905569007271</span>
+                                </div>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-500/10 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] sm:text-xs text-slate-400 block">เบอร์โทรศัพท์ติดต่อ</span>
+                                    <a href="tel:0971328145" class="font-medium text-white hover:text-cyan-400 transition-colors text-xs sm:text-sm">097-132-8145</a>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] sm:text-xs text-slate-400 block">อีเมลติดต่อ</span>
+                                    <a href="mailto:thaiaisolution@outlook.com" class="font-medium text-white hover:text-emerald-400 transition-colors text-xs sm:text-sm break-all">thaiaisolution@outlook.com</a>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <span class="text-[10px] sm:text-xs text-slate-400 block">ที่อยู่สำนักงานใหญ่</span>
+                                    <span class="font-medium text-white text-xs sm:text-sm leading-relaxed block">
+                                        เลขที่ 149/8 ถนนเก้าแสน ตําบลบ่อยาง อําเภอเมืองสงขลา จังหวัดสงขลา
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- LINE Official Account Card -->
+                            <div class="flex items-center justify-between p-3.5 rounded-xl bg-[#06C755]/10 border border-[#06C755]/30">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#06C755] text-white flex items-center justify-center shrink-0 shadow-lg shadow-[#06C755]/20">
+                                        <i class="fa-brands fa-line text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-[10px] sm:text-xs text-slate-400 block">LINE Official Account</span>
+                                        <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-[#06C755] transition-colors text-xs sm:text-sm">Thai AI Solution</a>
+                                    </div>
+                                </div>
+                                <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-lg bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-[#06C755]/25 transition-transform active:scale-95">
+                                    <i class="fa-solid fa-comments"></i> แชท LINE
+                                </a>
+                            </div>
+
+                            <!-- QR Code Block -->
+                            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center gap-3.5">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&amp;data=https%3A%2F%2Flin.ee%2F9gpj1h4&amp;color=06C755" alt="LINE Official QR Code" class="w-16 h-16 rounded-lg bg-white p-1 border border-slate-700 shrink-0" />
+                                <div>
+                                    <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                                        <i class="fa-solid fa-qrcode text-[#06C755]"></i> สแกน QR เพื่อแอด LINE OA
+                                    </div>
+                                    <p class="text-[11px] text-slate-400 mt-0.5">ปรึกษาทีมงาน ขอใบเสนอราคา หรือสอบถามบริการได้ตลอด 24 ชม.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-slate-950 border border-slate-800/80 p-5 sm:p-8 rounded-xl sm:rounded-2xl">
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3.5">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">ชื่อผู้ติดต่อ / บริษัท <span class="text-red-400">*</span></label>
+                                <input type="text" required placeholder="คุณสมชาย (บริษัท ตัวอย่าง จำกัด)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">เบอร์โทรศัพท์ <span class="text-red-400">*</span></label>
+                                    <input type="tel" inputmode="tel" required placeholder="097-132-8145" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">อีเมล หรือ LINE ID</label>
+                                    <input type="text" placeholder="thaiaisolution@outlook.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">บริการหรือฟังก์ชัน AI ที่สนใจ</label>
+                                <select class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                    <option>พัฒนาเว็บไซต์ + AI Order Assistant (เริ่มต้น ฿28,000)</option>
+                                    <option>ซอฟต์แวร์ ERP / CRM องค์กร + AI OCR (เริ่มต้น ฿85,000)</option>
+                                    <option>โมบายล์แอปพลิเคชัน & LINE LIFF (เริ่มต้น ฿58,000)</option>
+                                    <option>ทำการตลาดออนไลน์ AI Digital Marketing (เริ่มต้น ฿18,000/เดือน)</option>
+                                    <option>พัฒนา AI Model เฉพาะทางสำหรับธุรกิจ</option>
+                                    <option>อื่นๆ / ขอคำปรึกษาภาพรวม</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">รายละเอียดโปรเจกต์คร่าวๆ</label>
+                                <textarea rows="3" placeholder="ระบุสิ่งที่ต้องการให้ระบบช่วย เช่น ต้องการทำเว็บและสแกนใบเสร็จ..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl ai-gradient-bg text-white font-semibold text-xs sm:text-sm hover:opacity-95 transition-opacity shadow-lg shadow-purple-600/25 min-h-[46px]">
+                                ส่งข้อมูลเพื่อรับคำปรึกษาและใบเสนอราคาฟรี
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-900 py-10 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900 text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3">
+                    <svg class="h-9 sm:h-10 w-auto" viewBox="0 0 540 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoBlueGradFt" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#38bdf8" />
+                                <stop offset="100%" stop-color="#1d4ed8" />
+                            </linearGradient>
+                            <linearGradient id="logoCyanGradFt" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00f2fe" />
+                                <stop offset="100%" stop-color="#38bdf8" />
+                            </linearGradient>
+                        </defs>
+                        <g transform="translate(10, 5)">
+                            <g stroke="#38bdf8" stroke-width="1.8" opacity="0.85">
+                                <circle cx="60" cy="60" r="4.5" fill="#00f2fe" stroke="none"/>
+                                <path d="M 85 20 A 70 70 0 0 0 25 135" fill="none" stroke-dasharray="3 3"/>
+                                <line x1="25" y1="45" x2="75" y2="30"/>
+                                <line x1="18" y1="75" x2="85" y2="55"/>
+                            </g>
+                            <path d="M 105 140 L 145 35 L 185 140 L 162 140 L 145 95 L 130 140 Z" fill="url(#logoBlueGradFt)" />
+                            <path d="M 145 35 L 185 140 L 163 140 L 145 80 Z" fill="url(#logoCyanGradFt)" opacity="0.95"/>
+                            <circle cx="205" cy="38" r="13" fill="url(#logoCyanGradFt)"/>
+                            <path d="M 196 58 L 214 58 L 214 140 L 196 140 Z" fill="url(#logoBlueGradFt)"/>
+                        </g>
+                        <text x="315" y="68" font-family="'Kanit', sans-serif" font-weight="700" font-size="26" fill="#ffffff">บริษัท <tspan fill="#38bdf8">ไทยเอไอ</tspan></text>
+                        <text x="315" y="100" font-family="'Kanit', sans-serif" font-weight="700" font-size="26" fill="#ffffff">โซลูชั่น จำกัด</text>
+                    </svg>
+                </div>
+                <div>
+                    <p class="text-slate-300 font-medium">บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.)</p>
+                    <p class="text-[11px] text-slate-500 mt-1">เลขนิติบุคคล: 0905569007271 | 149/8 ถนนเก้าแสน ต.บ่อยาง อ.เมืองสงขลา จ.สงขลา</p>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px] text-center sm:text-left">
+                <p>© 2026 THAI AI SOLUTION CO., LTD. All rights reserved.</p>
+                <p>AI Software Engineering & Digital Marketing Agency Thailand</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed Mobile Quick Action Bar at Bottom -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 border-t border-slate-800 backdrop-blur-lg px-2 py-2 flex items-center justify-around md:hidden shadow-2xl">
+        <a href="tel:0971328145" class="flex flex-col items-center justify-center text-slate-300 hover:text-cyan-400 px-2.5 py-1 rounded-lg active:bg-slate-900 transition-colors">
+            <i class="fa-solid fa-phone text-base text-cyan-400 mb-0.5"></i>
+            <span class="text-[10px] font-medium">โทรเลย</span>
+        </a>
+        <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center text-slate-300 hover:text-[#06C755] px-2.5 py-1 rounded-lg active:bg-slate-900 transition-colors">
+            <div class="relative">
+                <i class="fa-brands fa-line text-lg text-[#06C755] mb-0.5"></i>
+                <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#06C755] animate-ping"></span>
+            </div>
+            <span class="text-[10px] font-bold text-[#06C755]">แอด LINE</span>
+        </a>
+        <a href="#estimator" class="flex flex-col items-center justify-center text-slate-300 hover:text-purple-400 px-2.5 py-1 rounded-lg active:bg-slate-900 transition-colors">
+            <i class="fa-solid fa-calculator text-base text-purple-400 mb-0.5"></i>
+            <span class="text-[10px] font-medium">คำนวณราคา</span>
+        </a>
+        <a href="#contact" class="flex items-center gap-1 px-3.5 py-2 rounded-xl ai-gradient-bg text-white font-semibold text-xs shadow-md">
+            <i class="fa-solid fa-paper-plane text-xs"></i> ขอใบเสนอราคา
+        </a>
+    </div>
+
+    <!-- Image Lightbox Modal for Portfolio Screenshots -->
+    <div id="image-modal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="relative max-w-4xl w-full bg-slate-900 border border-purple-500/50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl">
+            <div class="bg-slate-950 px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-800 flex items-center justify-between">
+                <h4 id="modal-image-title" class="text-xs sm:text-base font-bold text-white truncate pr-4">รูปภาพตัวอย่างระบบ</h4>
+                <button onclick="closeImageModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors shrink-0">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-2 sm:p-4 max-h-[70vh] sm:max-h-[75vh] overflow-y-auto">
+                <img id="modal-image-src" src="" alt="ภาพตัวอย่างระบบ" class="w-full h-auto rounded-xl border border-slate-800 shadow-lg">
+            </div>
+            <div class="bg-slate-950 px-4 sm:px-6 py-3 border-t border-slate-800 text-right">
+                <button onclick="closeImageModal()" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-semibold">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Box -->
+    <div id="toast-modal" class="fixed bottom-16 sm:bottom-6 right-4 sm:right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-slate-900 border border-purple-500/60 p-3.5 sm:p-4 rounded-2xl shadow-2xl flex items-center gap-3 text-white max-w-xs sm:max-w-sm pointer-events-none">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-circle-check text-lg sm:text-xl"></i>
+        </div>
+        <div>
+            <h5 class="text-xs sm:text-sm font-bold" id="toast-title">ส่งข้อมูลสำเร็จ!</h5>
+            <p class="text-[11px] sm:text-xs text-slate-400" id="toast-message">ทีมงาน Thai AI Solution จะติดต่อกลับโดยเร็วที่สุดครับ</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile drawer on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Interactive AI Demo Playground Logic
+        const demoConversation = document.getElementById('demo-conversation');
+        const customPromptInput = document.getElementById('custom-ai-prompt');
+
+        const presetResponses = {
+            'sales': {
+                user: "📊 สรุปรายงานการขายของเดือนนี้ให้หน่อย",
+                ai: "📈 **รายงานสรุปยอดขายประจำเดือน**<br>• ยอดขายรวม: **฿1,420,000** (+18% เทียบกับเดือนก่อน)<br>• สินค้าขายดีอันดับ 1: เครื่องฟอกอากาศอัจฉริยะ (320 ชิ้น)<br>• ลูกค้าใหม่เพิ่มขึ้น 45 ราย โดย 60% มาจากช่องทาง LINE OA<br>💡 *AI แนะนำ:* จัดแคมเปญ Flash Sale สำหรับสินค้าหมวดอุปกรณ์เสริมเพื่อกระตุ้นยอดช่วงปลายเดือน"
+            },
+            'support': {
+                user: "💬 ลูกค้าทักมาขอใบเสนอราคาทำเว็บไซต์ E-commerce พร้อม AI Chatbot",
+                ai: "🤖 **AI ตอบกลับลูกค้าอัตโนมัติเรียบร้อย:**<br>\"ยินดีให้บริการครับ! ระบบ E-commerce + AI Chatbot ของ Thai AI Solution เริ่มต้นที่ ฿46,000 ประกอบด้วยระบบจัดการสต็อกและบอทปิดการขาย 24 ชม. ทางเราส่งตัวอย่างหน้าเว็บและขออนุญาตขออีเมลเพื่อส่งใบเสนอราคาฉบับเต็มครับ\"<br>*(ระบบบันทึกลีดลง CRM เรียบร้อย)*"
+            },
+            'inventory': {
+                user: "📦 ตรวจสอบสต็อกสินค้าและแจ้งเตือนของใกล้หมด",
+                ai: "🔍 **สถานะสต็อกล่าสุดจากระบบ ERP:**<br>• พบสินค้า **SKU-B88 (เซ็นเซอร์ AI)** เหลือเพียง 5 ชิ้น (ต่ำกว่าเกณฑ์ 20 ชิ้น)<br>• ระยะเวลาสั่งผลิตจากซัพพลายเออร์คือ 7 วัน<br>⚡ *AI จัดการ:* ระบบได้ร่างใบสั่งซื้อ (PO #4409) เตรียมไว้แล้ว ต้องการกดอนุมัติส่งให้ฝ่ายจัดซื้อเลยหรือไม่?"
+            },
+            'marketing': {
+                user: "🚀 ช่วยวางแผนยิงโฆษณา Facebook & Google ด้วย AI หน่อย",
+                ai: "🎯 **AI Marketing Assistant วิเคราะห์กลุ่มเป้าหมายสำเร็จ:**<br>• กลุ่มเป้าหมายศักยภาพสูง: เจ้าของธุรกิจ อายุ 28-50 ปี สนใจนวัตกรรมซอฟต์แวร์<br>• AI สร้าง Ad Copy ให้ 3 รูปแบบ พร้อม Headline ดึงดูดอัตราการคลิก (CTR +35%)<br>💡 *AI Auto-Budget Setup:* ระบบตั้งค่าปรับงบโฆษณา Real-time ไปที่แคมเปญที่สร้าง Conversion สูงสุดให้อัตโนมัติ"
+            },
+            'code': {
+                user: "⚡ สร้างแบบฟอร์มเอกสารใบเสร็จรับเงินจากภาพถ่ายสลิป",
+                ai: "📑 **AI OCR ประมวลผลภาพสลิปสำเร็จ:**<br>• ธนาคาร: กสิกรไทย (KBANK)<br>• จำนวนเงิน: **฿15,500.00** | วันที่: 27 ส.ค. 2026 เวลา 08:30 น.<br>• ผู้โอน: บริษัท นวัตกรรมไทย จำกัด<br>✅ ตรวจสอบยอดเงินเข้าบัญชีจริงตรง 100% -> สร้างใบเสร็จรับเงิน (Receipt-2026-088) พร้อมส่งให้ลูกค้าทางอีเมลแล้ว"
+            }
+        };
+
+        function runAiDemo(type) {
+            const data = presetResponses[type];
+            if (!data) return;
+
+            appendMessage(data.user, 'user');
+            
+            setTimeout(() => {
+                appendMessage(data.ai, 'ai');
+            }, 500);
+        }
+
+        function handleCustomAiPrompt() {
+            const val = customPromptInput.value.trim();
+            if (!val) return;
+
+            appendMessage(val, 'user');
+            customPromptInput.value = '';
+
+            setTimeout(() => {
+                const response = `🤖 <strong>AI Assistant ประมวลผลคำสั่ง "${val}":</strong><br>ระบบได้รับคำสั่งเรียบร้อยแล้ว! พร้อมเชื่อมต่อกับฐานข้อมูลเว็บไซต์และซอฟต์แวร์ของคุณเพื่อดำเนินการตามคำสั่งแบบ Real-time ครับ`;
+                appendMessage(response, 'ai');
+            }, 600);
+        }
+
+        function appendMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = sender === 'user' ? 'flex items-start gap-2.5 justify-end' : 'flex items-start gap-2.5';
+            
+            if (sender === 'user') {
+                msgDiv.innerHTML = `
+                    <div class="bg-purple-600/30 border border-purple-500/40 rounded-2xl rounded-tr-none p-3 text-xs text-purple-100 max-w-[85%]">
+                        ${text}
+                    </div>
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 text-xs shrink-0 mt-0.5">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                `;
+            } else {
+                msgDiv.innerHTML = `
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-purple-600 flex items-center justify-center text-white text-xs shrink-0 shadow-md shadow-purple-500/30 mt-0.5">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl rounded-tl-none p-3.5 text-xs text-slate-300 max-w-[85%] leading-relaxed">
+                        ${text}
+                    </div>
+                `;
+            }
+
+            demoConversation.appendChild(msgDiv);
+            const box = document.getElementById('demo-chat-box');
+            box.scrollTop = box.scrollHeight;
+        }
+
+        // Project Cost Estimator Logic (Updated Market Prices)
+        let currentPlatformPrice = 28000;
+        let currentPlatformName = "เว็บไซต์องค์กร / แพลตฟอร์ม";
+
+        function selectPlatform(type, price, name) {
+            currentPlatformPrice = price;
+            currentPlatformName = name;
+
+            document.querySelectorAll('.platform-option').forEach(el => {
+                el.classList.remove('border-purple-500', 'bg-purple-950/20');
+                el.classList.add('border-slate-800', 'bg-slate-950');
+            });
+
+            event.currentTarget.classList.remove('border-slate-800', 'bg-slate-950');
+            event.currentTarget.classList.add('border-purple-500', 'bg-purple-950/20');
+
+            calculateEstimate();
+        }
+
+        function calculateEstimate() {
+            let total = currentPlatformPrice;
+            const checkedAiBoxes = document.querySelectorAll('.ai-feature-cb:checked');
+            const summaryAiList = document.getElementById('summary-ai-list');
+            
+            summaryAiList.innerHTML = '';
+
+            let additionalDays = 0;
+
+            if (checkedAiBoxes.length === 0) {
+                summaryAiList.innerHTML = '<li class="text-slate-500 italic text-[11px]">- ยังไม่ได้เลือกฟังก์ชัน AI -</li>';
+            } else {
+                checkedAiBoxes.forEach(cb => {
+                    total += parseInt(cb.value);
+                    additionalDays += 4;
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center gap-1.5 text-purple-300 text-xs';
+                    li.innerHTML = `<i class="fa-solid fa-sparkles text-[10px]"></i> ${cb.getAttribute('data-name')}`;
+                    summaryAiList.appendChild(li);
+                });
+            }
+
+            document.getElementById('summary-platform').textContent = currentPlatformName;
+            
+            let priceSuffix = currentPlatformPrice === 18000 ? '/เดือน' : '';
+            document.getElementById('summary-price').textContent = '฿' + total.toLocaleString() + priceSuffix;
+
+            let baseDays = currentPlatformPrice >= 85000 ? 30 : (currentPlatformPrice >= 58000 ? 25 : 15);
+            let finalDaysMin = baseDays + additionalDays;
+            let finalDaysMax = finalDaysMin + 10;
+            document.getElementById('summary-duration').textContent = `${finalDaysMin} - ${finalDaysMax} วันทำการ`;
+        }
+
+        // Contact Form Submission & Toast Box
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast('ส่งข้อมูลติดต่อสำเร็จ!', 'ขอบคุณที่สนใจบริการ ทางทีมงาน Thai AI Solution จะติดต่อกลับโดยเร็วที่สุดครับ');
+            e.target.reset();
+        }
+
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast-modal');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = msg;
+
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 4500);
+        }
+
+        // Portfolio Category Filter Logic
+        function filterPortfolio(category) {
+            const cards = document.querySelectorAll('.portfolio-card');
+            const btns = document.querySelectorAll('.portfolio-tab-btn');
+
+            btns.forEach(btn => {
+                if (btn.getAttribute('data-cat') === category) {
+                    btn.className = 'portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-purple-600 text-white border border-purple-500 shadow-md shadow-purple-600/20';
+                } else {
+                    btn.className = 'portfolio-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-medium transition-all bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800';
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Image Lightbox Modal Functions
+        function openImageModal(imgUrl, title) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image-src');
+            const modalTitle = document.getElementById('modal-image-title');
+
+            modalImg.src = imgUrl;
+            modalTitle.textContent = title;
+            modal.classList.remove('hidden');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+
+    <!-- Floating LINE Official Account Widget -->
+    <div class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40">
+        <a href="https://lin.ee/9gpj1h4" target="_blank" rel="noopener noreferrer"
+           class="group flex items-center gap-2.5 px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white font-bold text-xs sm:text-sm shadow-xl shadow-[#06C755]/35 hover:shadow-[#06C755]/50 hover:scale-105 active:scale-95 transition-all border border-emerald-300/40 backdrop-blur-md"
+           title="แชทกับ Thai AI Solution ผ่าน LINE Official">
+            <div class="relative flex items-center justify-center">
+                <i class="fa-brands fa-line text-2xl group-hover:rotate-12 transition-transform"></i>
+                <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full animate-ping"></span>
+                <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-white rounded-full border border-[#06C755]"></span>
+            </div>
+            <span class="hidden sm:inline">แชทผ่าน LINE OA</span>
+        </a>
+    </div>
+</body>
 </html>
