@@ -1,3 +1,5 @@
+import { generateAIResponse } from './ai-service.js';
+
 const LINE_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN || 'yP1CscBeAmqnLS17FQlt4in3Oq3QzRtMZCSGedFrneSyZ0+tDFwNTHwPTuQi6mr4VbDfaEqBExYTV2TUM5d97UaEbKg1/XI04/guVk81I6P9HILfdml5bCEMdSDrP+VULWf3nB3tyUBAf/YcSxTEAgdB04t89/1O/w1cDnyilFU=';
 
 const defaultQuickReplies = {
@@ -441,11 +443,12 @@ export default async function handler(req, res) {
         });
       }
 
-      // Fallback
+      // AI Natural Language Intelligence & Fallback
       else {
+        const aiReply = await generateAIResponse(event.message.text);
         await replyMessage(replyToken, {
           type: 'text',
-          text: `สวัสดีครับ! ทีมงาน บริษัท ไทยเอไอ โซลูชั่น จำกัด ยินดีให้บริการครับ 😊\n\nเราได้รับข้อความ "${event.message.text}" เรียบร้อยแล้วครับ\n\nเจ้าหน้าที่ผู้เชี่ยวชาญจะติดต่อกลับโดยเร็วที่สุด หรือท่านสามารถแตะเลือกดูบริการจากริชเมนูด้านล่างได้ทันทีครับ 👇`,
+          text: aiReply,
           quickReply: defaultQuickReplies
         });
       }

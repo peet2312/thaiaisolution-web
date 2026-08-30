@@ -39,7 +39,7 @@ export default function AIAssistant({ t }) {
     }
   ];
 
-  const handleSend = (textToSend) => {
+  const handleSend = async (textToSend) => {
     const query = (textToSend || input).trim();
     if (!query) return;
 
@@ -49,6 +49,31 @@ export default function AIAssistant({ t }) {
     setInput('');
     setIsTyping(true);
 
+    try {
+      // Attempt to call AI Chat API
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: query,
+          history: messages.slice(-5),
+          mode: 'general'
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.reply) {
+          setMessages((prev) => [...prev, { role: 'assistant', text: data.reply }]);
+          setIsTyping(false);
+          return;
+        }
+      }
+    } catch (e) {
+      console.log('Using client fallback for AI widget:', e);
+    }
+
+    // Client-side fallback
     setTimeout(() => {
       const lower = query.toLowerCase();
       let matched = knowledgeBase.find((item) =>
@@ -61,7 +86,7 @@ export default function AIAssistant({ t }) {
 
       setMessages((prev) => [...prev, { role: 'assistant', text: responseText }]);
       setIsTyping(false);
-    }, 700);
+    }, 600);
   };
 
   useEffect(() => {

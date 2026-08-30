@@ -41,15 +41,41 @@ export default function AIAssistantPage({ t, setPage }) {
     ]
   };
 
-  const handleSend = (queryText) => {
+  const handleSend = async (queryText) => {
     const text = (queryText || input).trim();
     if (!text) return;
 
-    const newMsgs = [...messages, { role: 'user', text, mode: activeMode }];
+    const userMsg = { role: 'user', text, mode: activeMode };
+    const newMsgs = [...messages, userMsg];
     setMessages(newMsgs);
     setInput('');
     setIsTyping(true);
 
+    try {
+      // Attempt to call AI Chat API
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prompt: text,
+          history: messages.slice(-5),
+          mode: activeMode
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.reply) {
+          setMessages((prev) => [...prev, { role: 'assistant', text: data.reply, mode: activeMode }]);
+          setIsTyping(false);
+          return;
+        }
+      }
+    } catch (e) {
+      console.log('Using client fallback for AI assistant:', e);
+    }
+
+    // Client-side fallback if API is not accessible
     setTimeout(() => {
       let reply = '';
       const lower = text.toLowerCase();
