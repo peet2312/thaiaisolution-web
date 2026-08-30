@@ -1,4 +1,4 @@
-// ai-service.js - Thai AI Solution AI Core Engine (Gemini & Fallback Knowledge Base)
+// ai-service.js - Thai AI Solution Multi-Engine AI (Claude, Gemini & Smart Fallback)
 
 const SYSTEM_INSTRUCTION = `คุณคือ "AI Assistant ผู้เชี่ยวชาญของ บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.)"
 หน้าที่ของคุณคือให้คำปรึกษา แนะนำบริการ ประเมินราคาเบื้องต้น ตอบคำถามเทคนิค และแนะนำการติดต่อทีมงานอย่างเป็นมืออาชีพ
@@ -31,16 +31,57 @@ const SYSTEM_INSTRUCTION = `คุณคือ "AI Assistant ผู้เชี�
 - หากลูกค้าสอบถามข้อมูลทางเทคนิค (เช่น Cloud, RAG, OCR, Docker, Kubernetes) ให้อธิบายตามหลักวิศวกรรมซอฟต์แวร์อย่างน่าเชื่อถือ`;
 
 /**
- * Generate intelligent response using Gemini API or Smart Fallback
+ * Generate intelligent response using Claude (Anthropic), Gemini, or Smart Fallback
  */
 export async function generateAIResponse(userPrompt, conversationHistory = [], mode = 'general') {
-  const apiKey = process.env.GEMINI_API_KEY;
+  // 1. Try Anthropic Claude API
+  const anthropicKey = process.env.ANTHROPIC_API_KEY;
+  if (anthropicKey) {
+    try {
+      const headers = {
+        'Content-Type': 'application/json',
+        'x-api-key': anthropicKey,
+        'anthropic-version': '2023-06-01'
+      };
+      if (process.env.ANTHROPIC_WORKSPACE_ID) {
+        headers['anthropic-workspace-id'] = process.env.ANTHROPIC_WORKSPACE_ID;
+      }
 
-  if (apiKey) {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          model: 'claude-3-5-haiku-20241022',
+          max_tokens: 800,
+          system: SYSTEM_INSTRUCTION + `\n\nCurrent Mode: ${mode}`,
+          messages: [
+            ...conversationHistory.slice(-6).map(m => ({
+              role: m.role === 'user' ? 'user' : 'assistant',
+              content: m.text || m.content || ''
+            })),
+            { role: 'user', content: userPrompt }
+          ]
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const text = data.content?.[0]?.text;
+        if (text) return text.trim();
+      } else {
+        const errData = await res.json().catch(() => ({}));
+        console.warn('Anthropic API returned status:', res.status, errData);
+      }
+    } catch (err) {
+      console.error('Error calling Anthropic Claude API:', err.message);
+    }
+  }
+
+  // 2. Try Google Gemini API
+  const geminiKey = process.env.GEMINI_API_KEY;
+  if (geminiKey) {
     try {
       const contents = [];
-
-      // Add system prompt context as first user turn
       contents.push({
         role: 'user',
         parts: [{ text: `System Instructions:\n${SYSTEM_INSTRUCTION}\n\nCurrent Mode: ${mode}` }]
@@ -50,7 +91,6 @@ export async function generateAIResponse(userPrompt, conversationHistory = [], m
         parts: [{ text: 'รับทราบครับ ผมพร้อมทำหน้าที่ AI Assistant ของบริษัท ไทยเอไอ โซลูชั่น จำกัด เพื่อช่วยเหลือลูกค้าอย่างดีที่สุดครับ' }]
       });
 
-      // Add conversation history
       for (const msg of conversationHistory.slice(-6)) {
         contents.push({
           role: msg.role === 'user' ? 'user' : 'model',
@@ -58,14 +98,13 @@ export async function generateAIResponse(userPrompt, conversationHistory = [], m
         });
       }
 
-      // Add current user prompt
       contents.push({
         role: 'user',
         parts: [{ text: userPrompt }]
       });
 
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -85,15 +124,13 @@ export async function generateAIResponse(userPrompt, conversationHistory = [], m
         if (candidate) {
           return candidate.trim();
         }
-      } else {
-        console.warn('Gemini API returned status:', response.status);
       }
     } catch (err) {
       console.error('Error calling Gemini API:', err);
     }
   }
 
-  // Smart Fallback Engine (No API Key required)
+  // 3. Smart Fallback Knowledge Engine (No API Key required)
   return generateKnowledgeFallback(userPrompt, mode);
 }
 
