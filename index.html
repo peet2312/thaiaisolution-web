@@ -1129,39 +1129,39 @@
                         <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-3.5">
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1">ชื่อผู้ติดต่อ / บริษัท <span class="text-red-400">*</span></label>
-                                <input type="text" required placeholder="คุณสมชาย (บริษัท ตัวอย่าง จำกัด)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                <input type="text" id="cust-name" required placeholder="คุณสมชาย (บริษัท ตัวอย่าง จำกัด)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                                 <div>
                                     <label class="block text-xs font-medium text-slate-300 mb-1">เบอร์โทรศัพท์ <span class="text-red-400">*</span></label>
-                                    <input type="tel" inputmode="tel" required placeholder="097-132-8145" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                    <input type="tel" inputmode="tel" id="cust-phone" required placeholder="097-132-8145" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-medium text-slate-300 mb-1">อีเมล หรือ LINE ID</label>
-                                    <input type="text" placeholder="thaiaisolution@outlook.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                    <input type="text" id="cust-email" placeholder="thaiaisolution@outlook.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-xs font-medium text-slate-300 mb-1">บริการหรือฟังก์ชัน AI ที่สนใจ</label>
-                                <select class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
-                                    <option>พัฒนาเว็บไซต์ + AI Order Assistant (เริ่มต้น ฿28,000)</option>
-                                    <option>ซอฟต์แวร์ ERP / CRM องค์กร + AI OCR (เริ่มต้น ฿85,000)</option>
-                                    <option>โมบายล์แอปพลิเคชัน & LINE LIFF (เริ่มต้น ฿58,000)</option>
-                                    <option>ทำการตลาดออนไลน์ AI Digital Marketing (เริ่มต้น ฿18,000/เดือน)</option>
-                                    <option>พัฒนา AI Model เฉพาะทางสำหรับธุรกิจ</option>
-                                    <option>อื่นๆ / ขอคำปรึกษาภาพรวม</option>
+                                <select id="cust-service" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500 min-h-[42px]">
+                                    <option value="28000" data-name="พัฒนาเว็บไซต์องค์กร & E-Commerce + AI Chatbot">พัฒนาเว็บไซต์ + AI Order Assistant (เริ่มต้น ฿28,000)</option>
+                                    <option value="85000" data-name="ซอฟต์แวร์ ERP / CRM องค์กร + AI OCR">ซอฟต์แวร์ ERP / CRM องค์กร + AI OCR (เริ่มต้น ฿85,000)</option>
+                                    <option value="58000" data-name="โมบายล์แอปพลิเคชัน iOS & Android & LINE LIFF">โมบายล์แอปพลิเคชัน & LINE LIFF (เริ่มต้น ฿58,000)</option>
+                                    <option value="18000" data-name="ทำการตลาดออนไลน์ AI Digital Marketing & ยิงแอด">ทำการตลาดออนไลน์ AI Digital Marketing (เริ่มต้น ฿18,000/เดือน)</option>
+                                    <option value="65000" data-name="พัฒนาโมเดล AI เฉพาะทางสำหรับองค์กรธุรกิจ">พัฒนา AI Model เฉพาะทางสำหรับธุรกิจ (฿65,000)</option>
                                 </select>
                             </div>
 
                             <div>
-                                <label class="block text-xs font-medium text-slate-300 mb-1">รายละเอียดโปรเจกต์คร่าวๆ</label>
-                                <textarea rows="3" placeholder="ระบุสิ่งที่ต้องการให้ระบบช่วย เช่น ต้องการทำเว็บและสแกนใบเสร็จ..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">รายละเอียดโปรเจกต์คร่าวๆ / ขอบเขตงาน</label>
+                                <textarea id="cust-notes" rows="3" placeholder="ระบุสิ่งที่ต้องการให้ระบบช่วย เช่น ต้องการทำเว็บและสแกนใบเสร็จ..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
                             </div>
 
-                            <button type="submit" class="w-full py-3.5 rounded-xl ai-gradient-bg text-white font-semibold text-xs sm:text-sm hover:opacity-95 transition-opacity shadow-lg shadow-purple-600/25 min-h-[46px]">
-                                ส่งข้อมูลเพื่อรับคำปรึกษาและใบเสนอราคาฟรี
+                            <button type="submit" class="w-full py-3.5 rounded-xl ai-gradient-bg text-white font-bold text-xs sm:text-sm hover:opacity-95 transition-opacity shadow-lg shadow-purple-600/25 min-h-[46px] flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-invoice-dollar text-amber-300"></i>
+                                <span>📄 ออกใบเสนอราคาจริงทันที & บันทึกเข้าระบบ</span>
                             </button>
                         </form>
                     </div>
@@ -1214,7 +1214,12 @@
             </div>
 
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px] text-center sm:text-left">
-                <p>© 2026 THAI AI SOLUTION CO., LTD. All rights reserved.</p>
+                <div class="flex items-center gap-3">
+                    <p>© 2026 THAI AI SOLUTION CO., LTD. All rights reserved.</p>
+                    <button onclick="openAdminPortal()" class="text-slate-600 hover:text-cyan-400 font-mono transition-colors">
+                        [Admin ระบบหลังบ้าน]
+                    </button>
+                </div>
                 <p>AI Software Engineering & Digital Marketing Agency Thailand</p>
             </div>
         </div>
@@ -1432,11 +1437,310 @@
             document.getElementById('summary-duration').textContent = `${finalDaysMin} - ${finalDaysMax} วันทำการ`;
         }
 
-        // Contact Form Submission & Toast Box
+        // Thai Baht Text Converter
+        function thaiBahtText(num) {
+            if (num === null || num === undefined || isNaN(num)) return 'ศูนย์บาทถ้วน';
+            const numbers = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+            const units = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
+            let isNegative = false;
+            if (num < 0) { isNegative = true; num = Math.abs(num); }
+            const formatted = num.toFixed(2);
+            const [intStr, decStr] = formatted.split('.');
+
+            function convertChunk(str) {
+                let result = '';
+                const len = str.length;
+                for (let i = 0; i < len; i++) {
+                    const digit = parseInt(str[i], 10);
+                    const pos = len - i - 1;
+                    if (digit !== 0) {
+                        if (pos === 0 && digit === 1 && len > 1) { result += 'เอ็ด'; }
+                        else if (pos === 1 && digit === 2) { result += 'ยี่'; }
+                        else if (pos === 1 && digit === 1) { /* no หนึ่ง */ }
+                        else { result += numbers[digit]; }
+                        result += units[pos];
+                    }
+                }
+                return result;
+            }
+
+            function convertInteger(str) {
+                if (parseInt(str, 10) === 0) return 'ศูนย์';
+                let result = '';
+                let len = str.length;
+                if (len > 6) {
+                    const millionPart = str.slice(0, len - 6);
+                    const remainPart = str.slice(len - 6);
+                    result += convertInteger(millionPart) + 'ล้าน' + convertChunk(remainPart);
+                } else {
+                    result += convertChunk(str);
+                }
+                return result;
+            }
+
+            let text = '';
+            const intVal = parseInt(intStr, 10);
+            const decVal = parseInt(decStr, 10);
+            if (intVal === 0 && decVal === 0) return 'ศูนย์บาทถ้วน';
+            if (intVal > 0) text += convertInteger(intStr) + 'บาท';
+            if (decVal > 0) text += convertChunk(decStr) + 'สตางค์';
+            else text += 'ถ้วน';
+            return isNegative ? 'ลบ' + text : text;
+        }
+
+        // Storage helpers
+        const STORAGE_KEY = 'thai_ai_solution_quotations';
+        function getStoredQuotations() {
+            try {
+                const d = localStorage.getItem(STORAGE_KEY);
+                return d ? JSON.parse(d) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+        function saveStoredQuotation(q) {
+            const list = getStoredQuotations();
+            list.unshift(q);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        }
+
+        let currentActiveQuotation = null;
+
+        // Contact Form Submission -> Generate Instant Official Quotation
         function handleContactSubmit(e) {
             e.preventDefault();
-            showToast('ส่งข้อมูลติดต่อสำเร็จ!', 'ขอบคุณที่สนใจบริการ ทางทีมงาน Thai AI Solution จะติดต่อกลับโดยเร็วที่สุดครับ');
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const email = document.getElementById('cust-email').value.trim();
+            const serviceSelect = document.getElementById('cust-service');
+            let servicePrice = 28000;
+            let serviceName = 'พัฒนาเว็บไซต์องค์กร & E-Commerce + AI Chatbot';
+            if (serviceSelect) {
+                servicePrice = parseInt(serviceSelect.value, 10) || 28000;
+                if (serviceSelect.selectedIndex >= 0 && serviceSelect.options[serviceSelect.selectedIndex]) {
+                    const opt = serviceSelect.options[serviceSelect.selectedIndex];
+                    serviceName = opt.getAttribute('data-name') || opt.text || serviceName;
+                }
+            }
+            const notes = document.getElementById('cust-notes') ? document.getElementById('cust-notes').value.trim() : '';
+
+            const now = new Date();
+            const yearMonth = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
+            const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+            const quoteId = `QT-${yearMonth}-${randomSuffix}`;
+
+            const subtotal = servicePrice;
+            const vat = Math.round(subtotal * 0.07 * 100) / 100;
+            const grandTotal = subtotal + vat;
+
+            const quotation = {
+                id: quoteId,
+                createdAt: now.toISOString(),
+                customerName: name,
+                companyName: name.includes('บริษัท') || name.includes('บจก.') ? name : '',
+                phone: phone,
+                email: email,
+                taxId: '',
+                address: '',
+                serviceName: serviceName,
+                notes: notes,
+                items: [
+                    { no: 1, name: serviceName, description: 'บริการตามข้อกำหนดและมาตรฐานนวัตกรรม AI ของ Thai AI Solution', qty: 1, unit: 'ระบบ', unitPrice: subtotal, total: subtotal }
+                ],
+                subtotal: subtotal,
+                vat: vat,
+                grandTotal: grandTotal,
+                status: 'pending'
+            };
+
+            // Save to backend storage
+            saveStoredQuotation(quotation);
+
+            // Open Official Quotation Modal
+            openQuotationModal(quotation);
+
+            showToast('ออกใบเสนอราคาสำเร็จ!', `เอกสารเลขที่ ${quoteId} พร้อมพิมพ์และบันทึกเข้าระบบแล้วครับ`);
             e.target.reset();
+        }
+
+        function openQuotationModal(q) {
+            currentActiveQuotation = q;
+            document.getElementById('modal-qt-id-top').textContent = q.id;
+            document.getElementById('modal-qt-id').textContent = q.id;
+            
+            const dateStr = new Date(q.createdAt).toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('modal-qt-date').textContent = dateStr;
+            document.getElementById('modal-qt-sign-date').textContent = dateStr;
+
+            const d = new Date(q.createdAt);
+            d.setDate(d.getDate() + 30);
+            document.getElementById('modal-qt-valid').textContent = '30 วัน (ถึง ' + d.toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric' }) + ')';
+
+            document.getElementById('modal-qt-cust-name').textContent = q.customerName || 'ผู้สนใจโครงการ';
+            document.getElementById('modal-qt-cust-phone').textContent = q.phone || '-';
+            document.getElementById('modal-qt-cust-email').textContent = q.email || '-';
+
+            // Items Table
+            const tbody = document.getElementById('modal-qt-items-body');
+            tbody.innerHTML = '';
+            (q.items || []).forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/70';
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3 text-center font-mono font-bold text-slate-500 border-r border-slate-200">${item.no || idx + 1}</td>
+                    <td class="py-2.5 px-4 border-r border-slate-200">
+                        <div class="font-bold text-slate-900">${item.name}</div>
+                        <div class="text-[11px] text-slate-500 pt-0.5">${item.description || ''}</div>
+                    </td>
+                    <td class="py-2.5 px-3 text-center font-mono border-r border-slate-200">${item.qty || 1}</td>
+                    <td class="py-2.5 px-3 text-center text-slate-600 border-r border-slate-200">${item.unit || 'ระบบ'}</td>
+                    <td class="py-2.5 px-4 text-right font-mono text-slate-700 border-r border-slate-200">฿${(item.unitPrice || 0).toLocaleString()}</td>
+                    <td class="py-2.5 px-4 text-right font-mono font-bold text-slate-900">฿${(item.total || item.unitPrice || 0).toLocaleString()}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('modal-qt-subtotal').textContent = '฿' + (q.subtotal || 0).toLocaleString();
+            document.getElementById('modal-qt-vat').textContent = '฿' + (q.vat || 0).toLocaleString();
+            document.getElementById('modal-qt-grand').textContent = '฿' + (q.grandTotal || 0).toLocaleString();
+            document.getElementById('modal-qt-baht-text').textContent = thaiBahtText(q.grandTotal || 0);
+
+            const notesEl = document.getElementById('modal-qt-notes');
+            if (q.notes) {
+                notesEl.textContent = 'หมายเหตุ: ' + q.notes;
+                notesEl.classList.remove('hidden');
+            } else {
+                notesEl.classList.add('hidden');
+            }
+
+            document.getElementById('official-quotation-modal').classList.remove('hidden');
+        }
+
+        function closeQuotationModal() {
+            document.getElementById('official-quotation-modal').classList.add('hidden');
+        }
+
+        function printOfficialQuotation() {
+            window.print();
+        }
+
+        function shareQuotationLINE() {
+            if (!currentActiveQuotation) return;
+            const q = currentActiveQuotation;
+            const msg = encodeURIComponent(`สวัสดีครับ ขอส่งใบเสนอราคาเลขที่ ${q.id} บริการ: ${q.serviceName} ยอดรวมสุทธิ ฿${q.grandTotal.toLocaleString()} บาท จาก บริษัท ไทยเอไอ โซลูชั่น จำกัด ครับ`);
+            window.open(`https://line.me/R/msg/text/?${msg}`, '_blank');
+        }
+
+        function copyQuotationSummary() {
+            if (!currentActiveQuotation) return;
+            const q = currentActiveQuotation;
+            const text = `ใบเสนอราคา บริษัท ไทยเอไอ โซลูชั่น จำกัด\nเลขที่: ${q.id}\nลูกค้า: ${q.customerName}\nบริการ: ${q.serviceName}\nยอดรวมสุทธิ: ฿${q.grandTotal.toLocaleString()} บาท (${thaiBahtText(q.grandTotal)})\nโทร: 097-132-8145`;
+            navigator.clipboard.writeText(text);
+            showToast('คัดลอกสำเร็จ', 'คัดลอกข้อมูลสรุปใบเสนอราคาไปยังคลิปบอร์ดแล้ว');
+        }
+
+        // Admin Portal Functions
+        function openAdminPortal() {
+            renderAdminTable();
+            document.getElementById('admin-portal-modal').classList.remove('hidden');
+            if (window.location.pathname !== '/admin') {
+                try { window.history.pushState(null, '', '/admin'); } catch (e) {}
+            }
+        }
+
+        function closeAdminPortal() {
+            document.getElementById('admin-portal-modal').classList.add('hidden');
+            if (window.location.pathname === '/admin') {
+                try { window.history.pushState(null, '', '/'); } catch (e) {}
+            }
+        }
+
+        // Auto-check URL for /admin on page load
+        function checkAndOpenAdmin() {
+            const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+            const hash = window.location.hash.toLowerCase();
+            const href = window.location.href.toLowerCase();
+            if (path.endsWith('/admin') || path === '/admin' || hash === '#admin' || href.includes('/admin')) {
+                openAdminPortal();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', checkAndOpenAdmin);
+        window.addEventListener('load', checkAndOpenAdmin);
+        window.addEventListener('popstate', () => {
+            const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+            const hash = window.location.hash.toLowerCase();
+            const href = window.location.href.toLowerCase();
+            if (path.endsWith('/admin') || path === '/admin' || hash === '#admin' || href.includes('/admin')) {
+                openAdminPortal();
+            } else {
+                document.getElementById('admin-portal-modal').classList.add('hidden');
+            }
+        });
+
+        function renderAdminTable() {
+            const list = getStoredQuotations();
+            const tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = '';
+
+            document.getElementById('admin-metric-total').textContent = list.length;
+            const totalVal = list.reduce((sum, item) => sum + (item.grandTotal || 0), 0);
+            document.getElementById('admin-metric-value').textContent = '฿' + totalVal.toLocaleString();
+
+            if (list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-500 text-xs">ยังไม่มีรายการใบเสนอราคาในระบบ</td></tr>';
+                return;
+            }
+
+            list.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/50 transition-colors border-b border-slate-800 text-xs text-slate-300';
+                tr.innerHTML = `
+                    <td class="p-3 font-mono font-bold text-cyan-400">${item.id}<br><span class="text-[10px] text-slate-500">${new Date(item.createdAt).toLocaleDateString('th-TH')}</span></td>
+                    <td class="p-3 font-bold text-white">${item.customerName}<br><span class="text-[10px] text-slate-400 font-normal">${item.phone || '-'}</span></td>
+                    <td class="p-3 max-w-[180px] truncate text-slate-300">${item.serviceName}</td>
+                    <td class="p-3 text-right font-mono font-bold text-emerald-400">฿${(item.grandTotal || 0).toLocaleString()}</td>
+                    <td class="p-3 text-center">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${item.status === 'approved' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-amber-950 text-amber-400 border border-amber-800'}">
+                            ${item.status === 'approved' ? 'อนุมัติแล้ว' : 'รอดำเนินการ'}
+                        </span>
+                    </td>
+                    <td class="p-3 text-center">
+                        <button onclick='openQuotationModal(${JSON.stringify(item)})' class="px-2.5 py-1 rounded bg-purple-600/30 hover:bg-purple-600 text-purple-200 text-xs font-bold transition-all">
+                            <i class="fa-solid fa-eye mr-1"></i> ดูเอกสาร
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function exportAdminCSV() {
+            const list = getStoredQuotations();
+            if (!list.length) {
+                alert('ยังไม่มีข้อมูลใบเสนอราคาสำหรับส่งออก');
+                return;
+            }
+            const headers = ['เลขที่', 'วันที่', 'ลูกค้า', 'เบอร์โทร', 'อีเมล', 'บริการ', 'ยอดสุทธิ (บาท)', 'สถานะ'];
+            const rows = list.map(q => [
+                `"${q.id}"`,
+                `"${new Date(q.createdAt).toLocaleString('th-TH')}"`,
+                `"${q.customerName || ''}"`,
+                `"${q.phone || ''}"`,
+                `"${q.email || ''}"`,
+                `"${q.serviceName || ''}"`,
+                q.grandTotal || 0,
+                `"${q.status || 'pending'}"`
+            ]);
+            const csv = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Thai_AI_Quotations_${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
         function showToast(title, msg) {
@@ -1491,6 +1795,222 @@
             modal.classList.add('hidden');
         }
     </script>
+    <!-- ========================================================================= -->
+    <!-- Official Printable Quotation Document Modal -->
+    <!-- ========================================================================= -->
+    <div id="official-quotation-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-sm hidden flex justify-center items-start p-2 sm:p-4 md:p-6 print:p-0 print:bg-white print:static">
+        <div class="relative w-full max-w-4xl bg-slate-100 rounded-3xl shadow-2xl overflow-hidden my-4 sm:my-8 print:my-0 print:rounded-none print:shadow-none print:bg-white print:w-full print:max-w-none">
+            
+            <!-- Modal Action Bar (Hidden on Print) -->
+            <div class="sticky top-0 z-20 bg-slate-900 text-white px-4 py-3 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 print:hidden">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="font-extrabold text-xs sm:text-sm text-white">ใบเสนอราคาอย่างเป็นทางการ (Official Quotation)</span>
+                    <span id="modal-qt-id-top" class="text-cyan-300 font-mono text-xs bg-slate-800 px-2 py-0.5 rounded border border-slate-700">QT-202608-XXXX</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="printOfficialQuotation()" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md active:scale-95 transition-all">
+                        <i class="fa-solid fa-print"></i> พิมพ์ / บันทึก PDF
+                    </button>
+                    <button onclick="shareQuotationLINE()" class="px-3 py-1.5 rounded-xl bg-[#06C755] hover:bg-[#05b34c] text-white text-xs font-bold flex items-center gap-1.5 shadow-md active:scale-95 transition-all">
+                        <i class="fa-brands fa-line text-sm"></i> ส่งเข้า LINE
+                    </button>
+                    <button onclick="copyQuotationSummary()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 active:scale-95 transition-all">
+                        <i class="fa-solid fa-copy"></i> คัดลอกสรุป
+                    </button>
+                    <button onclick="closeQuotationModal()" class="p-1.5 rounded-xl bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white transition-colors">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- A4 White Printable Paper -->
+            <div id="quotation-print-area" class="bg-white p-6 sm:p-10 md:p-12 text-slate-900 shadow-sm min-h-[1050px] flex flex-col justify-between font-sans">
+                <div>
+                    <!-- 1. Header -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start gap-4 border-b-2 border-slate-900 pb-5">
+                        <div class="space-y-0.5">
+                            <h1 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">บริษัท ไทยเอไอ โซลูชั่น จำกัด</h1>
+                            <p class="text-xs sm:text-sm font-bold text-blue-700 font-mono">THAI AI SOLUTION CO., LTD.</p>
+                            <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed max-w-md pt-1">
+                                สำนักงานใหญ่: เลขที่ 149/8 ถนนเก้าแสน ตำบลบ่อยาง อำเภอเมืองสงขลา จังหวัดสงขลา 90000
+                            </p>
+                            <p class="text-[11px] sm:text-xs text-slate-600">
+                                เลขประจำตัวผู้เสียภาษีอากร (Tax ID): <strong class="font-mono text-slate-900 font-bold">0905569007271</strong>
+                            </p>
+                            <p class="text-[11px] sm:text-xs text-slate-600">
+                                โทรศัพท์: <strong>097-132-8145</strong> (บริการ 24 ชม.) | อีเมล: <strong>thaiaisolution@outlook.com</strong> | เว็บไซต์: <strong>www.thaiaisolution.co.th</strong>
+                            </p>
+                        </div>
+                        <div class="text-left sm:text-right shrink-0 w-full sm:w-auto pt-2 sm:pt-0">
+                            <span class="inline-block px-2.5 py-0.5 bg-blue-50 border border-blue-200 text-blue-800 text-[11px] font-black rounded mb-1">
+                                ต้นฉบับ / ORIGINAL
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-slate-900">ใบเสนอราคา</h2>
+                            <p class="text-xs font-bold text-slate-500 font-mono tracking-widest">QUOTATION</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Customer & Document Meta Box -->
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 my-6 p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs">
+                        <div class="sm:col-span-7 space-y-1.5 pr-0 sm:pr-4 sm:border-r border-slate-200">
+                            <div class="font-bold text-slate-500 uppercase tracking-wider text-[10px]">ข้อมูลลูกค้า / ผู้ว่าจ้าง (CUSTOMER INFORMATION)</div>
+                            <div class="text-sm font-black text-slate-900" id="modal-qt-cust-name">-</div>
+                            <div class="text-slate-600 flex items-center gap-1">
+                                <i class="fa-solid fa-phone text-emerald-600"></i> โทรศัพท์: <strong id="modal-qt-cust-phone">-</strong>
+                            </div>
+                            <div class="text-slate-600 flex items-center gap-1">
+                                <i class="fa-solid fa-envelope text-blue-600"></i> อีเมล: <strong id="modal-qt-cust-email">-</strong>
+                            </div>
+                        </div>
+                        <div class="sm:col-span-5 space-y-1.5">
+                            <div class="font-bold text-slate-500 uppercase tracking-wider text-[10px]">รายละเอียดเอกสาร (DOCUMENT DETAILS)</div>
+                            <div class="flex justify-between"><span class="text-slate-500">เลขที่ใบเสนอราคา:</span><strong class="font-mono text-blue-800" id="modal-qt-id">-</strong></div>
+                            <div class="flex justify-between"><span class="text-slate-500">วันที่ออกเอกสาร:</span><span class="font-bold text-slate-900" id="modal-qt-date">-</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">กำหนดยืนราคา:</span><span class="font-bold text-slate-900" id="modal-qt-valid">30 วัน</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500">เงื่อนไขการชำระ:</span><span class="text-slate-700 font-bold">แบ่งชำระตามงวดงาน</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Items Table -->
+                    <div class="my-6 overflow-hidden rounded-xl border border-slate-300">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 text-white font-black text-[11px]">
+                                    <th class="py-2.5 px-3 text-center w-12 border-r border-slate-800">ลำดับ</th>
+                                    <th class="py-2.5 px-4 border-r border-slate-800">รายการและขอบเขตงาน (Description)</th>
+                                    <th class="py-2.5 px-3 text-center w-16 border-r border-slate-800">จำนวน</th>
+                                    <th class="py-2.5 px-3 text-center w-16 border-r border-slate-800">หน่วย</th>
+                                    <th class="py-2.5 px-4 text-right w-28 border-r border-slate-800">ราคา/หน่วย</th>
+                                    <th class="py-2.5 px-4 text-right w-32">จำนวนเงิน (บาท)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="modal-qt-items-body" class="divide-y divide-slate-200">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 4. Financial Calculations -->
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-start mb-6">
+                        <div class="sm:col-span-7 p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                            <div class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">จำนวนเงินตัวอักษร (AMOUNT IN WORDS)</div>
+                            <div class="text-xs sm:text-sm font-bold text-blue-900" id="modal-qt-baht-text">ศูนย์บาทถ้วน</div>
+                            <div id="modal-qt-notes" class="text-[11px] text-slate-600 pt-1 border-t border-slate-200 mt-1 hidden"></div>
+                        </div>
+                        <div class="sm:col-span-5 bg-white border border-slate-300 rounded-xl overflow-hidden text-xs">
+                            <div class="flex justify-between py-2 px-3 border-b border-slate-200">
+                                <span class="text-slate-600">รวมเป็นเงิน (Subtotal):</span>
+                                <span class="font-mono font-bold text-slate-900" id="modal-qt-subtotal">฿0</span>
+                            </div>
+                            <div class="flex justify-between py-2 px-3 border-b border-slate-200 bg-slate-50/50">
+                                <span class="text-slate-600">ภาษีมูลค่าเพิ่ม 7% (VAT):</span>
+                                <span class="font-mono font-bold text-slate-900" id="modal-qt-vat">฿0</span>
+                            </div>
+                            <div class="flex justify-between py-2.5 px-3 bg-blue-50 text-blue-900 border-t border-blue-200">
+                                <span class="font-black text-xs sm:text-sm">รวมเงินทั้งสิ้น (Grand Total):</span>
+                                <span class="font-mono font-black text-sm sm:text-base text-blue-700" id="modal-qt-grand">฿0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Payment Terms & Bank Info -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[11px] text-slate-600 border-t border-slate-200 pt-4 mb-6">
+                        <div class="space-y-1">
+                            <strong class="text-slate-800 font-bold block text-xs">เงื่อนไขการชำระเงิน (Payment Terms):</strong>
+                            <p>• งวดที่ 1: ชำระ 40% เมื่อลงนามสัญญาและเริ่มพัฒนาโครงการ</p>
+                            <p>• งวดที่ 2: ชำระ 40% เมื่อติดตั้งระบบขึ้นเซิร์ฟเวอร์ทดสอบ (Staging)</p>
+                            <p>• งวดที่ 3: ชำระ 20% เมื่องานส่งมอบสมบูรณ์และเปิดใช้งานจริง (Go-Live)</p>
+                            <p>• รวมการรับประกันและดูแลรักษาระบบ (Maintenance Support) ฟรี 1 ปีเต็ม</p>
+                        </div>
+                        <div class="space-y-1 p-3 rounded-xl bg-blue-50/60 border border-blue-100">
+                            <strong class="text-blue-900 font-bold block text-xs flex items-center gap-1.5">
+                                <i class="fa-solid fa-shield-halved text-emerald-600"></i> การชำระเงินผ่านบัญชีนิติบุคคลบริษัท:
+                            </strong>
+                            <p class="font-medium text-slate-800">ธนาคารกสิกรไทย (KBank) / บัญชีกระแสรายวัน</p>
+                            <p class="text-blue-800 font-bold">ชื่อบัญชี: บริษัท ไทยเอไอ โซลูชั่น จำกัด</p>
+                            <p class="font-mono text-slate-700 font-bold">เลขที่บัญชี: 090-5-56900-7 (นิติบุคคล)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Signatures -->
+                <div class="border-t-2 border-slate-800 pt-6 mt-4">
+                    <div class="grid grid-cols-2 gap-8 text-center text-xs">
+                        <div class="flex flex-col justify-between items-center h-36 border border-dashed border-slate-300 rounded-2xl p-4 bg-slate-50/50">
+                            <div class="text-slate-600 font-bold">อนุมัติสั่งซื้อ / ลงนามผู้ว่าจ้าง (Customer Acceptance)</div>
+                            <div class="w-44 border-b border-slate-400 pb-1 text-slate-400 text-[10px]">(ลงชื่อ / ประทับตรา)</div>
+                            <div class="text-[11px] text-slate-600">วันที่ .......... / .......... / ................</div>
+                        </div>
+                        <div class="flex flex-col justify-between items-center h-36 border border-slate-300 rounded-2xl p-4 bg-white relative">
+                            <div class="text-slate-800 font-bold">ในนาม บริษัท ไทยเอไอ โซลูชั่น จำกัด</div>
+                            <div class="font-mono text-xs font-bold text-blue-700 z-10 bg-white/90 px-3 py-1 rounded border border-blue-200 shadow-sm">
+                                นาย อานันทชัย ทวีวัฒน์
+                            </div>
+                            <div class="text-[11px] text-slate-700">
+                                กรรมการผู้จัดการ / ผู้มีอำนาจลงนาม
+                                <div class="text-[10px] text-slate-500 font-mono">วันที่ <span id="modal-qt-sign-date">-</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center text-[10px] text-slate-400 font-mono pt-4">
+                        THAI AI SOLUTION CO., LTD. • 0905569007271 • WWW.THAIAISOLUTION.CO.TH • 24/7 SUPPORT
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- Admin Backend Dashboard Modal -->
+    <!-- ========================================================================= -->
+    <div id="admin-portal-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/90 backdrop-blur-md hidden flex justify-center items-start p-3 sm:p-6">
+        <div class="relative w-full max-w-5xl bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden my-4">
+            <div class="bg-slate-950 px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-cyan-400"></i>
+                    <h3 class="text-base font-bold text-white">ระบบหลังบ้าน • จัดการใบเสนอราคา (Admin Portal)</h3>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="exportAdminCSV()" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md">
+                        <i class="fa-solid fa-file-excel"></i> ส่งออก Excel / CSV
+                    </button>
+                    <button onclick="closeAdminPortal()" class="p-1.5 rounded-xl bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white transition-colors">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6 space-y-6">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800">
+                        <span class="text-xs text-slate-400">ใบเสนอราคาทั้งหมด</span>
+                        <div class="text-2xl font-black text-white font-mono mt-1" id="admin-metric-total">0</div>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 col-span-2">
+                        <span class="text-xs text-slate-400">มูลค่ารวมในระบบ (Total Value)</span>
+                        <div class="text-2xl font-black text-emerald-400 font-mono mt-1" id="admin-metric-value">฿0</div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-800">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950 text-slate-400 font-bold border-b border-slate-800 text-[11px]">
+                                <th class="p-3">เลขที่ / วันที่</th>
+                                <th class="p-3">ลูกค้า / เบอร์โทร</th>
+                                <th class="p-3">บริการ</th>
+                                <th class="p-3 text-right">ยอดรวมสุทธิ</th>
+                                <th class="p-3 text-center">สถานะ</th>
+                                <th class="p-3 text-center">การกระทำ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Floating LINE Official Account Widget -->
     <div class="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40">
@@ -1505,5 +2025,16 @@
             <span class="hidden sm:inline">แชทผ่าน LINE OA</span>
         </a>
     </div>
+
+    <!-- Print CSS Optimization -->
+    <style>
+        @media print {
+            body * { visibility: hidden; }
+            #official-quotation-modal, #official-quotation-modal * { visibility: visible; }
+            #official-quotation-modal { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; background: white; }
+            #quotation-print-area { box-shadow: none !important; border: none !important; padding: 0 !important; width: 100% !important; max-width: none !important; }
+            .print\:hidden { display: none !important; }
+        }
+    </style>
 </body>
 </html>

@@ -172,6 +172,15 @@ export default function Footer({ t, setPage, setCurrentPage, setSelectedServiceT
                   {t.nav.contact}
                 </button>
               </li>
+              <li>
+                <button 
+                  onClick={() => handleNav('admin')} 
+                  className="text-cyan-400 hover:text-cyan-200 font-bold transition-colors flex items-center gap-1"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>ระบบหลังบ้าน (Admin)</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -192,8 +201,14 @@ export default function Footer({ t, setPage, setCurrentPage, setSelectedServiceT
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div>
-            © 2026 บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.). สงวนลิขสิทธิ์ทั้งหมด
+          <div className="flex items-center gap-3">
+            <span>© 2026 บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.). สงวนลิขสิทธิ์ทั้งหมด</span>
+            <button 
+              onClick={() => handleNav('admin')}
+              className="text-[11px] text-slate-600 hover:text-cyan-400 font-mono transition-colors"
+            >
+              [Admin Portal]
+            </button>
           </div>
 
           <button

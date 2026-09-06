@@ -9,20 +9,63 @@ import AIAssistantPage from './pages/AIAssistantPage';
 import PortfolioPage from './pages/PortfolioPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import AdminQuotationsPage from './pages/AdminQuotationsPage';
 import { translations } from './data/translations';
 import { Bot, Sparkles, MessageSquare } from 'lucide-react';
 
 export default function App() {
   const [lang, setLang] = useState('th');
-  const [currentPage, setCurrentPage] = useState('home');
+  const getInitialPage = () => {
+    const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+    const hash = window.location.hash.toLowerCase();
+    if (path === '/admin' || hash === '#admin') return 'admin';
+    if (path === '/services' || hash === '#services') return 'services';
+    if (path === '/estimator' || hash === '#estimator') return 'estimator';
+    if (path === '/aistudio' || hash === '#aistudio') return 'aiStudio';
+    if (path === '/portfolio' || hash === '#portfolio') return 'portfolio';
+    if (path === '/about' || hash === '#about') return 'about';
+    if (path === '/contact' || hash === '#contact') return 'contact';
+    return 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState(getInitialPage);
   const [selectedServiceTab, setSelectedServiceTab] = useState('web');
   const [prefillData, setPrefillData] = useState(null);
 
   const t = translations[lang] || translations.th;
 
-  // Scroll to top on page change
+  // Listen to popstate and URL hash changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
+      const hash = window.location.hash.toLowerCase();
+      if (path === '/admin' || hash === '#admin') {
+        setCurrentPage('admin');
+      } else if (path === '' || path === '/') {
+        if (!hash) setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
+  // Update browser URL and scroll to top on page change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (currentPage === 'admin') {
+      if (window.location.pathname !== '/admin') {
+        window.history.pushState(null, '', '/admin');
+      }
+    } else if (currentPage === 'home') {
+      if (window.location.pathname === '/admin') {
+        window.history.pushState(null, '', '/');
+      }
+    }
   }, [currentPage]);
 
   const renderPage = () => {
@@ -79,6 +122,13 @@ export default function App() {
           <ContactPage
             t={t}
             prefillData={prefillData}
+          />
+        );
+      case 'admin':
+        return (
+          <AdminQuotationsPage
+            t={t}
+            setPage={setCurrentPage}
           />
         );
       default:

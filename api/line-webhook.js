@@ -301,6 +301,13 @@ function getConsultationFlex() {
           {
             type: 'box', layout: 'horizontal',
             contents: [
+              { type: 'text', text: 'กรรมการ:', color: '#94a3b8', size: 'xs', flex: 3 },
+              { type: 'text', text: 'นาย อานันทชัย ทวีวัฒน์', color: '#f8fafc', size: 'xs', weight: 'bold', flex: 7 }
+            ]
+          },
+          {
+            type: 'box', layout: 'horizontal',
+            contents: [
               { type: 'text', text: 'สำนักงาน:', color: '#94a3b8', size: 'xs', flex: 3 },
               { type: 'text', text: '149/8 ถ.เก้าแสน ต.บ่อยาง อ.เมืองสงขลา จ.สงขลา', color: '#cbd5e1', size: 'xs', wrap: true, flex: 7 }
             ]
@@ -315,6 +322,47 @@ function getConsultationFlex() {
           { type: 'button', style: 'primary', color: '#16a34a', height: 'sm', action: { type: 'uri', label: '📞 กดโทรหาเจ้าหน้าที่ทันที', uri: 'tel:0971328145' } },
           { type: 'button', style: 'secondary', color: '#1e293b', height: 'sm', action: { type: 'message', label: '📑 ขอใบเสนอราคา', text: 'ขอใบเสนอราคา' } },
           { type: 'button', style: 'secondary', color: '#1e293b', height: 'sm', action: { type: 'uri', label: '🌐 เยี่ยมชมเว็บไซต์บริษัท', uri: 'https://www.thaiaisolution.co.th' } }
+        ]
+      }
+    },
+    quickReply: defaultQuickReplies
+  };
+}
+
+// 8. QUOTATION Flex Message
+function getQuotationFlex() {
+  return {
+    type: 'flex',
+    altText: '📄 ขอใบเสนอราคาทางการทันที - Thai AI Solution',
+    contents: {
+      type: 'bubble',
+      header: {
+        type: 'box', layout: 'vertical', backgroundColor: '#0b0f19',
+        contents: [
+          { type: 'text', text: '📄 ออกใบเสนอราคาทางการทันที', weight: 'bold', color: '#38bdf8', size: 'lg' },
+          { type: 'text', text: 'Instant Official Quotation A4 พร้อมตราประทับ', color: '#4ade80', size: 'xs', weight: 'bold', margin: 'xs' }
+        ]
+      },
+      body: {
+        type: 'box', layout: 'vertical', backgroundColor: '#111827', spacing: 'md',
+        contents: [
+          { type: 'text', text: 'ท่านสามารถคำนวณงบประมาณและกดออกใบเสนอราคาทางการฉบับจริงได้ทันที พร้อมตราประทับบริษัทและลงนามโดยกรรมการผู้จัดการ', color: '#e2e8f0', size: 'xs', wrap: true },
+          {
+            type: 'box', layout: 'vertical', spacing: 'xs',
+            contents: [
+              { type: 'text', text: '• บริษัท ไทยเอไอ โซลูชั่น จำกัด', color: '#cbd5e1', size: 'xxs' },
+              { type: 'text', text: '• เลขประจำตัวผู้เสียภาษี: 0905569007271', color: '#cbd5e1', size: 'xxs' },
+              { type: 'text', text: '• กรรมการผู้จัดการ: นาย อานันทชัย ทวีวัฒน์', color: '#cbd5e1', size: 'xxs' },
+              { type: 'text', text: '• สั่งพิมพ์ A4 / บันทึก PDF / ส่งเข้า LINE ได้ทันที', color: '#38bdf8', size: 'xxs' }
+            ]
+          }
+        ]
+      },
+      footer: {
+        type: 'box', layout: 'vertical', backgroundColor: '#111827', spacing: 'sm',
+        contents: [
+          { type: 'button', style: 'primary', color: '#2563eb', height: 'sm', action: { type: 'uri', label: '🧮 คำนวณ & ออกเอกสารทันที', uri: 'https://www.thaiaisolution.co.th/#estimator' } },
+          { type: 'button', style: 'secondary', color: '#16a34a', height: 'sm', action: { type: 'uri', label: '📞 โทรสายด่วน 097-132-8145', uri: 'tel:0971328145' } }
         ]
       }
     },
@@ -427,11 +475,7 @@ export default async function handler(req, res) {
 
       // Quotation
       else if (text.includes('ใบเสนอราคา') || text.includes('เสนอราคา') || text.includes('quotation')) {
-        await replyMessage(replyToken, {
-          type: 'text',
-          text: '📄 **การขอใบเสนอราคาอย่างเป็นทางการ (Quotation)**\n\nท่านสามารถแจ้งข้อมูลเบื้องต้นให้เจ้าหน้าที่ได้เลยครับ:\n1. ชื่อผู้ติดต่อ และชื่อบริษัท/ร้านค้า\n2. เบอร์โทรศัพท์ และอีเมล\n3. บริการ/ระบบ AI ที่ต้องการ\n4. งบประมาณที่ตั้งไว้เบื้องต้น\n\nทีมงานจะจัดทำใบเสนอราคาพร้อมเอกสารรับรองส่งให้ทางอีเมลโดยเร็วที่สุดครับ!\n\n🌐 กรอกผ่านหน้าเว็บ: https://www.thaiaisolution.co.th/#contact\n📞 โทรด่วน: 097-132-8145 (24 ชม.)',
-          quickReply: defaultQuickReplies
-        });
+        await replyMessage(replyToken, getQuotationFlex());
       }
 
       // Price / Estimator
