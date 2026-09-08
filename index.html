@@ -82,7 +82,7 @@
             <div class="flex items-center justify-between h-16 sm:h-20">
                 <!-- Official Vector Logo -->
                 <div class="flex items-center">
-                    <a href="#" class="flex items-center gap-2 group" aria-label="Thai AI Solution Logo">
+                    <a href="#home" onclick="event.preventDefault(); switchTab('home')" class="flex items-center gap-2 group cursor-pointer" aria-label="Thai AI Solution Logo">
                         <svg class="h-9 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-105" viewBox="0 0 540 180" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="logoBlueGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -156,16 +156,26 @@
                     </a>
                 </div>
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-300">
-                    <a href="#services" class="hover:text-cyan-400 transition-colors">บริการของเรา</a>
-                    <a href="#ai-features" class="hover:text-purple-400 transition-colors flex items-center gap-1.5">
-                        <i class="fa-solid fa-sparkles text-purple-400 text-xs"></i> นวัตกรรม AI
-                    </a>
-                    <a href="#ai-demo" class="hover:text-cyan-400 transition-colors">ทดสอบระบบ AI</a>
-                    <a href="#estimator" class="hover:text-cyan-400 transition-colors">ประเมินราคา</a>
-                    <a href="#portfolio" class="hover:text-cyan-400 transition-colors">ตัวอย่างระบบจริง</a>
-                    <a href="#contact" class="hover:text-cyan-400 transition-colors">ติดต่อเรา</a>
+                <!-- Desktop Navigation (Dedicated Tab Buttons) -->
+                <nav class="hidden lg:flex items-center gap-1.5 xl:gap-2 text-sm font-medium text-slate-300">
+                    <button onclick="switchTab('home')" class="nav-tab-btn px-3 py-2 rounded-xl text-cyan-300 bg-purple-600/20 border border-purple-500/40 shadow-sm shadow-purple-500/20 font-semibold transition-all flex items-center gap-1.5 cursor-pointer" data-tab="home">
+                        <i class="fa-solid fa-house text-xs"></i> หน้าหลัก
+                    </button>
+                    <button onclick="switchTab('services')" class="nav-tab-btn px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent transition-all flex items-center gap-1.5 cursor-pointer" data-tab="services">
+                        <i class="fa-solid fa-cubes text-xs text-blue-400"></i> บริการของเรา
+                    </button>
+                    <button onclick="switchTab('ai')" class="nav-tab-btn px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent transition-all flex items-center gap-1.5 cursor-pointer" data-tab="ai">
+                        <i class="fa-solid fa-sparkles text-purple-400 text-xs"></i> นวัตกรรม & ทดสอบ AI
+                    </button>
+                    <button onclick="switchTab('estimator')" class="nav-tab-btn px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent transition-all flex items-center gap-1.5 cursor-pointer" data-tab="estimator">
+                        <i class="fa-solid fa-calculator text-xs text-indigo-400"></i> ประเมินราคา
+                    </button>
+                    <button onclick="switchTab('portfolio')" class="nav-tab-btn px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent transition-all flex items-center gap-1.5 cursor-pointer" data-tab="portfolio">
+                        <i class="fa-solid fa-laptop-code text-xs text-teal-400"></i> ตัวอย่างระบบจริง
+                    </button>
+                    <button onclick="switchTab('contact')" class="nav-tab-btn px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent transition-all flex items-center gap-1.5 cursor-pointer" data-tab="contact">
+                        <i class="fa-solid fa-envelope text-xs text-pink-400"></i> ติดต่อเรา
+                    </button>
                 </nav>
 
                 <!-- Action Button Desktop -->
@@ -173,9 +183,9 @@
                     <a href="https://lin.ee/u14z1Oq" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-[#06C755]/15 hover:bg-[#06C755]/25 text-[#06C755] border border-[#06C755]/40 font-bold text-sm transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
                         <i class="fa-brands fa-line text-lg"></i> แอด LINE OA
                     </a>
-                    <a href="#estimator" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-medium text-sm hover:shadow-lg hover:shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
+                    <button onclick="switchTab('estimator')" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-medium text-sm hover:shadow-lg hover:shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-calculator"></i> คำนวณราคาโปรเจกต์
-                    </a>
+                    </button>
                 </div>
 
                 <!-- Mobile Hamburger Menu Button -->
@@ -194,25 +204,25 @@
         </div>
 
         <!-- Mobile Drawer Navigation Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-slate-950/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-3 backdrop-blur-xl animate-fadeIn">
-            <a href="#services" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+        <div id="mobile-menu" class="hidden lg:hidden bg-slate-950/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2 backdrop-blur-xl animate-fadeIn">
+            <button onclick="switchTab('home'); closeMobileMenu();" class="mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-purple-600/30 border border-purple-500/50 text-cyan-300 font-bold text-sm cursor-pointer" data-tab="home">
+                <i class="fa-solid fa-house text-purple-400 w-6"></i> หน้าหลัก
+            </button>
+            <button onclick="switchTab('services'); closeMobileMenu();" class="mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40 cursor-pointer" data-tab="services">
                 <i class="fa-solid fa-cubes text-blue-400 w-6"></i> บริการของเรา
-            </a>
-            <a href="#ai-features" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-purple-300 font-medium text-sm active:bg-purple-900/40">
-                <i class="fa-solid fa-sparkles text-purple-400 w-6"></i> นวัตกรรม Smart AI
-            </a>
-            <a href="#ai-demo" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
-                <i class="fa-solid fa-robot text-cyan-400 w-6"></i> ทดสอบสั่งงาน AI จำลอง
-            </a>
-            <a href="#estimator" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+            </button>
+            <button onclick="switchTab('ai'); closeMobileMenu();" class="mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-purple-300 font-medium text-sm active:bg-purple-900/40 cursor-pointer" data-tab="ai">
+                <i class="fa-solid fa-sparkles text-purple-400 w-6"></i> นวัตกรรม & ทดสอบ AI
+            </button>
+            <button onclick="switchTab('estimator'); closeMobileMenu();" class="mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40 cursor-pointer" data-tab="estimator">
                 <i class="fa-solid fa-calculator text-indigo-400 w-6"></i> คำนวณราคาโปรเจกต์
-            </a>
-            <a href="#portfolio" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+            </button>
+            <button onclick="switchTab('portfolio'); closeMobileMenu();" class="mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40 cursor-pointer" data-tab="portfolio">
                 <i class="fa-solid fa-laptop-code text-teal-400 w-6"></i> ตัวอย่างภาพระบบจริง
-            </a>
-            <a href="#contact" class="block py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40">
+            </button>
+            <button onclick="switchTab('contact'); closeMobileMenu();" class="mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40 cursor-pointer" data-tab="contact">
                 <i class="fa-solid fa-envelope text-pink-400 w-6"></i> ติดต่อเรา / ขอใบเสนอราคา
-            </a>
+            </button>
             
             <div class="pt-2 grid grid-cols-3 gap-2">
                 <a href="https://lin.ee/u14z1Oq" target="_blank" rel="noopener noreferrer" class="py-3 rounded-xl bg-slate-900 border border-[#06C755]/40 text-[#06C755] font-bold text-xs text-center flex items-center justify-center gap-1.5">
@@ -228,74 +238,226 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative pt-24 pb-16 sm:pt-40 sm:pb-28 overflow-hidden">
-        <!-- Background Ambient Glow -->
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] bg-purple-600/15 rounded-full blur-3xl pointer-events-none pulse-slow"></div>
-        <div class="absolute top-1/3 left-1/4 w-[240px] sm:w-[400px] h-[240px] sm:h-[400px] bg-cyan-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- ========================================================================= -->
+    <!-- TAB 1: หน้าหลัก (HOME TAB) -->
+    <!-- ========================================================================= -->
+    <div id="tab-home" class="page-tab">
+        <!-- Hero Section -->
+        <section class="relative pt-24 pb-14 sm:pt-36 sm:pb-20 overflow-hidden">
+            <!-- Background Ambient Glow -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] bg-purple-600/15 rounded-full blur-3xl pointer-events-none pulse-slow"></div>
+            <div class="absolute top-1/3 left-1/4 w-[240px] sm:w-[400px] h-[240px] sm:h-[400px] bg-cyan-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-4xl mx-auto space-y-5 sm:space-y-6">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-medium shadow-inner shadow-purple-500/10 max-w-full truncate">
-                    <span class="flex h-2 w-2 rounded-full bg-purple-400 animate-ping shrink-0"></span>
-                    <i class="fa-solid fa-sparkles text-xs shrink-0"></i> 
-                    <span class="truncate">ซอฟต์แวร์ เว็บไซต์ และการตลาด ยุคใหม่ ผสานพลัง Smart AI</span>
-                </div>
-
-                <!-- Main Heading -->
-                <h1 class="text-2xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-snug sm:leading-tight">
-                    บริการรับเขียนโปรแกรม เว็บไซต์ & ซอฟต์แวร์ <br class="hidden sm:inline">
-                    ยกระดับธุรกิจด้วย <span class="ai-gradient-text">ระบบ AI อัจฉริยะในทุกบริการ</span>
-                </h1>
-
-                <!-- Subheading -->
-                <p class="text-xs sm:text-lg text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
-                    <strong>บริษัท ไทยเอไอ โซลูชั่น จำกัด</strong> (THAI AI SOLUTION CO., LTD.) พัฒนาเว็บไซต์ เว็บแอป ซอฟต์แวร์ธุรกิจ โมบายล์แอป และการตลาดออนไลน์ครบวงจร 
-                    ด้วยจุดเด่น <span class="text-cyan-400 font-medium">"ติดตั้ง AI ในตัว"</span> เพื่อให้ระบบของคุณคิดแทน ทำงานอัตโนมัติ และสร้างยอดขายได้ตลอด 24 ชม.
-                </p>
-
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                    <a href="#estimator" class="w-full sm:w-auto px-6 py-3.5 rounded-xl ai-gradient-bg text-white font-semibold text-sm sm:text-base shadow-xl shadow-purple-600/25 hover:shadow-purple-600/40 transition-all flex items-center justify-center gap-2 min-h-[48px]">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        ประเมินราคาพร้อมติดตั้ง AI
-                    </a>
-                    <a href="#portfolio" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm sm:text-base transition-all flex items-center justify-center gap-2 min-h-[48px]">
-                        <i class="fa-solid fa-laptop-code text-cyan-400"></i>
-                        ดูตัวอย่างภาพระบบและผลงานจริง
-                    </a>
-                </div>
-
-                <!-- Quick Highlights Grid (Scrollable on mobile) -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 text-left">
-                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
-                        <i class="fa-solid fa-brain text-purple-400 text-xl sm:text-2xl mb-1.5"></i>
-                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Chatbot & Support</h4>
-                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ตอบลูกค้าอัตโนมัติ 24 ชม.</p>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-4xl mx-auto space-y-5 sm:space-y-6">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-purple-500/40 text-purple-300 text-xs sm:text-sm font-medium shadow-inner shadow-purple-500/10 max-w-full truncate">
+                        <span class="flex h-2 w-2 rounded-full bg-purple-400 animate-ping shrink-0"></span>
+                        <i class="fa-solid fa-sparkles text-xs shrink-0"></i> 
+                        <span class="truncate">ซอฟต์แวร์ เว็บไซต์ และการตลาด ยุคใหม่ ผสานพลัง Smart AI</span>
                     </div>
-                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
-                        <i class="fa-solid fa-chart-line text-cyan-400 text-xl sm:text-2xl mb-1.5"></i>
-                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Smart Analytics</h4>
-                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">พยากรณ์สต็อกแม่นยำ</p>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-2xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-snug sm:leading-tight">
+                        บริการรับเขียนโปรแกรม เว็บไซต์ & ซอฟต์แวร์ <br class="hidden sm:inline">
+                        ยกระดับธุรกิจด้วย <span class="ai-gradient-text">ระบบ AI อัจฉริยะในทุกบริการ</span>
+                    </h1>
+
+                    <!-- Subheading -->
+                    <p class="text-xs sm:text-lg text-slate-300 max-w-3xl mx-auto font-light leading-relaxed">
+                        <strong>บริษัท ไทยเอไอ โซลูชั่น จำกัด</strong> (THAI AI SOLUTION CO., LTD.) พัฒนาเว็บไซต์ เว็บแอป ซอฟต์แวร์ธุรกิจ โมบายล์แอป และการตลาดออนไลน์ครบวงจร 
+                        ด้วยจุดเด่น <span class="text-cyan-400 font-medium">"ติดตั้ง AI ในตัว"</span> เพื่อให้ระบบของคุณคิดแทน ทำงานอัตโนมัติ และสร้างยอดขายได้ตลอด 24 ชม.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                        <button onclick="switchTab('estimator')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl ai-gradient-bg text-white font-semibold text-sm sm:text-base shadow-xl shadow-purple-600/25 hover:shadow-purple-600/40 transition-all flex items-center justify-center gap-2 min-h-[48px] cursor-pointer">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            ประเมินราคาพร้อมติดตั้ง AI
+                        </button>
+                        <button onclick="switchTab('portfolio')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm sm:text-base transition-all flex items-center justify-center gap-2 min-h-[48px] cursor-pointer">
+                            <i class="fa-solid fa-laptop-code text-cyan-400"></i>
+                            ดูตัวอย่างภาพระบบและผลงานจริง
+                        </button>
                     </div>
-                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
-                        <i class="fa-solid fa-bullhorn text-pink-400 text-xl sm:text-2xl mb-1.5"></i>
-                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Digital Marketing</h4>
-                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ยิง Ads ด้วย AI + คอนเทนต์</p>
-                    </div>
-                    <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
-                        <i class="fa-solid fa-shield-halved text-emerald-400 text-xl sm:text-2xl mb-1.5"></i>
-                        <h4 class="font-semibold text-xs sm:text-sm text-slate-200">Enterprise Security</h4>
-                        <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ปลอดภัย มาตรฐานองค์กร 100%</p>
+
+                    <!-- Quick Highlights Grid (Scrollable on mobile) -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-8 text-left">
+                        <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                            <i class="fa-solid fa-brain text-purple-400 text-xl sm:text-2xl mb-1.5"></i>
+                            <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Chatbot & Support</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ตอบลูกค้าอัตโนมัติ 24 ชม.</p>
+                        </div>
+                        <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                            <i class="fa-solid fa-chart-line text-cyan-400 text-xl sm:text-2xl mb-1.5"></i>
+                            <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Smart Analytics</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">พยากรณ์สต็อกแม่นยำ</p>
+                        </div>
+                        <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                            <i class="fa-solid fa-bullhorn text-pink-400 text-xl sm:text-2xl mb-1.5"></i>
+                            <h4 class="font-semibold text-xs sm:text-sm text-slate-200">AI Digital Marketing</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ยิง Ads ด้วย AI + คอนเทนต์</p>
+                        </div>
+                        <div class="bg-slate-900/60 backdrop-blur border border-slate-800 p-3.5 sm:p-4 rounded-2xl">
+                            <i class="fa-solid fa-shield-halved text-emerald-400 text-xl sm:text-2xl mb-1.5"></i>
+                            <h4 class="font-semibold text-xs sm:text-sm text-slate-200">Enterprise Security</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-400 mt-0.5">ปลอดภัย มาตรฐานองค์กร 100%</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Core Services Section -->
-    <section id="services" class="py-14 sm:py-20 bg-slate-900/60 border-y border-slate-800/80 relative">
+        <!-- Home Hub: Quick Category Explorer -->
+        <section class="py-12 sm:py-16 bg-slate-900/40 border-t border-slate-800/80 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-10 space-y-2">
+                    <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Menu Navigation Hub</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">เลือกดูรายละเอียดแยกตามหมวดหมู่</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm">คลิกเพื่อเข้าสู่แต่ละเมนูระบบ ไม่ว่าจะเป็นบริการเต็มรูปแบบ ห้องทดสอบ AI การประเมินราคา หรือตัวอย่างผลงาน</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    <!-- Card 1: Services -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-lg">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cubes"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1.5">บริการพัฒนาซอฟต์แวร์ 8 ด้าน</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                เว็บไซต์ E-Commerce, แอพพลิเคชัน iOS/Android, ซอฟต์แวร์ ERP/CRM, AI Chatbot, Cloud API, IoT และการตลาดออนไลน์
+                            </p>
+                        </div>
+                        <button onclick="switchTab('services')" class="w-full py-2.5 px-4 rounded-xl bg-blue-600/15 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>ดูบริการทั้งหมด 8 รายการ</span>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 2: AI Innovation -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-purple-500/50 p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-lg">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-sparkles"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1.5">นวัตกรรม & ทดสอบระบบ AI</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                ห้องทดลอง AI Playground สั่งงานจริง จำลองการตอบคำถามอัตโนมัติ 24 ชม., วิเคราะห์ยอดขาย, ตรวจสลิปด้วย OCR และวางแผนโฆษณา
+                            </p>
+                        </div>
+                        <button onclick="switchTab('ai')" class="w-full py-2.5 px-4 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-300 hover:text-white border border-purple-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>เข้าสู่ห้องทดลองสั่งงาน AI</span>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 3: Cost Estimator -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-lg">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-calculator"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1.5">ประเมินราคา & ออกใบเสนอราคาจริง</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                คำนวณงบประมาณตามฟังก์ชันที่ต้องการ พร้อมกดรับใบเสนอราคาอย่างเป็นทางการ (Official Quotation) มีตราประทับและบันทึกลงระบบทันที
+                            </p>
+                        </div>
+                        <button onclick="switchTab('estimator')" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600/15 hover:bg-indigo-600 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>คำนวณราคาโปรเจกต์</span>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 4: Portfolio -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-teal-500/50 p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-lg">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-laptop-code"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-1.5">ตัวอย่างภาพระบบจริง (Live Showcase)</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                ชมอินเทอร์เฟซระบบจริงที่เราพัฒนา แพลตฟอร์ม E-Commerce, ระบบบริหารสต็อก ERP, แอพมือถือ, Dashboard วิเคราะห์ข้อมูล และฮาร์ดแวร์ IoT
+                            </p>
+                        </div>
+                        <button onclick="switchTab('portfolio')" class="w-full py-2.5 px-4 rounded-xl bg-teal-600/15 hover:bg-teal-600 text-teal-300 hover:text-white border border-teal-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer">
+                            <span>ชมตัวอย่างหน้าตาระบบจริง</span>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        </button>
+                    </div>
+
+                    <!-- Card 5: Contact -->
+                    <div class="bg-slate-900/90 border border-slate-800 hover:border-pink-500/50 p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-lg md:col-span-2 lg:col-span-2">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">ติดต่อสำนักงาน & ขอใบเสนอราคา</h3>
+                                    <p class="text-xs text-slate-400">บริษัท ไทยเอไอ โซลูชั่น จำกัด • สำนักงานใหญ่ จ.สงขลา</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                                ปรึกษาข้อกำหนดโครงการ นัดหมายประชุมออนไลน์ หรือขอเอกสารทางธุรกิจ พร้อมบริการสายด่วนตลอด 24 ชั่วโมง โดยทีมวิศวกรและผู้บริหาร
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <button onclick="switchTab('contact')" class="flex-1 min-w-[160px] py-2.5 px-4 rounded-xl ai-gradient-bg text-white text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer">
+                                <span>เปิดหน้าติดต่อเรา & ใบเสนอราคา</span>
+                                <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                            </button>
+                            <a href="tel:0971328145" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold border border-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-phone"></i> โทร 097-132-8145 (24 ชม.)
+                            </a>
+                            <a href="https://lin.ee/u14z1Oq" target="_blank" rel="noopener noreferrer" class="py-2.5 px-4 rounded-xl bg-[#06C755]/20 hover:bg-[#06C755]/30 text-[#06C755] border border-[#06C755]/40 text-xs font-bold flex items-center gap-1.5">
+                                <i class="fa-brands fa-line text-sm"></i> LINE OA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Badges & Corporate Verification Strip -->
+                <div class="mt-10 pt-8 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs text-slate-400">
+                    <div class="flex items-center gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+                        <i class="fa-solid fa-shield-check text-emerald-400 text-xl shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-white">นิติบุคคลถูกต้องตามกฎหมาย</div>
+                            <div class="text-[11px] text-slate-500">เลขทะเบียน 0905569007271</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+                        <i class="fa-solid fa-certificate text-cyan-400 text-xl shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-white">DBD Registered</div>
+                            <div class="text-[11px] text-slate-500">กรมพัฒนาธุรกิจการค้า ตรวจสอบได้</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+                        <i class="fa-solid fa-file-contract text-purple-400 text-xl shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-white">สัญญาจ้างมาตรฐานสากล</div>
+                            <div class="text-[11px] text-slate-500">ส่งมอบ Source Code 100%</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800/60">
+                        <i class="fa-solid fa-headset text-pink-400 text-xl shrink-0"></i>
+                        <div>
+                            <div class="font-bold text-white">ซัพพอร์ต 24 ชั่วโมง</div>
+                            <div class="text-[11px] text-slate-500">ดูแลตลอดอายุการใช้งาน</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div> <!-- End of #tab-home -->
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: บริการของเรา (SERVICES TAB) -->
+    <!-- ========================================================================= -->
+    <div id="tab-services" class="page-tab hidden">
+        <!-- Core Services Section -->
+        <section id="services" class="pt-24 pb-14 sm:pt-36 sm:pb-20 bg-slate-900/60 border-y border-slate-800/80 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16 space-y-2">
                 <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Services & AI Solutions</span>
@@ -423,11 +585,37 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Bottom CTA Banner in Services -->
+            <div class="mt-12">
+                <div class="bg-gradient-to-r from-blue-950/60 via-purple-950/60 to-slate-900 border border-purple-500/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                    <div class="space-y-1.5 text-center md:text-left">
+                        <span class="inline-flex items-center gap-1.5 text-cyan-400 text-xs font-semibold">
+                            <i class="fa-solid fa-sparkles"></i> ออกใบเสนอราคาทางการทันที
+                        </span>
+                        <h4 class="text-lg sm:text-2xl font-bold text-white">ต้องการคำนวณงบประมาณและฟังก์ชันที่ต้องการ?</h4>
+                        <p class="text-xs sm:text-sm text-slate-300">เลือกบริการและโมเดล AI ที่ต้องการติดตั้ง เพื่อประเมินราคาและพิมพ์ใบเสนอราคาทางการได้ทันที</p>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+                        <button onclick="switchTab('estimator')" class="px-5 py-3 rounded-xl ai-gradient-bg text-white font-semibold text-xs sm:text-sm shadow-lg hover:opacity-95 transition-opacity flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-calculator"></i> คำนวณราคา & ขอใบเสนอราคา
+                        </button>
+                        <button onclick="switchTab('contact')" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-envelope text-pink-400"></i> ติดต่อเรา
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    </div> <!-- End of #tab-services -->
 
-    <!-- Why AI Feature Deep Dive -->
-    <section id="ai-features" class="py-14 sm:py-20 relative">
+    <!-- ========================================================================= -->
+    <!-- TAB 3: นวัตกรรม & ทดสอบ AI (AI TAB) -->
+    <!-- ========================================================================= -->
+    <div id="tab-ai" class="page-tab hidden">
+        <!-- Why AI Feature Deep Dive -->
+        <section id="ai-features" class="pt-24 pb-14 sm:pt-36 sm:pb-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
                 <div class="lg:w-1/2 space-y-4 sm:space-y-6">
@@ -574,11 +762,37 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Bottom CTA Banner in AI Tab -->
+            <div class="mt-12">
+                <div class="bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-500/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                    <div class="space-y-1.5 text-center md:text-left">
+                        <span class="inline-flex items-center gap-1.5 text-purple-300 text-xs font-semibold">
+                            <i class="fa-solid fa-brain"></i> พัฒนาระบบด้วย AI เฉพาะทางสำหรับธุรกิจคุณ
+                        </span>
+                        <h4 class="text-lg sm:text-2xl font-bold text-white">ต้องการโมเดล AI พิเศษหรือติดตั้งในระบบที่มีอยู่แล้ว?</h4>
+                        <p class="text-xs sm:text-sm text-slate-300">ประเมินงบประมาณการพัฒนา AI และออกใบเสนอราคาอย่างเป็นทางการได้ทันที</p>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+                        <button onclick="switchTab('estimator')" class="px-5 py-3 rounded-xl ai-gradient-bg text-white font-semibold text-xs sm:text-sm shadow-lg hover:opacity-95 transition-opacity flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-calculator"></i> ประเมินราคา & ขอใบเสนอราคา
+                        </button>
+                        <button onclick="switchTab('contact')" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-phone text-cyan-400"></i> ปรึกษาผู้เชี่ยวชาญ AI
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    </div> <!-- End of #tab-ai -->
 
-    <!-- Interactive Project & AI Cost Estimator -->
-    <section id="estimator" class="py-14 sm:py-20 relative">
+    <!-- ========================================================================= -->
+    <!-- TAB 4: ประเมินราคา & ออกใบเสนอราคา (ESTIMATOR TAB) -->
+    <!-- ========================================================================= -->
+    <div id="tab-estimator" class="page-tab hidden">
+        <!-- Interactive Project & AI Cost Estimator -->
+        <section id="estimator" class="pt-24 pb-14 sm:pt-36 sm:pb-20 relative">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12 space-y-2">
                 <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Cost & AI Feature Estimator</span>
@@ -713,17 +927,22 @@
                         <div class="text-2xl sm:text-3xl font-bold text-white mt-0.5 ai-gradient-text" id="summary-price">฿28,000</div>
                         <p class="text-[10px] text-slate-400 mt-1 mb-3">*ประเมินตามราคามาตรฐานตลาดจริง</p>
                         
-                        <a href="#contact" class="w-full block text-center py-3 rounded-xl ai-gradient-bg text-white font-medium text-xs sm:text-sm hover:opacity-95 transition-opacity min-h-[44px] flex items-center justify-center">
+                        <button onclick="switchTab('contact')" class="w-full block text-center py-3 rounded-xl ai-gradient-bg text-white font-medium text-xs sm:text-sm hover:opacity-95 transition-opacity min-h-[44px] flex items-center justify-center cursor-pointer">
                             ขอใบเสนอราคาอย่างเป็นทางการ
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    </div> <!-- End of #tab-estimator -->
 
-    <!-- Portfolio Section with Real Website Previews -->
-    <section id="portfolio" class="py-14 sm:py-20 bg-slate-900/40 border-t border-slate-800/80">
+    <!-- ========================================================================= -->
+    <!-- TAB 5: ตัวอย่างระบบจริง (PORTFOLIO TAB) -->
+    <!-- ========================================================================= -->
+    <div id="tab-portfolio" class="page-tab hidden">
+        <!-- Portfolio Section with Real Website Previews -->
+        <section id="portfolio" class="pt-24 pb-14 sm:pt-36 sm:pb-20 bg-slate-900/40 border-t border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2">
                 <span class="text-xs font-semibold text-cyan-400 tracking-wider uppercase">Live System & Website Portfolio</span>
@@ -1016,10 +1235,36 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-14 sm:py-20 relative">
+        <!-- Bottom CTA Banner in Portfolio Tab -->
+        <div class="mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-teal-950/60 via-slate-900 to-purple-950/60 border border-teal-500/30 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div class="space-y-1.5 text-center md:text-left">
+                    <span class="inline-flex items-center gap-1.5 text-teal-400 text-xs font-semibold">
+                        <i class="fa-solid fa-code"></i> พัฒนาตาม Requirement เฉพาะของธุรกิจคุณ 100%
+                    </span>
+                    <h4 class="text-lg sm:text-2xl font-bold text-white">ต้องการระบบในสเกลธุรกิจของคุณเอง?</h4>
+                    <p class="text-xs sm:text-sm text-slate-300">ปรึกษาทีมงานเพื่อออกแบบสถาปัตยกรรมระบบ หรือประเมินราคาทันที</p>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-3 shrink-0">
+                    <button onclick="switchTab('estimator')" class="px-5 py-3 rounded-xl ai-gradient-bg text-white font-semibold text-xs sm:text-sm shadow-lg hover:opacity-95 transition-opacity flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-calculator"></i> ประเมินราคา & ขอใบเสนอราคา
+                    </button>
+                    <button onclick="switchTab('contact')" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs sm:text-sm font-semibold transition-colors flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-envelope text-pink-400"></i> ติดต่อเรา
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div> <!-- End of #tab-portfolio -->
+
+    <!-- ========================================================================= -->
+    <!-- TAB 6: ติดต่อเรา (CONTACT TAB) -->
+    <!-- ========================================================================= -->
+    <div id="tab-contact" class="page-tab hidden">
+        <!-- Contact Section -->
+        <section id="contact" class="pt-24 pb-14 sm:pt-36 sm:pb-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-purple-950/50 border border-slate-800 rounded-2xl sm:rounded-3xl p-5 sm:p-12 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
@@ -1169,6 +1414,7 @@
             </div>
         </div>
     </section>
+    </div> <!-- End of #tab-contact -->
 
     <!-- Footer -->
     <footer class="bg-slate-950 border-t border-slate-900 py-10 text-slate-400 text-xs">
@@ -1213,16 +1459,27 @@
                 </div>
             </div>
 
+            <!-- Footer Tab Navigation Links -->
+            <div class="py-4 border-b border-slate-900/80 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-slate-400 text-xs">
+                <button onclick="switchTab('home')" class="hover:text-cyan-400 transition-colors cursor-pointer">หน้าหลัก</button>
+                <button onclick="switchTab('services')" class="hover:text-cyan-400 transition-colors cursor-pointer">บริการของเรา</button>
+                <button onclick="switchTab('ai')" class="hover:text-purple-400 transition-colors cursor-pointer">นวัตกรรม & ทดสอบ AI</button>
+                <button onclick="switchTab('estimator')" class="hover:text-cyan-400 transition-colors cursor-pointer">ประเมินราคา</button>
+                <button onclick="switchTab('portfolio')" class="hover:text-cyan-400 transition-colors cursor-pointer">ตัวอย่างระบบจริง</button>
+                <button onclick="switchTab('contact')" class="hover:text-cyan-400 transition-colors cursor-pointer">ติดต่อเรา</button>
+            </div>
+
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px] text-center sm:text-left">
                 <div class="flex items-center gap-3">
                     <p>© 2026 THAI AI SOLUTION CO., LTD. All rights reserved.</p>
-                    <button onclick="openAdminPortal()" class="text-slate-600 hover:text-cyan-400 font-mono transition-colors">
+                    <button onclick="openAdminPortal()" class="text-slate-600 hover:text-cyan-400 font-mono transition-colors cursor-pointer">
                         [Admin ระบบหลังบ้าน]
                     </button>
                 </div>
                 <p>AI Software Engineering & Digital Marketing Agency Thailand</p>
             </div>
         </div>
+    </footer>
     <!-- Floating AI Chatbot Button -->
     <div id="ai-chat-trigger" class="fixed bottom-16 md:bottom-6 right-3 sm:right-6 z-40">
         <button onclick="toggleFloatingAiChat()" class="px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 text-white font-semibold text-xs sm:text-sm shadow-xl shadow-purple-600/40 hover:shadow-cyan-500/50 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 border border-cyan-300/30 backdrop-blur-md group" title="เปิดหน้าต่างสนทนากับ AI 24 ชม.">
@@ -1297,24 +1554,28 @@
 
     <!-- Fixed Mobile Quick Action Bar at Bottom -->
     <div class="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 border-t border-slate-800 backdrop-blur-lg px-2 py-2 flex items-center justify-around md:hidden shadow-2xl">
-        <a href="tel:0971328145" class="flex flex-col items-center justify-center text-slate-300 hover:text-cyan-400 px-2.5 py-1 rounded-lg active:bg-slate-900 transition-colors">
-            <i class="fa-solid fa-phone text-base text-cyan-400 mb-0.5"></i>
-            <span class="text-[10px] font-medium">โทรเลย</span>
-        </a>
-        <a href="https://lin.ee/u14z1Oq" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center text-slate-300 hover:text-[#06C755] px-2.5 py-1 rounded-lg active:bg-slate-900 transition-colors">
+        <button onclick="switchTab('home')" class="mobile-dock-btn flex flex-col items-center justify-center text-cyan-400 font-bold px-2 py-1 rounded-lg transition-colors cursor-pointer" data-tab="home">
+            <i class="fa-solid fa-house text-base mb-0.5"></i>
+            <span class="text-[10px]">หน้าหลัก</span>
+        </button>
+        <button onclick="switchTab('services')" class="mobile-dock-btn flex flex-col items-center justify-center text-slate-300 hover:text-cyan-400 px-2 py-1 rounded-lg transition-colors cursor-pointer" data-tab="services">
+            <i class="fa-solid fa-cubes text-base mb-0.5"></i>
+            <span class="text-[10px]">บริการ</span>
+        </button>
+        <button onclick="switchTab('estimator')" class="mobile-dock-btn flex flex-col items-center justify-center text-slate-300 hover:text-purple-400 px-2 py-1 rounded-lg transition-colors cursor-pointer" data-tab="estimator">
+            <i class="fa-solid fa-calculator text-base mb-0.5"></i>
+            <span class="text-[10px]">คำนวณราคา</span>
+        </button>
+        <a href="https://lin.ee/u14z1Oq" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-center text-slate-300 hover:text-[#06C755] px-2 py-1 rounded-lg transition-colors">
             <div class="relative">
                 <i class="fa-brands fa-line text-lg text-[#06C755] mb-0.5"></i>
                 <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#06C755] animate-ping"></span>
             </div>
-            <span class="text-[10px] font-bold text-[#06C755]">แอด LINE</span>
+            <span class="text-[10px] font-bold text-[#06C755]">LINE OA</span>
         </a>
-        <a href="#estimator" class="flex flex-col items-center justify-center text-slate-300 hover:text-purple-400 px-2.5 py-1 rounded-lg active:bg-slate-900 transition-colors">
-            <i class="fa-solid fa-calculator text-base text-purple-400 mb-0.5"></i>
-            <span class="text-[10px] font-medium">คำนวณราคา</span>
-        </a>
-        <a href="#contact" class="flex items-center gap-1 px-3.5 py-2 rounded-xl ai-gradient-bg text-white font-semibold text-xs shadow-md">
-            <i class="fa-solid fa-paper-plane text-xs"></i> ขอใบเสนอราคา
-        </a>
+        <button onclick="switchTab('contact')" class="mobile-dock-btn flex items-center gap-1 px-3 py-2 rounded-xl ai-gradient-bg text-white font-semibold text-xs shadow-md cursor-pointer" data-tab="contact">
+            <i class="fa-solid fa-envelope text-xs"></i> ติดต่อเรา
+        </button>
     </div>
 
     <!-- Image Lightbox Modal for Portfolio Screenshots -->
@@ -1350,30 +1611,118 @@
 
     <!-- JavaScript Logic -->
     <script>
+        // Tab Navigation System
+        function switchTab(tabId, pushHistory = true) {
+            const validTabs = ['home', 'services', 'ai', 'estimator', 'portfolio', 'contact'];
+            if (!validTabs.includes(tabId)) {
+                tabId = 'home';
+            }
+
+            // Toggle visibility of all page tabs
+            document.querySelectorAll('.page-tab').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            const activeTabEl = document.getElementById('tab-' + tabId);
+            if (activeTabEl) {
+                activeTabEl.classList.remove('hidden');
+            }
+
+            // Update Desktop Nav Button states
+            document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+                const bTab = btn.getAttribute('data-tab');
+                if (bTab === tabId) {
+                    btn.className = 'nav-tab-btn px-3 py-2 rounded-xl text-cyan-300 bg-purple-600/20 border border-purple-500/40 shadow-sm shadow-purple-500/20 font-semibold transition-all flex items-center gap-1.5 cursor-pointer';
+                } else {
+                    btn.className = 'nav-tab-btn px-3 py-2 rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/60 border border-transparent transition-all flex items-center gap-1.5 cursor-pointer';
+                }
+            });
+
+            // Update Mobile Drawer Button states
+            document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
+                const bTab = btn.getAttribute('data-tab');
+                if (bTab === tabId) {
+                    btn.className = 'mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-purple-600/30 border border-purple-500/50 text-cyan-300 font-bold text-sm cursor-pointer';
+                } else {
+                    btn.className = 'mobile-tab-btn w-full text-left flex items-center py-2.5 px-3 rounded-xl bg-slate-900/60 border border-slate-800/80 text-slate-200 font-medium text-sm active:bg-purple-900/40 cursor-pointer';
+                }
+            });
+
+            // Update Mobile Bottom Dock states
+            document.querySelectorAll('.mobile-dock-btn').forEach(btn => {
+                const bTab = btn.getAttribute('data-tab');
+                if (bTab === tabId) {
+                    btn.classList.add('text-cyan-400', 'font-bold');
+                    btn.classList.remove('text-slate-300');
+                } else {
+                    btn.classList.remove('text-cyan-400', 'font-bold');
+                    btn.classList.add('text-slate-300');
+                }
+            });
+
+            // Scroll smoothly to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Push state to browser history
+            if (pushHistory) {
+                if (tabId === 'home') {
+                    history.pushState(null, '', window.location.pathname + window.location.search);
+                } else {
+                    history.pushState(null, '', '#' + tabId);
+                }
+            }
+        }
+
+        // Initialize Tab from URL Hash
+        function initTabsFromURL() {
+            let hash = (window.location.hash || '').replace('#', '').trim();
+            if (hash === 'ai-features' || hash === 'ai-demo') hash = 'ai';
+            const validTabs = ['home', 'services', 'ai', 'estimator', 'portfolio', 'contact'];
+            if (!validTabs.includes(hash)) {
+                hash = 'home';
+            }
+            switchTab(hash, false);
+        }
+
+        window.addEventListener('popstate', () => {
+            initTabsFromURL();
+        });
+        window.addEventListener('DOMContentLoaded', () => {
+            initTabsFromURL();
+        });
+
         // Mobile Menu Toggle Logic
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        function toggleMobileMenu() {
+            if (!mobileMenu) return;
             mobileMenu.classList.toggle('hidden');
             if (mobileMenu.classList.contains('hidden')) {
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
+                if (menuIcon) {
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                }
             } else {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
+                if (menuIcon) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                }
             }
-        });
+        }
 
-        // Close mobile drawer on link click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        function closeMobileMenu() {
+            if (!mobileMenu) return;
+            mobileMenu.classList.add('hidden');
+            if (menuIcon) {
                 menuIcon.classList.remove('fa-xmark');
                 menuIcon.classList.add('fa-bars');
-            });
-        });
+            }
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        }
 
         // Interactive AI Demo Playground Logic
         const demoConversation = document.getElementById('demo-conversation');
@@ -1444,13 +1793,13 @@
 • 📑 <strong>e-KYC & AI OCR สแกนเอกสาร:</strong> เริ่มต้น ฿25,000<br>
 • 🏢 <strong>ระบบ ERP / CRM / Dashboard องค์กร:</strong> เริ่มต้น ฿85,000<br>
 • 🚀 <strong>AI Digital Marketing (Ads/SEO):</strong> เริ่มต้น ฿3,900 - ฿18,000/เดือน<br><br>
-👉 <a href="#estimator" class="text-cyan-400 underline font-semibold">คลิกคำนวณราคาและออกใบเสนอราคาออนไลน์ทันที</a> หรือโทร 📞 <strong>097-132-8145</strong> (24 ชม.)`;
+👉 <a href="#estimator" onclick="event.preventDefault(); switchTab('estimator')" class="text-cyan-400 underline font-semibold cursor-pointer">คลิกคำนวณราคาและออกใบเสนอราคาออนไลน์ทันที</a> หรือโทร 📞 <strong>097-132-8145</strong> (24 ชม.)`;
             }
 
             if (lower.includes('ใบเสนอราคา') || lower.includes('เสนอราคา') || lower.includes('quotation')) {
                 return `📄 <strong>ระบบออกใบเสนอราคาทางการจริง (Instant Quotation):</strong><br><br>
 คุณสามารถเลือกสเปกและออกใบเสนอราคาทางการ A4 พร้อมตราประทับบริษัท และลงนามโดย <strong>นาย อานันทชัย ทวีวัฒน์ (กรรมการผู้จัดการ)</strong> ได้ทันทีครับ!<br><br>
-👉 <a href="#estimator" class="text-cyan-400 underline font-semibold">คลิกเพื่อคำนวณและออกใบเสนอราคาทันที</a> หรือโทรสายด่วน 📞 <strong>097-132-8145</strong>`;
+👉 <a href="#estimator" onclick="event.preventDefault(); switchTab('estimator')" class="text-cyan-400 underline font-semibold cursor-pointer">คลิกเพื่อคำนวณและออกใบเสนอราคาทันที</a> หรือโทรสายด่วน 📞 <strong>097-132-8145</strong>`;
             }
 
             if (lower.includes('0905569007271') || lower.includes('ทะเบียน') || lower.includes('นิติบุคคล') || lower.includes('บริษัท') || lower.includes('ภาษี') || lower.includes('tax') || lower.includes('กรรมการ') || lower.includes('อานันทชัย')) {
@@ -1484,7 +1833,7 @@
             return `✨ สวัสดีครับ! ขอบคุณที่สอบถามเข้ามาเกี่ยวกับ "<strong>${prompt}</strong>" ครับ<br><br>
 ทีมงานวิศวกรซอฟต์แวร์และที่ปรึกษา AI ของ บริษัท ไทยเอไอ โซลูชั่น จำกัด ยินดีช่วยวิเคราะห์และออกแบบระบบให้ตอบโจทย์ธุรกิจของคุณที่สุดครับ<br><br>
 1. 📞 โทรปรึกษาด่วน: <a href="tel:0971328145" class="text-emerald-400 underline font-bold">097-132-8145</a> (24 ชม.)<br>
-2. 🧮 คำนวณราคาออนไลน์: <a href="#estimator" class="text-cyan-400 underline font-bold">คลิกคำนวณราคา & ขอใบเสนอราคา</a><br>
+2. 🧮 คำนวณราคาออนไลน์: <a href="#estimator" onclick="event.preventDefault(); switchTab('estimator')" class="text-cyan-400 underline font-bold cursor-pointer">คลิกคำนวณราคา & ขอใบเสนอราคา</a><br>
 3. 💬 แอด LINE OA: <a href="https://lin.ee/u14z1Oq" target="_blank" class="text-emerald-400 underline font-bold">@319feyqj</a>`;
         }
 
