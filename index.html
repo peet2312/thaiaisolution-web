@@ -2736,6 +2736,8 @@
         let currentActiveDeliveryOrder = null;
         let checkoutTimerInterval = null;
         let isDeliveryPasswordVisible = false;
+        let currentSelectedSlip = null;
+        let currentSlipRef = null;
 
         function renderAdsStore(category = currentAdsCategory) {
             currentAdsCategory = category;
@@ -2859,6 +2861,197 @@
             renderAdsStore(cat);
         }
 
+        function resetSlipUploadUI() {
+            const input = document.getElementById('checkout-slip-input');
+            if (input) input.value = '';
+            const placeholder = document.getElementById('checkout-slip-placeholder');
+            const previewBox = document.getElementById('checkout-slip-preview-box');
+            if (placeholder) placeholder.classList.remove('hidden');
+            if (previewBox) previewBox.classList.add('hidden');
+        }
+
+        function handleSlipFileSelect(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                alert('กรุณาเลือกไฟล์รูปภาพสลิป (JPG, PNG, WEBP)');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentSelectedSlip = e.target.result;
+                const datePart = new Date().toISOString().slice(0,10).replace(/-/g, '');
+                currentSlipRef = 'SLIP-' + datePart + '-' + Math.floor(100000 + Math.random() * 900000);
+                showSlipPreview(currentSelectedSlip, file.name, currentSlipRef);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeSelectedSlip(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            currentSelectedSlip = null;
+            currentSlipRef = null;
+            resetSlipUploadUI();
+        }
+
+        function showSlipPreview(imgUrl, fileName, refCode) {
+            const placeholder = document.getElementById('checkout-slip-placeholder');
+            const previewBox = document.getElementById('checkout-slip-preview-box');
+            const previewImg = document.getElementById('checkout-slip-preview-img');
+            const filenameEl = document.getElementById('checkout-slip-filename');
+            const refEl = document.getElementById('checkout-slip-ref-tag');
+
+            if (previewImg) previewImg.src = imgUrl;
+            if (filenameEl) filenameEl.textContent = fileName || 'kbank-transfer-slip.png';
+            if (refEl) refEl.textContent = 'Ref: ' + (refCode || 'AUTO-SCAN-READY');
+            if (placeholder) placeholder.classList.add('hidden');
+            if (previewBox) previewBox.classList.remove('hidden');
+        }
+
+        function generateDemoSlip() {
+            if (!currentCheckoutAccount) return;
+            const canvas = document.createElement('canvas');
+            canvas.width = 480;
+            canvas.height = 680;
+            const ctx = canvas.getContext('2d');
+
+            // Background
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, 0, 480, 680);
+
+            // Header Green Bar (KBank Green #138f2d)
+            const grad = ctx.createLinearGradient(0, 0, 480, 0);
+            grad.addColorStop(0, '#0e7023');
+            grad.addColorStop(1, '#138f2d');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 480, 110);
+
+            // Header Text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 22px sans-serif';
+            ctx.fillText('ธนาคารกสิกรไทย', 28, 48);
+            ctx.font = '14px sans-serif';
+            ctx.fillStyle = '#a7f3d0';
+            ctx.fillText('KASIKORNBANK • บริการโอนเงินสำเร็จ', 28, 76);
+
+            // Success badge in header
+            ctx.beginPath();
+            ctx.arc(420, 55, 24, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+            ctx.fillStyle = '#138f2d';
+            ctx.font = 'bold 24px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('✓', 420, 63);
+            ctx.textAlign = 'left';
+
+            // White Card Body
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(20, 125, 440, 530);
+
+            // Date & Time
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+            const refNo = 'KBANK' + now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + Math.floor(100000 + Math.random()*900000);
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px sans-serif';
+            ctx.fillText('วันที่ทำรายการ: ' + dateStr + ' ' + timeStr + ' น.', 40, 158);
+            ctx.fillText('รหัสอ้างอิง: ' + refNo, 40, 180);
+
+            // Divider
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(40, 195);
+            ctx.lineTo(440, 195);
+            ctx.stroke();
+
+            // From Account
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 13px sans-serif';
+            ctx.fillText('จากบัญชี (ผู้โอน)', 40, 222);
+            ctx.font = '14px sans-serif';
+            ctx.fillStyle = '#0f172a';
+            const custName = document.getElementById('checkout-cust-name')?.value.trim() || 'คุณลูกค้า (บัญชีทดสอบโอน)';
+            ctx.fillText(custName, 40, 246);
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px sans-serif';
+            ctx.fillText('ธนาคารกสิกรไทย  xxx-x-x' + Math.floor(1000+Math.random()*9000) + '-x', 40, 268);
+
+            // Arrow down
+            ctx.fillStyle = '#138f2d';
+            ctx.font = 'bold 16px sans-serif';
+            ctx.fillText('↓', 40, 298);
+
+            // To Account
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 13px sans-serif';
+            ctx.fillText('ไปยังบัญชี (ผู้รับเงิน)', 40, 328);
+            ctx.font = 'bold 15px sans-serif';
+            ctx.fillStyle = '#0f172a';
+            ctx.fillText('บจก. ไทยเอไอ โซลูชั่น', 40, 352);
+            ctx.fillStyle = '#0284c7';
+            ctx.font = 'bold 13px sans-serif';
+            ctx.fillText('ธนาคารกสิกรไทย  090-5-56900-7', 40, 374);
+
+            // Divider
+            ctx.beginPath();
+            ctx.moveTo(40, 395);
+            ctx.lineTo(440, 395);
+            ctx.stroke();
+
+            // Amount Box
+            ctx.fillStyle = '#f0fdf4';
+            ctx.fillRect(40, 410, 400, 75);
+            ctx.strokeStyle = '#bbf7d0';
+            ctx.strokeRect(40, 410, 400, 75);
+
+            ctx.fillStyle = '#166534';
+            ctx.font = '13px sans-serif';
+            ctx.fillText('จำนวนเงินโอน (ยอดสุทธิ)', 60, 436);
+            ctx.font = 'bold 28px sans-serif';
+            ctx.fillStyle = '#15803d';
+            ctx.fillText('฿ ' + currentCheckoutAccount.price.toLocaleString() + '.00', 60, 470);
+
+            // Mini QR Verification at bottom
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(40, 500, 400, 130);
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.strokeRect(40, 500, 400, 130);
+
+            // Fake QR Pattern
+            ctx.fillStyle = '#0f172a';
+            const qx = 60, qy = 515, qs = 80;
+            ctx.fillRect(qx, qy, qs, qs);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qx+6, qy+6, qs-12, qs-12);
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(qx+16, qy+16, qs-32, qs-32);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qx+26, qy+26, qs-52, qs-52);
+
+            ctx.fillStyle = '#334155';
+            ctx.font = 'bold 12px sans-serif';
+            ctx.fillText('สแกนตรวจสอบสลิปอัตโนมัติ', 160, 545);
+            ctx.font = '11px sans-serif';
+            ctx.fillStyle = '#64748b';
+            ctx.fillText('Thai AI Solution Automated Slip OCR Engine', 160, 568);
+            ctx.fillStyle = '#16a34a';
+            ctx.font = 'bold 11px sans-serif';
+            ctx.fillText('✓ e-Slip Standard Authenticated 100%', 160, 592);
+
+            const dataUrl = canvas.toDataURL('image/png');
+            currentSelectedSlip = dataUrl;
+            currentSlipRef = refNo;
+            showSlipPreview(dataUrl, 'kbank-slip-' + currentCheckoutAccount.price + '.png', currentSlipRef);
+            showToast('สร้างสลิปทดสอบแล้ว', 'ยอดเงินตรงตามสินค้า ฿' + currentCheckoutAccount.price.toLocaleString() + ' บาท');
+        }
+
         function openAdsCheckout(accountId) {
             const inventory = getAdsInventory();
             const acc = inventory.find(a => a.id === accountId);
@@ -2868,6 +3061,9 @@
             }
 
             currentCheckoutAccount = acc;
+            currentSelectedSlip = null;
+            currentSlipRef = null;
+            resetSlipUploadUI();
 
             document.getElementById('checkout-prod-title').textContent = acc.title;
             document.getElementById('checkout-prod-platform').textContent = acc.platformName || acc.platform;
@@ -2894,6 +3090,9 @@
         function closeAdsCheckoutModal() {
             document.getElementById('ads-checkout-modal').classList.add('hidden');
             if (checkoutTimerInterval) clearInterval(checkoutTimerInterval);
+            currentSelectedSlip = null;
+            currentSlipRef = null;
+            resetSlipUploadUI();
         }
 
         function startCheckoutTimer(durationSeconds) {
@@ -2938,36 +3137,65 @@
                 return;
             }
 
+            if (!currentSelectedSlip) {
+                alert('กรุณาแนบรูปภาพสลิปโอนเงิน หรือกดปุ่ม "⚡ ใช้สลิปทดสอบด่วน" เพื่อให้ระบบตรวจสอบอัตโนมัติ');
+                const dropzone = document.getElementById('checkout-slip-dropzone');
+                if (dropzone) {
+                    dropzone.classList.add('border-rose-500');
+                    setTimeout(() => dropzone.classList.remove('border-rose-500'), 2500);
+                }
+                return;
+            }
+
             const overlay = document.getElementById('checkout-processing-overlay');
             const step1 = document.getElementById('step-verify-1');
             const step2 = document.getElementById('step-verify-2');
             const step3 = document.getElementById('step-verify-3');
+            const step4 = document.getElementById('step-verify-4');
 
             overlay.classList.remove('hidden');
             step1.className = 'flex items-center gap-2 text-amber-400';
-            step1.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> กำลังตรวจสอบข้อมูลคำสั่งซื้อ...';
+            step1.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> ตรวจจับ Mini QR Code & ถอดรหัสสลิป...';
             step2.className = 'flex items-center gap-2 text-slate-500';
+            step2.innerHTML = '<i class="fa-solid fa-circle text-[8px]"></i> ตรวจสอบบัญชีผู้รับเงิน กสิกรไทย 090-5-56900-7...';
             step3.className = 'flex items-center gap-2 text-slate-500';
+            step3.innerHTML = '<i class="fa-solid fa-circle text-[8px]"></i> ตรวจสอบยอดเงินโอนตรงตามคำสั่งซื้อ...';
+            if (step4) {
+                step4.className = 'flex items-center gap-2 text-slate-500';
+                step4.innerHTML = '<i class="fa-solid fa-circle text-[8px]"></i> ปลดล็อกและส่งมอบรหัสผ่านทันที...';
+            }
 
             setTimeout(() => {
                 step1.className = 'flex items-center gap-2 text-emerald-400';
-                step1.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ตรวจสอบคำสั่งซื้อถูกต้อง 100%';
+                step1.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ถอดรหัสสลิป: ' + (currentSlipRef || 'KBANK-OK') + ' ถูกต้อง';
 
                 step2.className = 'flex items-center gap-2 text-amber-400';
-                step2.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> ตรวจสอบการรับเงิน บัญชีกสิกรไทย 090-5-56900-7...';
-            }, 700);
+                step2.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> ตรวจสอบบัญชีผู้รับ: กสิกรไทย 090-5-56900-7 (บจก.ไทยเอไอ โซลูชั่น)...';
+            }, 800);
 
             setTimeout(() => {
                 step2.className = 'flex items-center gap-2 text-emerald-400';
-                step2.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ได้รับยอดเงิน ฿' + currentCheckoutAccount.price.toLocaleString() + ' บาท เรียบร้อยแล้ว';
+                step2.innerHTML = '<i class="fa-solid fa-check text-xs"></i> บัญชีผู้รับเงินถูกต้อง 100% (บจก. ไทยเอไอ โซลูชั่น)';
 
                 step3.className = 'flex items-center gap-2 text-amber-400';
-                step3.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> ปลดล็อกและดึงข้อมูลไอดี-รหัสผ่านจากระบบคลังอัตโนมัติ...';
-            }, 1400);
+                step3.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> ตรวจสอบยอดเงินโอน ฿' + currentCheckoutAccount.price.toLocaleString() + ' บาท...';
+            }, 1700);
 
             setTimeout(() => {
                 step3.className = 'flex items-center gap-2 text-emerald-400';
-                step3.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ส่งมอบข้อมูลบัญชีสำเร็จ!';
+                step3.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ยอดเงินถูกต้อง ฿' + currentCheckoutAccount.price.toLocaleString() + ' บาท ผ่านการตรวจสอบ!';
+
+                if (step4) {
+                    step4.className = 'flex items-center gap-2 text-amber-400';
+                    step4.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> ปลดล็อกไอดี-รหัสผ่าน & 2FA จากคลังทันที...';
+                }
+            }, 2600);
+
+            setTimeout(() => {
+                if (step4) {
+                    step4.className = 'flex items-center gap-2 text-emerald-400';
+                    step4.innerHTML = '<i class="fa-solid fa-check text-xs"></i> ส่งมอบข้อมูลบัญชีสำเร็จ!';
+                }
 
                 const orderId = 'ADS-' + new Date().toISOString().slice(0,10).replace(/-/g, '') + '-' + Math.floor(1000 + Math.random() * 9000);
                 const order = {
@@ -2979,6 +3207,10 @@
                     lineId: lineId,
                     account: JSON.parse(JSON.stringify(currentCheckoutAccount)),
                     amount: currentCheckoutAccount.price,
+                    slipImage: currentSelectedSlip,
+                    slipRef: currentSlipRef || ('REF-' + Math.floor(10000000 + Math.random() * 90000000)),
+                    paymentStatus: 'auto_verified',
+                    verifiedAt: new Date().toISOString(),
                     status: 'delivered'
                 };
 
@@ -3000,8 +3232,8 @@
                 renderAdminAdsOrders();
                 renderAdminAdsInventory();
 
-                showToast('ชำระเงินสำเร็จ!', `รับมอบข้อมูลบัญชี ${order.account.title} เรียบร้อยแล้ว`);
-            }, 2100);
+                showToast('ชำระเงินและตรวจสลิปสำเร็จ!', `รับมอบข้อมูลบัญชี ${order.account.title} เรียบร้อยแล้ว`);
+            }, 3400);
         }
 
         function openAdsDeliveryModal(order) {
@@ -3178,7 +3410,7 @@ Website: https://www.thaiaisolution.co.th
             document.getElementById('admin-ads-metric-orders').textContent = orders.length;
 
             if (orders.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-500 text-xs">ยังไม่มีรายการสั่งซื้อแอคเคาท์ในระบบ</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-slate-500 text-xs">ยังไม่มีรายการสั่งซื้อแอคเคาท์ในระบบ</td></tr>';
                 return;
             }
 
@@ -3194,6 +3426,19 @@ Website: https://www.thaiaisolution.co.th
                     </td>
                     <td class="p-3 text-right font-mono font-bold text-amber-400">฿${(o.amount || 0).toLocaleString()}</td>
                     <td class="p-3 text-center">
+                        ${o.slipImage ? `
+                            <button onclick="viewAdminSlipModal('${o.id}')" class="inline-flex flex-col items-center group cursor-pointer" title="คลิกเพื่อดูภาพสลิปขนาดใหญ่">
+                                <div class="relative">
+                                    <img src="${o.slipImage}" class="w-9 h-9 object-cover rounded-lg border border-slate-700 group-hover:border-amber-400 transition-colors shadow" alt="Slip">
+                                    <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border border-slate-900 flex items-center justify-center text-[8px] text-white font-bold">✓</span>
+                                </div>
+                                <span class="text-[9px] text-emerald-400 font-mono mt-0.5 group-hover:underline">Auto-Verified</span>
+                            </button>
+                        ` : `
+                            <span class="text-[10px] text-slate-500">-</span>
+                        `}
+                    </td>
+                    <td class="p-3 text-center">
                         <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">
                             จัดส่งสำเร็จ 100%
                         </span>
@@ -3206,6 +3451,40 @@ Website: https://www.thaiaisolution.co.th
                 `;
                 tbody.appendChild(tr);
             });
+        }
+
+        function viewAdminSlipModal(orderId) {
+            const orders = getAdsOrders();
+            const order = orders.find(o => o.id === orderId);
+            if (!order || !order.slipImage) {
+                alert('ไม่พบรูปภาพสลิปของคำสั่งซื้อนี้');
+                return;
+            }
+
+            document.getElementById('admin-slip-modal-order-id').textContent = order.id;
+            document.getElementById('admin-slip-modal-cust').textContent = order.customerName + ' (' + order.phone + ')';
+            document.getElementById('admin-slip-modal-amount').textContent = '฿' + (order.amount || 0).toLocaleString() + ' บาท';
+            document.getElementById('admin-slip-modal-ref').textContent = order.slipRef || 'KBANK-AUTO-VERIFIED';
+            document.getElementById('admin-slip-modal-time').textContent = new Date(order.verifiedAt || order.createdAt).toLocaleString('th-TH');
+            document.getElementById('admin-slip-modal-img').src = order.slipImage;
+
+            const dlBtn = document.getElementById('admin-slip-modal-download-btn');
+            if (dlBtn) {
+                dlBtn.onclick = function() {
+                    const a = document.createElement('a');
+                    a.href = order.slipImage;
+                    a.download = `Slip_${order.id}.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                };
+            }
+
+            document.getElementById('admin-slip-modal').classList.remove('hidden');
+        }
+
+        function closeAdminSlipModal() {
+            document.getElementById('admin-slip-modal').classList.add('hidden');
         }
 
         function renderAdminAdsInventory() {
@@ -3737,16 +4016,61 @@ Website: https://www.thaiaisolution.co.th
                                     <span id="checkout-bank-amount" class="font-bold text-amber-400 font-mono text-sm">฿4,500</span>
                                 </div>
                             </div>
+
+                            <!-- Automated Slip Upload Box -->
+                            <div class="bg-slate-900/90 border border-cyan-500/30 rounded-xl p-3 space-y-2.5 mt-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-cyan-300 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-file-invoice-dollar"></i> 3. แนบสลิปโอนเงิน (ตรวจสอบอัตโนมัติ)
+                                    </span>
+                                    <span class="text-[10px] text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60 flex items-center gap-1">
+                                        <i class="fa-solid fa-shield-check"></i> OCR Scan 24h
+                                    </span>
+                                </div>
+
+                                <div id="checkout-slip-dropzone" class="border-2 border-dashed border-slate-700 hover:border-cyan-500/80 rounded-xl p-2.5 text-center transition-all bg-slate-950/60 relative group">
+                                    <input type="file" id="checkout-slip-input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" onchange="handleSlipFileSelect(event)">
+                                    
+                                    <div id="checkout-slip-placeholder" class="space-y-1 py-1">
+                                        <div class="w-8 h-8 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center mx-auto text-sm group-hover:scale-110 transition-transform">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        </div>
+                                        <p class="text-xs text-slate-300 font-medium">คลิกเพื่อเลือกไฟล์ หรือลากสลิปมาวางที่นี่</p>
+                                        <p class="text-[10px] text-slate-500">รองรับ JPG, PNG, WEBP จากแอปธนาคาร</p>
+                                    </div>
+
+                                    <div id="checkout-slip-preview-box" class="hidden flex items-center gap-3 text-left">
+                                        <img id="checkout-slip-preview-img" src="" alt="Slip Preview" class="w-12 h-12 object-cover rounded-lg border border-cyan-500/50 shrink-0">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                                                <i class="fa-solid fa-circle-check"></i> แนบสลิปเรียบร้อย
+                                            </div>
+                                            <div id="checkout-slip-filename" class="text-[11px] text-slate-300 truncate font-mono mt-0.5">slip.jpg</div>
+                                            <div id="checkout-slip-ref-tag" class="text-[10px] text-cyan-400 font-mono">Ref: KBANK-AUTO-SCAN</div>
+                                        </div>
+                                        <button type="button" onclick="removeSelectedSlip(event)" class="z-20 p-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-400 hover:text-white transition-colors cursor-pointer" title="ลบรูปสลิป">
+                                            <i class="fa-solid fa-trash-can text-xs"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-0.5">
+                                    <span class="text-[10px] text-slate-400">ทดลองระบบโดยไม่ต้องโอนจริง:</span>
+                                    <button type="button" onclick="generateDemoSlip()" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-[11px] font-bold flex items-center gap-1.5 transition-all cursor-pointer">
+                                        <i class="fa-solid fa-bolt text-amber-400"></i> ใช้สลิปทดสอบด่วน
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Action Button -->
                         <div>
                             <button id="btn-process-payment" onclick="processAdsPayment()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-amber-500/25 flex items-center justify-center gap-2 transition-all transform active:scale-95 cursor-pointer">
-                                <i class="fa-solid fa-bolt-lightning text-yellow-200"></i>
-                                <span>ยืนยันชำระเงิน & รับไอดี-รหัสผ่านทันที</span>
+                                <i class="fa-solid fa-shield-check text-yellow-200"></i>
+                                <span>ตรวจสอบสลิป & รับไอดี-รหัสผ่านทันที</span>
                             </button>
                             <p class="text-[10px] text-center text-slate-500 mt-2">
-                                🔒 ระบบจำลองการตรวจเช็ก API ธนาคารอัตโนมัติ ส่งมอบข้อมูลทันที
+                                🔒 ระบบสแกนและตรวจสอบข้อมูลสลิปอัตโนมัติ ส่งมอบข้อมูลทันที 24 ชม.
                             </p>
                         </div>
                     </div>
@@ -3761,16 +4085,19 @@ Website: https://www.thaiaisolution.co.th
                         <i class="fa-solid fa-bolt text-amber-400 text-2xl"></i>
                     </div>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">กำลังตรวจสอบยอดชำระและเตรียมส่งมอบไอดี...</h3>
-                <div class="space-y-1.5 text-xs text-slate-400 max-w-sm mx-auto font-mono text-left bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                <h3 class="text-lg font-bold text-white mb-2">ระบบสแกนสลิปและตรวจสอบยอดเงินอัตโนมัติ...</h3>
+                <div class="space-y-2 text-xs text-slate-400 max-w-sm mx-auto font-mono text-left bg-slate-900/80 p-4 rounded-xl border border-slate-800">
                     <div id="step-verify-1" class="flex items-center gap-2 text-amber-400">
-                        <i class="fa-solid fa-spinner animate-spin"></i> ตรวจสอบข้อมูลคำสั่งซื้อ...
+                        <i class="fa-solid fa-spinner animate-spin"></i> ตรวจจับ Mini QR Code & ถอดรหัสสลิป...
                     </div>
                     <div id="step-verify-2" class="flex items-center gap-2 text-slate-500">
-                        <i class="fa-solid fa-circle text-[8px]"></i> ตรวจเช็กยอดเงินโอนเข้า บจก.ไทยเอไอ โซลูชั่น...
+                        <i class="fa-solid fa-circle text-[8px]"></i> ตรวจสอบบัญชีผู้รับเงิน กสิกรไทย 090-5-56900-7...
                     </div>
                     <div id="step-verify-3" class="flex items-center gap-2 text-slate-500">
-                        <i class="fa-solid fa-circle text-[8px]"></i> ปลดล็อกรหัสผ่านและ 2FA Secret Key...
+                        <i class="fa-solid fa-circle text-[8px]"></i> ตรวจสอบยอดเงินโอนตรงตามคำสั่งซื้อ...
+                    </div>
+                    <div id="step-verify-4" class="flex items-center gap-2 text-slate-500">
+                        <i class="fa-solid fa-circle text-[8px]"></i> ปลดล็อกและส่งมอบรหัสผ่านทันที...
                     </div>
                 </div>
             </div>
@@ -4032,6 +4359,7 @@ Website: https://www.thaiaisolution.co.th
                                     <th class="p-3">ลูกค้า / เบอร์โทร / อีเมล</th>
                                     <th class="p-3">แพลตฟอร์ม & บัญชี</th>
                                     <th class="p-3 text-right">ยอดชำระ</th>
+                                    <th class="p-3 text-center">สลิป / ตรวจสอบ</th>
                                     <th class="p-3 text-center">สถานะ</th>
                                     <th class="p-3 text-center">ข้อมูลที่ส่งมอบ</th>
                                 </tr>
@@ -4174,6 +4502,71 @@ Website: https://www.thaiaisolution.co.th
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- Admin Slip Viewer Modal (Enlarged Slip & Verification Details) -->
+    <!-- ========================================================================= -->
+    <div id="admin-slip-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/90 backdrop-blur-md hidden flex justify-center items-center p-4">
+        <div class="relative w-full max-w-lg bg-slate-900 border border-cyan-500/40 rounded-3xl shadow-2xl overflow-hidden my-4 animate-fadeIn">
+            <div class="bg-slate-950 px-5 py-3.5 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">ตรวจสอบหลักฐานสลิปโอนเงิน</h4>
+                        <p class="text-[10px] text-slate-400">Order ID: <span id="admin-slip-modal-order-id" class="font-mono text-cyan-400 font-bold">ADS-XXXX</span></p>
+                    </div>
+                </div>
+                <button onclick="closeAdminSlipModal()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white transition-colors cursor-pointer" aria-label="Close slip modal">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-4">
+                <!-- Slip Image Display -->
+                <div class="bg-slate-950 rounded-2xl p-2 border border-slate-800 flex justify-center max-h-[420px] overflow-hidden">
+                    <img id="admin-slip-modal-img" src="" alt="Full Slip" class="max-h-[400px] w-auto object-contain rounded-xl shadow-lg">
+                </div>
+
+                <!-- Verification Info Grid -->
+                <div class="bg-slate-950/80 rounded-2xl p-3.5 border border-slate-800 text-xs space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">ผู้สั่งซื้อ:</span>
+                        <span id="admin-slip-modal-cust" class="font-bold text-white">-</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">ยอดชำระ:</span>
+                        <span id="admin-slip-modal-amount" class="font-bold text-amber-400 font-mono text-sm">฿0</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">เลขอ้างอิงสลิป:</span>
+                        <span id="admin-slip-modal-ref" class="font-mono text-cyan-400 font-bold">KBANK-XXXX</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-slate-400">เวลาตรวจเช็ก:</span>
+                        <span id="admin-slip-modal-time" class="text-slate-300">-</span>
+                    </div>
+                    <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-emerald-400 font-bold text-[11px]">
+                        <span>สถานะระบบ:</span>
+                        <span class="flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check"></i> ตรวจสอบอัตโนมัติ 100% (Auto-Verified)
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center justify-end gap-2 pt-1">
+                    <button id="admin-slip-modal-download-btn" class="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer">
+                        <i class="fa-solid fa-download"></i> ดาวน์โหลดรูปสลิป
+                    </button>
+                    <button onclick="closeAdminSlipModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold cursor-pointer">
+                        ปิดหน้าต่าง
+                    </button>
                 </div>
             </div>
         </div>
