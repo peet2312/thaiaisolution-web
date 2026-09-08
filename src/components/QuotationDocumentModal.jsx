@@ -327,11 +327,11 @@ export default function QuotationDocumentModal({ quotation, isOpen, onClose }) {
               <div className="space-y-1 p-3 rounded-xl bg-blue-50/60 border border-blue-100">
                 <strong className="text-brand-900 font-bold block text-xs flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  การชำระเงินผ่านบัญชีนิติบุคคลบริษัท:
+                  การชำระเงินผ่านบัญชีธนาคาร:
                 </strong>
-                <p className="font-medium text-slate-800">ธนาคารกสิกรไทย (KBank) / บัญชีกระแสรายวัน</p>
-                <p className="text-brand-800 font-bold">ชื่อบัญชี: บริษัท ไทยเอไอ โซลูชั่น จำกัด</p>
-                <p className="font-mono text-slate-700 font-bold">เลขที่บัญชี: 090-5-56900-7 (นิติบุคคล)</p>
+                <p className="font-medium text-slate-800">ธนาคารกสิกรไทย (KBank)</p>
+                <p className="text-brand-800 font-bold">ชื่อบัญชี: นาย อานันทชัย ทวีวัฒน์ (กรรมการผู้จัดการ)</p>
+                <p className="font-mono text-slate-700 font-bold">เลขที่บัญชี: 097-1-85033-7</p>
                 <p className="text-[10px] text-slate-500">*นิติบุคคลสามารถหักภาษี ณ ที่จ่าย 3% ตามกฎหมายสรรพากร</p>
               </div>
             </div>
