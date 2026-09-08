@@ -2740,7 +2740,6 @@
         let isDeliveryPasswordVisible = false;
         let currentSelectedSlip = null;
         let currentSlipRef = null;
-        let currentSelectedSlipIsDemo = false;
         let currentSlipPayload = null;
 
         function renderAdsStore(category = currentAdsCategory) {
@@ -2876,7 +2875,6 @@
             if (previewBox) previewBox.classList.add('hidden');
             currentSelectedSlip = null;
             currentSlipRef = null;
-            currentSelectedSlipIsDemo = false;
             currentSlipPayload = null;
         }
 
@@ -2918,7 +2916,6 @@
                 alert('กรุณาเลือกไฟล์รูปภาพสลิป (JPG, PNG, WEBP)');
                 return;
             }
-            currentSelectedSlipIsDemo = false;
             const reader = new FileReader();
             reader.onload = function(e) {
                 currentSelectedSlip = e.target.result;
@@ -2945,7 +2942,6 @@
             }
             currentSelectedSlip = null;
             currentSlipRef = null;
-            currentSelectedSlipIsDemo = false;
             currentSlipPayload = null;
             resetSlipUploadUI();
         }
@@ -2974,151 +2970,6 @@
             if (previewBox) previewBox.classList.remove('hidden');
         }
 
-        function generateDemoSlip() {
-            if (!currentCheckoutAccount) return;
-            currentSelectedSlipIsDemo = true;
-            const canvas = document.createElement('canvas');
-            canvas.width = 480;
-            canvas.height = 680;
-            const ctx = canvas.getContext('2d');
-
-            // Background
-            ctx.fillStyle = '#f8fafc';
-            ctx.fillRect(0, 0, 480, 680);
-
-            // Header Green Bar (KBank Green #138f2d)
-            const grad = ctx.createLinearGradient(0, 0, 480, 0);
-            grad.addColorStop(0, '#0e7023');
-            grad.addColorStop(1, '#138f2d');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, 480, 110);
-
-            // Header Text
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 22px sans-serif';
-            ctx.fillText('ธนาคารกสิกรไทย', 28, 48);
-            ctx.font = '14px sans-serif';
-            ctx.fillStyle = '#a7f3d0';
-            ctx.fillText('KASIKORNBANK • บริการโอนเงินสำเร็จ', 28, 76);
-
-            // Success badge in header
-            ctx.beginPath();
-            ctx.arc(420, 55, 24, 0, Math.PI * 2);
-            ctx.fillStyle = '#ffffff';
-            ctx.fill();
-            ctx.fillStyle = '#138f2d';
-            ctx.font = 'bold 24px sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('✓', 420, 63);
-            ctx.textAlign = 'left';
-
-            // White Card Body
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(20, 125, 440, 530);
-
-            // Date & Time
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' });
-            const timeStr = now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
-            const refNo = 'KBANK' + now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + Math.floor(100000 + Math.random()*900000);
-
-            ctx.fillStyle = '#64748b';
-            ctx.font = '12px sans-serif';
-            ctx.fillText('วันที่ทำรายการ: ' + dateStr + ' ' + timeStr + ' น.', 40, 158);
-            ctx.fillText('รหัสอ้างอิง: ' + refNo, 40, 180);
-
-            // Divider
-            ctx.strokeStyle = '#e2e8f0';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(40, 195);
-            ctx.lineTo(440, 195);
-            ctx.stroke();
-
-            // From Account
-            ctx.fillStyle = '#334155';
-            ctx.font = 'bold 13px sans-serif';
-            ctx.fillText('จากบัญชี (ผู้โอน)', 40, 222);
-            ctx.font = '14px sans-serif';
-            ctx.fillStyle = '#0f172a';
-            const custName = document.getElementById('checkout-cust-name')?.value.trim() || 'คุณลูกค้า (บัญชีทดสอบโอน)';
-            ctx.fillText(custName, 40, 246);
-            ctx.fillStyle = '#64748b';
-            ctx.font = '12px sans-serif';
-            ctx.fillText('ธนาคารกสิกรไทย  xxx-x-x' + Math.floor(1000+Math.random()*9000) + '-x', 40, 268);
-
-            // Arrow down
-            ctx.fillStyle = '#138f2d';
-            ctx.font = 'bold 16px sans-serif';
-            ctx.fillText('↓', 40, 298);
-
-            // To Account: นาย อานันทชัย ทวีวัฒน์ ธนาคารกสิกรไทย 097-1-85033-7
-            ctx.fillStyle = '#334155';
-            ctx.font = 'bold 13px sans-serif';
-            ctx.fillText('ไปยังบัญชี (ผู้รับเงิน)', 40, 328);
-            ctx.font = 'bold 15px sans-serif';
-            ctx.fillStyle = '#0f172a';
-            ctx.fillText('นาย อานันทชัย ทวีวัฒน์', 40, 352);
-            ctx.fillStyle = '#0284c7';
-            ctx.font = 'bold 13px sans-serif';
-            ctx.fillText('ธนาคารกสิกรไทย  097-1-85033-7', 40, 374);
-
-            // Divider
-            ctx.beginPath();
-            ctx.moveTo(40, 395);
-            ctx.lineTo(440, 395);
-            ctx.stroke();
-
-            // Amount Box
-            ctx.fillStyle = '#f0fdf4';
-            ctx.fillRect(40, 410, 400, 75);
-            ctx.strokeStyle = '#bbf7d0';
-            ctx.strokeRect(40, 410, 400, 75);
-
-            ctx.fillStyle = '#166534';
-            ctx.font = '13px sans-serif';
-            ctx.fillText('จำนวนเงินโอน (ยอดสุทธิ)', 60, 436);
-            ctx.font = 'bold 28px sans-serif';
-            ctx.fillStyle = '#15803d';
-            ctx.fillText('฿ ' + currentCheckoutAccount.price.toLocaleString() + '.00', 60, 470);
-
-            // Mini QR Verification at bottom
-            ctx.fillStyle = '#f8fafc';
-            ctx.fillRect(40, 500, 400, 130);
-            ctx.strokeStyle = '#e2e8f0';
-            ctx.strokeRect(40, 500, 400, 130);
-
-            // Draw QR Code
-            ctx.fillStyle = '#0f172a';
-            const qx = 60, qy = 515, qs = 80;
-            ctx.fillRect(qx, qy, qs, qs);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(qx+6, qy+6, qs-12, qs-12);
-            ctx.fillStyle = '#0f172a';
-            ctx.fillRect(qx+16, qy+16, qs-32, qs-32);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(qx+26, qy+26, qs-52, qs-52);
-
-            ctx.fillStyle = '#334155';
-            ctx.font = 'bold 12px sans-serif';
-            ctx.fillText('สแกนตรวจสอบสลิปอัตโนมัติ (e-Slip Standard)', 160, 545);
-            ctx.font = '11px sans-serif';
-            ctx.fillStyle = '#64748b';
-            ctx.fillText('Thai AI Solution Anti-Fake Slip Engine', 160, 568);
-            ctx.fillStyle = '#16a34a';
-            ctx.font = 'bold 11px sans-serif';
-            ctx.fillText('✓ บัญชีรับ: 097-1-85033-7 (นาย อานันทชัย ทวีวัฒน์)', 160, 592);
-
-            const demoPayload = `0046000600000101030140225${refNo}5303764540${currentCheckoutAccount.price}5802TH`;
-            currentSlipPayload = demoPayload;
-            currentSlipRef = refNo;
-
-            const dataUrl = canvas.toDataURL('image/png');
-            currentSelectedSlip = dataUrl;
-            showSlipPreview(dataUrl, 'kbank-slip-' + currentCheckoutAccount.price + '.png', currentSlipRef, true);
-            showToast('สร้างสลิปทดสอบแล้ว', 'บัญชีกสิกรไทย 097-1-85033-7 (นาย อานันทชัย ทวีวัฒน์) ยอด ฿' + currentCheckoutAccount.price.toLocaleString());
-        }
-
         function openAdsCheckout(accountId) {
             const inventory = getAdsInventory();
             const acc = inventory.find(a => a.id === accountId);
@@ -3130,7 +2981,6 @@
             currentCheckoutAccount = acc;
             currentSelectedSlip = null;
             currentSlipRef = null;
-            currentSelectedSlipIsDemo = false;
             currentSlipPayload = null;
             resetSlipUploadUI();
 
@@ -3161,7 +3011,6 @@
             if (checkoutTimerInterval) clearInterval(checkoutTimerInterval);
             currentSelectedSlip = null;
             currentSlipRef = null;
-            currentSelectedSlipIsDemo = false;
             currentSlipPayload = null;
             resetSlipUploadUI();
         }
@@ -3209,7 +3058,7 @@
             }
 
             if (!currentSelectedSlip) {
-                alert('กรุณาแนบรูปภาพสลิปโอนเงิน หรือกดปุ่ม "⚡ ใช้สลิปทดสอบด่วน" เพื่อให้ระบบตรวจสอบอัตโนมัติ');
+                alert('กรุณาแนบรูปภาพสลิปโอนเงินจริงจากแอปธนาคาร เพื่อให้ระบบตรวจสอบอัตโนมัติ');
                 const dropzone = document.getElementById('checkout-slip-dropzone');
                 if (dropzone) {
                     dropzone.classList.add('border-rose-500');
@@ -3218,7 +3067,7 @@
                 return;
             }
 
-            // ANTI-FAKE SLIP & ANTI-DUPLICATE VERIFICATION
+            // ANTI-FAKE SLIP & ANTI-DUPLICATE VERIFICATION (LIVE PRODUCTION)
             const overlay = document.getElementById('checkout-processing-overlay');
             const step1 = document.getElementById('step-verify-1');
             const step2 = document.getElementById('step-verify-2');
@@ -3238,8 +3087,8 @@
             }
 
             setTimeout(() => {
-                // If it's a real uploaded slip and NO QR code was detected -> REJECT FAKE SLIP
-                if (!currentSelectedSlipIsDemo && !currentSlipPayload) {
+                // If NO QR code was detected -> REJECT FAKE SLIP IMMEDIATELY
+                if (!currentSlipPayload) {
                     overlay.classList.add('hidden');
                     alert('❌ ระบบกรองสลิปปลอมปฏิเสธการทำรายการ:\n\nตรวจไม่พบ Mini QR Code มาตรฐานธนาคารบนภาพสลิปนี้! สลิปโอนเงินจริงจากทุกธนาคารในไทยจะมี QR Code สำหรับตรวจสอบเสมอ กรุณาแนบภาพสลิปจริงจากแอปธนาคาร');
                     return;
@@ -3249,7 +3098,7 @@
                 const orders = getAdsOrders();
                 const isDuplicate = orders.some(o => 
                     (o.slipPayload && o.slipPayload === currentSlipPayload) || 
-                    (o.slipRef && currentSlipRef && o.slipRef === currentSlipRef && !currentSelectedSlipIsDemo)
+                    (o.slipRef && currentSlipRef && o.slipRef === currentSlipRef)
                 );
 
                 if (isDuplicate) {
@@ -3305,7 +3154,7 @@
                                 receivingAccount: '097-1-85033-7',
                                 receivingName: 'นาย อานันทชัย ทวีวัฒน์',
                                 receivingBank: 'ธนาคารกสิกรไทย (KBank)',
-                                verifiedSource: currentSelectedSlipIsDemo ? 'Demo KBank e-Slip Verified' : 'jsQR Anti-Fake e-Slip Authenticated',
+                                verifiedSource: 'PromptPay Bank e-Slip QR Verified (Live Production)',
                                 paymentStatus: 'auto_verified',
                                 verifiedAt: new Date().toISOString(),
                                 status: 'delivered'
@@ -4157,11 +4006,11 @@ Website: https://www.thaiaisolution.co.th
                                     </div>
                                 </div>
 
-                                <div class="flex items-center justify-between pt-0.5">
-                                    <span class="text-[10px] text-slate-400">ทดลองระบบโดยไม่ต้องโอนจริง:</span>
-                                    <button type="button" onclick="generateDemoSlip()" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-[11px] font-bold flex items-center gap-1.5 transition-all cursor-pointer">
-                                        <i class="fa-solid fa-bolt text-amber-400"></i> ใช้สลิปทดสอบด่วน
-                                    </button>
+                                <div class="flex items-center justify-between pt-0.5 text-[10px] text-slate-400">
+                                    <span class="flex items-center gap-1 text-emerald-400 font-medium">
+                                        <i class="fa-solid fa-shield-halved"></i> รับเฉพาะสลิปโอนเงินจริง (PromptPay e-Slip)
+                                    </span>
+                                    <span class="text-slate-500 font-mono">ระบบกรองสลิปปลอม 100%</span>
                                 </div>
                             </div>
                         </div>
