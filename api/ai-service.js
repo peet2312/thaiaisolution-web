@@ -171,6 +171,10 @@ export function generateKnowledgeFallback(prompt, mode = 'general') {
     return `📄 **ระบบออกใบเสนอราคาทางการทันที (Instant Quotation):**\nท่านสามารถคำนวณราคาและออกใบเสนอราคาฉบับจริงได้เลยทันทีผ่านระบบออนไลน์ครับ:\n\n🌐 คำนวณและออกใบเสนอราคา: https://www.thaiaisolution.co.th/#estimator\n\nเมื่อกรอกข้อมูลเรียบร้อย ระบบจะออกเอกสาร A4 พร้อมตราประทับบริษัทและลงนามโดย นาย อานันทชัย ทวีวัฒน์ (กรรมการผู้จัดการ) ให้ดาวน์โหลด/พิมพ์ได้ทันที และบันทึกลงระบบหลังบ้านอัตโนมัติครับ! หรือโทรด่วน 📞 097-132-8145 (24 ชม.)`;
   }
 
+  if (lower.includes('แอคเคาท์') || lower.includes('บัญชีโฆษณา') || lower.includes('ยิงแอด') || lower.includes('bm') || lower.includes('tiktok agency') || lower.includes('google ads') || lower.includes('line lap') || lower.includes('ซื้อเฟส')) {
+    return `🛒 **ระบบจำหน่ายแอคเคาท์โฆษณาแท้ (Agency Ads Store):**\nบจก. ไทยเอไอ โซลูชั่น มีระบบจำหน่ายบัญชีโฆษณาคุณภาพสูง ลูกค้าสามารถกดสั่งซื้อ ชำระเงินผ่านเว็บ และรับ Username, Password, 2FA Secret Key ได้ทันทีอัตโนมัติตลอด 24 ชม.:\n\n• 🔵 Facebook Agency & BM Verified (วงเงินไม่จำกัด)\n• 🎵 TikTok Agency Account (Global ยิงทั่วโลก ภาษี 0%)\n• 🔴 Google Ads Invoiced & Aged (มีประวัติการใช้จ่าย ทนทาน)\n• 🟢 LINE LAP Agency Account (ยิงแอดลง LINE OA และ VOOM)\n\n🌐 สั่งซื้อและรับไอดีทันที: https://www.thaiaisolution.co.th/#ads-accounts\n🛡️ รับประกันเปลี่ยนฟรี 7 วัน พร้อมทีมวิศวกรดูแล 24 ชม. โทร 📞 097-132-8145`;
+  }
+
   // Default context-aware response
   return `✨ สวัสดีครับ! ขอบคุณที่สอบถามเข้ามาเกี่ยวกับ "${prompt}" ครับ\n\nทีมงานวิศวกรซอฟต์แวร์และที่ปรึกษา AI ของ บริษัท ไทยเอไอ โซลูชั่น จำกัด ยินดีช่วยวิเคราะห์และออกแบบโซลูชันที่ตอบโจทย์ธุรกิจของท่านที่สุด\n\nท่านสามารถ:\n1. โทรปรึกษาด่วนได้ที่เบอร์ 📞 **097-132-8145** (24 ชม.)\n2. คำนวณราคาออนไลน์ได้ที่ 🌐 **https://www.thaiaisolution.co.th/#estimator**\n3. หรือพิมพ์แจ้งสิ่งที่ต้องการให้ดูแลเพิ่มเติมได้เลยครับ! 😊`;
 }

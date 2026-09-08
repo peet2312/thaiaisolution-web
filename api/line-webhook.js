@@ -478,6 +478,15 @@ export default async function handler(req, res) {
         await replyMessage(replyToken, getQuotationFlex());
       }
 
+      // Ads Account Store
+      else if (text.includes('แอคเคาท์') || text.includes('บัญชีโฆษณา') || text.includes('ยิงแอด') || text.includes('bm') || text.includes('tiktok agency') || text.includes('google ads') || text.includes('line lap') || text.includes('ซื้อเฟส')) {
+        await replyMessage(replyToken, {
+          type: 'text',
+          text: '🛒 **ระบบจำหน่ายแอคเคาท์โฆษณาแท้ (Agency Ads Store):**\n\nบจก. ไทยเอไอ โซลูชั่น มีคลังบัญชีโฆษณาคุณภาพสูงสำหรับเอเจนซี่และนักการตลาด ลูกค้าสามารถกดสั่งซื้อ ชำระเงินผ่านเว็บ และรับ Username, Password, 2FA Secret Key บนหน้าเว็บได้ทันที 24 ชม. ครับ!\n\n• 🔵 Facebook Agency & BM Verified (วงเงินไม่จำกัด) ฿1,800 - ฿4,500\n• 🎵 TikTok Agency Global (ยิงทั่วโลก ภาษี 0%) ฿3,900\n• 🔴 Google Ads Invoiced & Aged (มีประวัติใช้จ่าย ทนทาน) ฿5,900\n• 🟢 LINE LAP Agency Account ฿3,500\n\n🛡️ รับประกันเปลี่ยนฟรี 7 วันเต็ม\n🌐 เลือกซื้อและรับไอดีทันที: https://www.thaiaisolution.co.th/#ads-accounts\n📞 โทรสอบถาม: 097-132-8145 (24 ชม.)',
+          quickReply: defaultQuickReplies
+        });
+      }
+
       // Price / Estimator
       else if (text.includes('ราคา') || text.includes('ประเมิน') || text.includes('เท่าไหร่') || text.includes('cost')) {
         await replyMessage(replyToken, {
