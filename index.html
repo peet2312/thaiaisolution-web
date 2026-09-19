@@ -1897,6 +1897,16 @@
                                 <textarea id="cust-notes" rows="3" placeholder="ระบุสิ่งที่ต้องการให้ระบบช่วย เช่น ต้องการทำเว็บและสแกนใบเสร็จ..." class="w-full bg-blue-50/50 border border-blue-200 hover:border-blue-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all"></textarea>
                             </div>
 
+                            <!-- PDPA Consent Checkbox -->
+                            <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-100">
+                                <label class="flex items-start gap-2.5 cursor-pointer select-none">
+                                    <input type="checkbox" id="contact-consent-cb" class="mt-0.5 w-4 h-4 text-blue-600 border-blue-300 rounded focus:ring-blue-500 cursor-pointer" required>
+                                    <span class="text-[11px] leading-relaxed text-slate-700">
+                                        ข้าพเจ้ายินยอมให้บริษัท ไทยเอไอ โซลูชั่น จำกัด เก็บรวบรวม ใช้ และประมวลผลข้อมูลส่วนบุคคลข้างต้นเพื่อวัตถุประสงค์ในการติดต่อกลับ จัดทำใบเสนอราคา และให้บริการตาม <button type="button" onclick="openPrivacyPolicyModal()" class="text-blue-600 underline hover:text-blue-800 font-semibold cursor-pointer">นโยบายความเป็นส่วนตัว (Privacy Policy)</button> ตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562
+                                    </span>
+                                </label>
+                            </div>
+
                             <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-600 hover:from-blue-600 hover:to-cyan-500 text-white font-bold text-xs sm:text-sm transition-all shadow-sm min-h-[46px] flex items-center justify-center gap-2 cursor-pointer">
                                 <i class="fa-solid fa-file-invoice-dollar text-amber-200"></i>
                                 <span>📄 ออกใบเสนอราคาจริงทันที & บันทึกเข้าระบบ</span>
@@ -1966,6 +1976,22 @@
                 <button onclick="switchTab('estimator')" class="hover:text-blue-700 transition-colors cursor-pointer">ประเมินราคา</button>
                 <button onclick="switchTab('portfolio')" class="hover:text-blue-700 transition-colors cursor-pointer">ตัวอย่างระบบจริง</button>
                 <button onclick="switchTab('contact')" class="hover:text-blue-700 transition-colors cursor-pointer">ติดต่อเรา</button>
+            </div>
+
+            <!-- Footer PDPA & Legal Policy Links -->
+            <div class="py-3 border-b border-slate-200/80 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-[11px] text-slate-500 font-medium">
+                <button onclick="openPrivacyPolicyModal()" class="hover:text-blue-700 transition-colors cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-shield-halved text-blue-600 text-[10px]"></i> นโยบายความเป็นส่วนตัว (Privacy Policy)
+                </button>
+                <button onclick="openCookiePolicyModal()" class="hover:text-blue-700 transition-colors cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-cookie-bite text-amber-600 text-[10px]"></i> นโยบายคุกกี้ (Cookie Policy)
+                </button>
+                <button onclick="openTermsModal()" class="hover:text-blue-700 transition-colors cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-file-contract text-blue-600 text-[10px]"></i> เงื่อนไขการให้บริการ (Terms of Service)
+                </button>
+                <button onclick="openCookiePreferencesModal()" class="hover:text-blue-700 text-blue-600 font-semibold transition-colors cursor-pointer flex items-center gap-1.5">
+                    <i class="fa-solid fa-gear text-blue-600 text-[10px]"></i> ตั้งค่าความเป็นส่วนตัว & คุกกี้ (Cookie Settings)
+                </button>
             </div>
 
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px] text-center sm:text-left">
@@ -2668,6 +2694,12 @@
         // Contact Form Submission -> Generate Instant Official Quotation
         function handleContactSubmit(e) {
             e.preventDefault();
+            const consentCb = document.getElementById('contact-consent-cb');
+            if (consentCb && !consentCb.checked) {
+                alert('กรุณาทำเครื่องหมายยินยอมรับทราบนโยบายความเป็นส่วนตัว (PDPA) เพื่อดำเนินการต่อ');
+                consentCb.focus();
+                return;
+            }
             const name = document.getElementById('cust-name').value.trim();
             const phone = document.getElementById('cust-phone').value.trim();
             const email = document.getElementById('cust-email').value.trim();
@@ -3445,6 +3477,13 @@
                 return;
             }
 
+            const checkoutConsent = document.getElementById('checkout-consent-cb');
+            if (checkoutConsent && !checkoutConsent.checked) {
+                alert('กรุณาทำเครื่องหมายยินยอมรับทราบนโยบายความเป็นส่วนตัว (PDPA) และเงื่อนไขการให้บริการก่อนดำเนินการ');
+                checkoutConsent.focus();
+                return;
+            }
+
             if (!currentSelectedSlip) {
                 alert('กรุณาแนบรูปภาพสลิปโอนเงินจริงจากแอปธนาคาร เพื่อให้ระบบตรวจสอบอัตโนมัติ');
                 const dropzone = document.getElementById('checkout-slip-dropzone');
@@ -4045,6 +4084,138 @@ Website: https://thaiaisolution.co.th
             const modal = document.getElementById('image-modal');
             modal.classList.add('hidden');
         }
+
+        // =========================================================================
+        // PDPA B.E. 2562 & Cookie Consent Management System
+        // =========================================================================
+        const PDPA_STORAGE_KEY = 'thai_ai_cookie_consent_v1';
+
+        function getCookieConsent() {
+            try {
+                const data = localStorage.getItem(PDPA_STORAGE_KEY);
+                return data ? JSON.parse(data) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function setCookieConsent(preferences) {
+            try {
+                const payload = {
+                    strictlyNecessary: true,
+                    analytics: !!preferences.analytics,
+                    marketing: !!preferences.marketing,
+                    timestamp: new Date().toISOString(),
+                    version: '1.0.0'
+                };
+                localStorage.setItem(PDPA_STORAGE_KEY, JSON.stringify(payload));
+                updateCookiePreferencesUI(payload);
+                return payload;
+            } catch (e) {
+                console.error('Error saving cookie consent:', e);
+            }
+        }
+
+        function updateCookiePreferencesUI(consent) {
+            const elAnalytics = document.getElementById('cookie-pref-analytics');
+            const elMarketing = document.getElementById('cookie-pref-marketing');
+            if (elAnalytics) elAnalytics.checked = !!(consent && consent.analytics);
+            if (elMarketing) elMarketing.checked = !!(consent && consent.marketing);
+        }
+
+        function initPdpaConsent() {
+            const consent = getCookieConsent();
+            const banner = document.getElementById('cookie-consent-banner');
+            const triggerBtn = document.getElementById('cookie-trigger-btn');
+            
+            if (triggerBtn) triggerBtn.classList.remove('hidden');
+
+            if (!consent) {
+                if (banner) {
+                    banner.classList.remove('hidden');
+                }
+            } else {
+                updateCookiePreferencesUI(consent);
+                if (banner) {
+                    banner.classList.add('hidden');
+                }
+            }
+        }
+
+        function acceptAllCookies() {
+            setCookieConsent({ analytics: true, marketing: true });
+            const banner = document.getElementById('cookie-consent-banner');
+            if (banner) banner.classList.add('hidden');
+            closeCookiePreferencesModal();
+            showToast('บันทึกการตั้งค่าคุกกี้', 'ขอบคุณที่ยอมรับการใช้งานคุกกี้เพื่อประสบการณ์ที่ดีที่สุด');
+        }
+
+        function rejectNonEssentialCookies() {
+            setCookieConsent({ analytics: false, marketing: false });
+            const banner = document.getElementById('cookie-consent-banner');
+            if (banner) banner.classList.add('hidden');
+            closeCookiePreferencesModal();
+            showToast('บันทึกการตั้งค่าคุกกี้', 'คุณได้ปฏิเสธคุกกี้ที่ไม่จำเป็น (คงไว้เฉพาะคุกกี้ที่จำเป็นต่อการทำงานของระบบ)');
+        }
+
+        function saveCustomCookiePreferences() {
+            const elAnalytics = document.getElementById('cookie-pref-analytics');
+            const elMarketing = document.getElementById('cookie-pref-marketing');
+            const analytics = elAnalytics ? elAnalytics.checked : false;
+            const marketing = elMarketing ? elMarketing.checked : false;
+
+            setCookieConsent({ analytics, marketing });
+            const banner = document.getElementById('cookie-consent-banner');
+            if (banner) banner.classList.add('hidden');
+            closeCookiePreferencesModal();
+            showToast('บันทึกการตั้งค่าสำเร็จ', 'บันทึกความประสงค์การใช้งานคุกกี้ของคุณเรียบร้อยแล้ว');
+        }
+
+        function openCookiePreferencesModal() {
+            const consent = getCookieConsent();
+            updateCookiePreferencesUI(consent || { analytics: false, marketing: false });
+            const modal = document.getElementById('cookie-preferences-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeCookiePreferencesModal() {
+            const modal = document.getElementById('cookie-preferences-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function openPrivacyPolicyModal() {
+            const modal = document.getElementById('pdpa-privacy-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closePrivacyPolicyModal() {
+            const modal = document.getElementById('pdpa-privacy-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function openCookiePolicyModal() {
+            const modal = document.getElementById('pdpa-cookie-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeCookiePolicyModal() {
+            const modal = document.getElementById('pdpa-cookie-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function openTermsModal() {
+            const modal = document.getElementById('pdpa-terms-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeTermsModal() {
+            const modal = document.getElementById('pdpa-terms-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initPdpaConsent();
+        });
     </script>
     <!-- ========================================================================= -->
     <!-- Official Printable Quotation Document Modal -->
@@ -4409,6 +4580,16 @@ Website: https://thaiaisolution.co.th
                                     <span class="text-slate-400 font-mono">ระบบกรองสลิปปลอม 100%</span>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- PDPA & Terms Consent Checkbox -->
+                        <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-100">
+                            <label class="flex items-start gap-2.5 cursor-pointer select-none">
+                                <input type="checkbox" id="checkout-consent-cb" class="mt-0.5 w-4 h-4 text-blue-600 border-blue-300 rounded focus:ring-blue-500 cursor-pointer">
+                                <span class="text-[11px] leading-relaxed text-slate-700">
+                                    ข้าพเจ้ายินยอมให้ประมวลผลข้อมูลส่วนบุคคลและยอมรับ <button type="button" onclick="openTermsModal()" class="text-blue-600 underline font-semibold hover:text-blue-800 cursor-pointer">เงื่อนไขการให้บริการ</button> และ <button type="button" onclick="openPrivacyPolicyModal()" class="text-blue-600 underline font-semibold hover:text-blue-800 cursor-pointer">นโยบายความเป็นส่วนตัว (PDPA)</button> ของบริษัท ไทยเอไอ โซลูชั่น จำกัด
+                                </span>
+                            </label>
                         </div>
 
                         <!-- Action Button -->
@@ -4983,6 +5164,522 @@ Website: https://thaiaisolution.co.th
             </div>
             <span class="hidden sm:inline">แชทผ่าน LINE OA</span>
         </a>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- PDPA & Cookie Consent Components -->
+    <!-- ========================================================================= -->
+
+    <!-- Floating Cookie Preferences Trigger Button (Always Accessible at Bottom-Left) -->
+    <div id="cookie-trigger-btn" class="fixed bottom-4 left-4 z-40">
+        <button onclick="openCookiePreferencesModal()" class="group flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-white/95 hover:bg-blue-50 text-slate-700 hover:text-blue-700 shadow-lg border border-slate-200 transition-all cursor-pointer backdrop-blur-md" title="จัดการความยินยอมคุกกี้ (Cookie Preferences)">
+            <i class="fa-solid fa-cookie-bite text-amber-500 text-lg group-hover:rotate-12 transition-transform"></i>
+            <span class="text-xs font-semibold hidden sm:inline">จัดการคุกกี้ (PDPA)</span>
+        </button>
+    </div>
+
+    <!-- Cookie Consent Bottom Banner (Shown to First-Time Visitors) -->
+    <div id="cookie-consent-banner" class="fixed bottom-0 inset-x-0 z-50 p-4 sm:p-5 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl transition-all hidden">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+            <div class="flex items-start gap-3.5 max-w-4xl">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 shrink-0 mt-0.5">
+                    <i class="fa-solid fa-cookie-bite text-xl text-amber-500"></i>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <h4 class="text-sm font-bold text-slate-900">ประกาศการใช้งานคุกกี้และความเป็นส่วนตัว (Cookie & Privacy Notice)</h4>
+                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 border border-blue-200">
+                            <i class="fa-solid fa-shield-halved text-blue-600"></i> PDPA B.E. 2562
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        บริษัท ไทยเอไอ โซลูชั่น จำกัด ใช้คุกกี้ที่จำเป็นต่อการทำงานของเว็บไซต์เพื่อให้บริการได้อย่างถูกต้อง ปลอดภัย และมีประสิทธิภาพ รวมถึงอาจใช้คุกกี้เพื่อการวิเคราะห์และนำเสนอบริการที่ตรงความต้องการของท่านตามความยินยอม ทั้งนี้เป็นไปตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ท่านสามารถเลือก "ยอมรับทั้งหมด", "ปฏิเสธคุกกี้ที่ไม่จำเป็น" หรือเลือก "ตั้งค่าคุกกี้" ได้ตามความประสงค์ ศึกษารายละเอียดเพิ่มเติมได้ที่ 
+                        <button type="button" onclick="openPrivacyPolicyModal()" class="text-blue-600 underline font-semibold hover:text-blue-800 cursor-pointer">นโยบายความเป็นส่วนตัว</button> และ 
+                        <button type="button" onclick="openCookiePolicyModal()" class="text-blue-600 underline font-semibold hover:text-blue-800 cursor-pointer">นโยบายคุกกี้</button>
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto shrink-0 justify-end">
+                <button type="button" onclick="openCookiePreferencesModal()" class="flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors cursor-pointer text-center">
+                    <i class="fa-solid fa-sliders text-slate-500 mr-1.5"></i>ตั้งค่าคุกกี้
+                </button>
+                <button type="button" onclick="rejectNonEssentialCookies()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors cursor-pointer text-center">
+                    ปฏิเสธคุกกี้ที่ไม่จำเป็น
+                </button>
+                <button type="button" onclick="acceptAllCookies()" class="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-sm hover:shadow-md transition-all cursor-pointer text-center">
+                    ยอมรับทั้งหมด
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Preferences Modal -->
+    <div id="cookie-preferences-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm hidden flex justify-center items-center p-4">
+        <div class="relative w-full max-w-xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden my-4 text-slate-800 animate-fadeIn">
+            <div class="bg-slate-50 px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center text-sm border border-blue-200">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900">ศูนย์การตั้งค่าคุกกี้และความเป็นส่วนตัว</h4>
+                        <p class="text-[11px] text-slate-500">Cookie Preferences Center (PDPA B.E. 2562)</p>
+                    </div>
+                </div>
+                <button onclick="closeCookiePreferencesModal()" class="p-1.5 rounded-lg bg-slate-100 hover:bg-rose-500 text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-6 space-y-4 max-h-[70vh] overflow-y-auto text-xs">
+                <p class="text-slate-600 leading-relaxed">
+                    เมื่อท่านเข้าชมเว็บไซต์ บริษัท ไทยเอไอ โซลูชั่น จำกัด ข้อมูลอาจถูกจัดเก็บหรือดึงกลับมาในรูปแบบของคุกกี้บนเบราว์เซอร์ของท่าน ท่านสามารถเลือกปิดหรือเปิดประเภทคุกกี้ที่ไม่จำเป็นได้ตามความต้องการด้านล่างนี้
+                </p>
+
+                <!-- Category 1: Necessary -->
+                <div class="p-4 rounded-2xl bg-blue-50/50 border border-blue-200 space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-shield-check text-emerald-600 text-sm"></i>
+                            <span class="font-bold text-slate-900 text-xs sm:text-sm">คุกกี้ที่จำเป็นอย่างยิ่ง (Strictly Necessary Cookies)</span>
+                        </div>
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">จำเป็นเสมอ</span>
+                    </div>
+                    <p class="text-slate-600 text-[11px] leading-relaxed">
+                        คุกกี้เหล่านี้จำเป็นสำหรับการทำงานพื้นฐานของเว็บไซต์ เช่น การจัดการความปลอดภัย การเชื่อมต่อระบบชำระเงิน การป้องกันการหลอกลวง และการจัดเก็บบันทึกความยินยอมของท่าน ระบบไม่สามารถทำงานได้อย่างถูกต้องหากไม่มีคุกกี้ส่วนนี้ จึงไม่สามารถปิดการใช้งานได้
+                    </p>
+                </div>
+
+                <!-- Category 2: Analytics -->
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-blue-600 text-sm"></i>
+                            <span class="font-bold text-slate-900 text-xs sm:text-sm">คุกกี้เพื่อการวิเคราะห์และวัดผล (Analytics & Performance)</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="cookie-pref-analytics" class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                    <p class="text-slate-600 text-[11px] leading-relaxed">
+                        ช่วยให้เรานับจำนวนการเข้าชม แหล่งที่มาของทราฟฟิก และพฤติกรรมการใช้งาน เพื่อประเมินและปรับปรุงประสิทธิภาพของเว็บไซต์ ข้อมูลทั้งหมดที่คุกกี้นี้รวบรวมจะถูกประมวลผลแบบข้อมูลรวม (Aggregated Data)
+                    </p>
+                </div>
+
+                <!-- Category 3: Marketing -->
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn text-amber-600 text-sm"></i>
+                            <span class="font-bold text-slate-900 text-xs sm:text-sm">คุกกี้เพื่อการตลาดและการโฆษณา (Marketing & Targeting)</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="cookie-pref-marketing" class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        </label>
+                    </div>
+                    <p class="text-slate-600 text-[11px] leading-relaxed">
+                        ช่วยให้เราและพาร์ทเนอร์สร้างโปรไฟล์ความสนใจของท่าน และนำเสนอโฆษณา ประชาสัมพันธ์บริการซอฟต์แวร์ หรือแพ็กเกจบัญชีโฆษณาที่เกี่ยวข้องและตรงตามความต้องการของท่านมากที่สุด
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 px-5 py-3.5 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                <button onclick="rejectNonEssentialCookies()" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-200 transition-colors cursor-pointer">
+                    ปฏิเสธทั้งหมดที่ไม่จำเป็น
+                </button>
+                <div class="flex items-center gap-2">
+                    <button onclick="saveCustomCookiePreferences()" class="px-4 py-2 rounded-xl border border-blue-600 text-blue-700 hover:bg-blue-50 text-xs font-bold transition-all cursor-pointer">
+                        บันทึกการตั้งค่า
+                    </button>
+                    <button onclick="acceptAllCookies()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm cursor-pointer">
+                        ยอมรับทั้งหมด
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDPA Privacy Policy Modal (Section 23 PDPA Compliance) -->
+    <div id="pdpa-privacy-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm hidden flex justify-center items-center p-3 sm:p-6">
+        <div class="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden my-4 text-slate-800 animate-fadeIn">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-900 px-6 py-4 flex items-center justify-between text-white shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-cyan-300">
+                        <i class="fa-solid fa-shield-halved text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold">นโยบายการคุ้มครองข้อมูลส่วนบุคคล (Privacy Policy)</h3>
+                        <p class="text-xs text-blue-200">ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)</p>
+                    </div>
+                </div>
+                <button onclick="closePrivacyPolicyModal()" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <!-- Meta Info Badge -->
+                <div class="p-4 rounded-2xl bg-blue-50/80 border border-blue-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div>
+                        <span class="font-bold text-blue-900">ผู้ควบคุมข้อมูลส่วนบุคคล (Data Controller):</span>
+                        <span class="text-slate-700 ml-1">บริษัท ไทยเอไอ โซลูชั่น จำกัด</span>
+                    </div>
+                    <div class="font-mono text-slate-500 text-[11px]">
+                        เลขนิติบุคคล: 0905569007271 | มีผลบังคับใช้: 18 กันยายน 2569
+                    </div>
+                </div>
+
+                <!-- Section 1 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                        บทนำและขอบเขตการบังคับใช้
+                    </h4>
+                    <p>
+                        บริษัท ไทยเอไอ โซลูชั่น จำกัด ("บริษัทฯ") ตระหนักและให้ความสำคัญอย่างยิ่งต่อการคุ้มครองสิทธิความเป็นส่วนตัวและความปลอดภัยของข้อมูลส่วนบุคคลของผู้ใช้บริการ ลูกค้า คู่ค้า และผู้เข้าเยี่ยมชมเว็บไซต์ นโยบายความเป็นส่วนตัวฉบับนี้จัดทำขึ้นเพื่อชี้แจงรายละเอียดการเก็บรวบรวม ใช้ เปิดเผย และคุ้มครองข้อมูลส่วนบุคคลตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) รวมถึงระเบียบและแนวปฏิบัติของสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.)
+                    </p>
+                </section>
+
+                <!-- Section 2 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                        ข้อมูลส่วนบุคคลที่เราเก็บรวบรวม
+                    </h4>
+                    <p>บริษัทฯ จะเก็บรวบรวมข้อมูลส่วนบุคคลเท่าที่จำเป็นต่อวัตถุประสงค์ในการให้บริการ ดังต่อไปนี้:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li><strong>ข้อมูลระบุตัวตนและข้อมูลการติดต่อ:</strong> เช่น ชื่อ-นามสกุล, ชื่อบริษัท/องค์กร, หมายเลขโทรศัพท์, ที่อยู่อีเมล, บัญชี LINE Official Account (LINE ID), ที่อยู่สำหรับออกเอกสารใบกำกับภาษีหรือใบเสนอราคา</li>
+                        <li><strong>ข้อมูลธุรกรรมและการเงิน:</strong> หลักฐานการชำระเงิน (สลิปโอนเงิน PromptPay / ธนาคาร), วันที่และเวลาโอนเงิน, ยอดเงินที่ทำรายการ, เลขที่อ้างอิงธุรกรรมธนาคาร, และข้อมูลประวัติการสั่งซื้อบัญชีโฆษณาหรือบริการพัฒนาซอฟต์แวร์</li>
+                        <li><strong>ข้อมูลทางเทคนิคและบันทึกการใช้งาน:</strong> เช่น หมายเลข IP Address, ชนิดและเวอร์ชันของเว็บเบราว์เซอร์, การตั้งค่าเขตเวลา, บันทึกการเข้าใช้งาน (Log files), และข้อมูลคุกกี้ (Cookies) ที่จำเป็นต่อการรักษาความปลอดภัย</li>
+                    </ul>
+                </section>
+
+                <!-- Section 3 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                        ฐานทางกฎหมายในการประมวลผลข้อมูล (Lawful Basis)
+                    </h4>
+                    <p>บริษัทฯ ดำเนินการประมวลผลข้อมูลส่วนบุคคลของท่านภายใต้ฐานความชอบธรรมด้วยกฎหมายตาม พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ดังนี้:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-bold text-blue-800 block mb-1">1. ฐานสัญญา (Contractual Basis)</span>
+                            <span class="text-slate-600 text-[11px]">เพื่อปฏิบัติตามสัญญาการให้บริการ การออกใบเสนอราคา การส่งมอบบัญชีโฆษณา หรือการพัฒนาซอฟต์แวร์ที่ท่านได้ทำคำสั่งซื้อ</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-bold text-blue-800 block mb-1">2. ฐานหน้าที่ตามกฎหมาย (Legal Obligation)</span>
+                            <span class="text-slate-600 text-[11px]">เพื่อปฏิบัติตามกฎหมายบัญชี กฎหมายภาษีอากร การออกใบกำกับภาษี และการรายงานต่อหน่วยงานกำกับดูแลของรัฐ</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-bold text-blue-800 block mb-1">3. ฐานประโยชน์โดยชอบด้วยกฎหมาย (Legitimate Interest)</span>
+                            <span class="text-slate-600 text-[11px]">เพื่อการรักษาความปลอดภัยของระบบ ป้องกันการฉ้อโกง ตรวจสอบสลิปปลอม และป้องกันการเข้าถึงข้อมูลโดยมิชอบ</span>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-bold text-blue-800 block mb-1">4. ฐานความยินยอม (Consent)</span>
+                            <span class="text-slate-600 text-[11px]">สำหรับการใช้คุกกี้เพื่อการวิเคราะห์และทำการตลาด หรือการติดต่อสื่อสารแจ้งข่าวสารสิทธิประโยชน์ที่ท่านให้ความยินยอมโดยชัดแจ้ง</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">4</span>
+                        วัตถุประสงค์ในการเก็บรวบรวมและใช้ข้อมูลส่วนบุคคล
+                    </h4>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li>เพื่อพิจารณา จัดทำ และออกเอกสารใบเสนอราคา (Official Quotation) ใบแจ้งหนี้ และใบเสร็จรับเงินอย่างเป็นทางการ</li>
+                        <li>เพื่อตรวจสอบยืนยันยอดการชำระเงินผ่านระบบอัตโนมัติ และส่งมอบรหัสการใช้งานบัญชีโฆษณาและระบบซอฟต์แวร์ทันที</li>
+                        <li>เพื่อให้บริการสนับสนุนทางเทคนิค ประสานงานให้คำปรึกษา และแก้ไขปัญหาให้แก่ผู้ใช้บริการผ่านช่องทางต่างๆ รวมถึง LINE Official Account และโทรศัพท์</li>
+                        <li>เพื่อพัฒนา ปรับปรุงประสิทธิภาพ และยกระดับคุณภาพของเว็บไซต์และระบบสมองกล AI ของบริษัทฯ</li>
+                        <li>เพื่อป้องกันและตรวจสอบการทุจริต การฟอกเงิน หรือการกระทำผิดทางกฎหมายคอมพิวเตอร์</li>
+                    </ul>
+                </section>
+
+                <!-- Section 5 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">5</span>
+                        ระยะเวลาในการเก็บรักษาข้อมูลส่วนบุคคล
+                    </h4>
+                    <p>
+                        บริษัทฯ จะเก็บรักษาข้อมูลส่วนบุคคลของท่านไว้ตามระยะเวลาที่จำเป็นต่อการบรรลุวัตถุประสงค์ในการให้บริการ หรือตามระยะเวลาที่กฎหมายที่เกี่ยวข้องกำหนดไว้ เช่น กฎหมายการบัญชีและภาษีอากร กำหนดให้จัดเก็บเอกสารทางบัญชีและภาษีไว้เป็นเวลาไม่น้อยกว่า 5-10 ปี เมื่อพ้นกำหนดระยะเวลาดังกล่าว บริษัทฯ จะดำเนินการลบ ทำลาย หรือทำให้ข้อมูลส่วนบุคคลนั้นไม่สามารถระบุตัวบุคคลได้อีกต่อไปอย่างปลอดภัย
+                    </p>
+                </section>
+
+                <!-- Section 6 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">6</span>
+                        การเปิดเผยข้อมูลส่วนบุคคลต่อบุคคลภายนอก
+                    </h4>
+                    <p>
+                        บริษัทฯ <strong>ไม่มีนโยบายจำหน่ายหรือเปิดเผยข้อมูลส่วนบุคคลของท่านเพื่อประโยชน์ทางการค้าแก่บุคคลภายนอกโดยเด็ดขาด</strong> เว้นแต่กรณีที่จำเป็นต้องเปิดเผยให้แก่:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li>ผู้ให้บริการภายนอกที่เกี่ยวข้องกับการดำเนินงาน เช่น ผู้ให้บริการคลาวด์เซิร์ฟเวอร์ความปลอดภัยสูง, ระบบโครงข่ายธนาคารเพื่อการยืนยันยอดเงิน</li>
+                        <li>หน่วยงานราชการ ผู้บังคับใช้กฎหมาย หรือหน่วยงานกำกับดูแลตามคำสั่งศาล หรือบทบัญญัติแห่งกฎหมายที่เกี่ยวข้อง</li>
+                    </ul>
+                </section>
+
+                <!-- Section 7 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">7</span>
+                        สิทธิของเจ้าของข้อมูลส่วนบุคคลตามกฎหมาย PDPA
+                    </h4>
+                    <p>ในฐานะเจ้าของข้อมูลส่วนบุคคล ท่านมีสิทธิตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ดังนี้:</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] pt-1">
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการขอเข้าถึงและรับสำเนา:</strong> ขอรับสำเนาข้อมูลส่วนบุคคลที่บริษัทฯ ถือครองอยู่</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการขอแก้ไขข้อมูล:</strong> ขอแก้ไขข้อมูลส่วนบุคคลให้ถูกต้อง เป็นปัจจุบัน และสมบูรณ์</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการขอให้ลบหรือทำลาย:</strong> ขอลบ ทำลาย หรือทำให้ไม่สามารถระบุตัวตนได้ตามเงื่อนไขกฎหมาย</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการคัดค้านการประมวลผล:</strong> คัดค้านการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคล</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการขอให้ระงับการใช้ข้อมูล:</strong> ขอให้ระงับการใช้ข้อมูลชั่วคราวในระหว่างการตรวจสอบ</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการขอโอนย้ายข้อมูล:</strong> ขอรับข้อมูลในรูปแบบที่สามารถอ่านหรือใช้งานโดยทั่วไปได้</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการเพิกถอนความยินยอม:</strong> ขอถอนความยินยอมที่เคยให้ไว้ได้ตลอดเวลา โดยไม่กระทบการประมวลผลก่อนหน้า</div>
+                        <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200"><strong>• สิทธิในการร้องเรียน:</strong> มีสิทธิร้องเรียนต่อสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.)</div>
+                    </div>
+                </section>
+
+                <!-- Section 8 -->
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-xs font-bold shrink-0">8</span>
+                        มาตรการรักษาความปลอดภัยของข้อมูล
+                    </h4>
+                    <p>
+                        บริษัทฯ ใช้มาตรการรักษาความมั่นคงปลอดภัยทั้งทางเทคนิค (Technical Measures) และการบริหารจัดการ (Organizational Measures) ที่ได้มาตรฐานสากล เช่น การเข้ารหัสข้อมูลความปลอดภัยสูงผ่านโปรโตคอล HTTPS/TLS (SSL 256-bit), การควบคุมสิทธิ์การเข้าถึงข้อมูลตามลำดับหน้าที่ (Role-Based Access Control), และการตรวจสอบความปลอดภัยของระบบคอมพิวเตอร์อย่างสม่ำเสมอ
+                    </p>
+                </section>
+
+                <!-- Section 9 -->
+                <section class="space-y-2 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                        <i class="fa-solid fa-address-book text-blue-600"></i>
+                        ช่องทางการติดต่อผู้ควบคุมข้อมูลส่วนบุคคลและ DPO
+                    </h4>
+                    <p class="text-slate-600">
+                        หากท่านมีข้อสงสัย ข้อเสนอแนะ หรือประสงค์ที่จะใช้สิทธิของเจ้าของข้อมูลส่วนบุคคล สามารถติดต่อเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (Data Protection Officer - DPO) ของบริษัทฯ ได้ที่:
+                    </p>
+                    <div class="space-y-1 font-medium text-slate-700 text-xs">
+                        <p><strong>ชื่อผู้ควบคุม:</strong> บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.)</p>
+                        <p><strong>ที่อยู่:</strong> เลขที่ 149/8 ถนนเก้าแสน ตำบลบ่อยาง อำเภอเมืองสงขลา จังหวัดสงขลา 90000</p>
+                        <p><strong>อีเมล:</strong> <a href="mailto:support@thaiaisolution.co.th" class="text-blue-600 underline">support@thaiaisolution.co.th</a> หรือ <a href="mailto:thaiaisolution@outlook.com" class="text-blue-600 underline">thaiaisolution@outlook.com</a></p>
+                        <p><strong>โทรศัพท์:</strong> 097-132-8145</p>
+                        <p><strong>LINE Official Account:</strong> @319feyqj</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-50 px-6 py-3.5 border-t border-slate-200 flex items-center justify-between shrink-0">
+                <span class="text-[11px] text-slate-500">นโยบายความเป็นส่วนตัวนี้ได้รับการปรับปรุงและมีผลบังคับใช้ล่าสุดเมื่อ 18 กันยายน 2569</span>
+                <button onclick="closePrivacyPolicyModal()" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer">
+                    เข้าใจและปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDPA Cookie Policy Modal -->
+    <div id="pdpa-cookie-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm hidden flex justify-center items-center p-3 sm:p-6">
+        <div class="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden my-4 text-slate-800 animate-fadeIn">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-amber-800 via-amber-700 to-yellow-800 px-6 py-4 flex items-center justify-between text-white shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-amber-200">
+                        <i class="fa-solid fa-cookie-bite text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold">นโยบายการใช้คุกกี้ (Cookie Policy)</h3>
+                        <p class="text-xs text-amber-200">บริษัท ไทยเอไอ โซลูชั่น จำกัด</p>
+                    </div>
+                </div>
+                <button onclick="closeCookiePolicyModal()" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">1. คุกกี้ (Cookies) คืออะไร?</h4>
+                    <p>
+                        คุกกี้ คือ ไฟล์ข้อความขนาดเล็กที่จัดเก็บไว้ในคอมพิวเตอร์หรืออุปกรณ์เคลื่อนที่ของท่านเมื่อท่านเข้าชมเว็บไซต์ คุกกี้ช่วยให้เว็บไซต์สามารถจดจำการตั้งค่า ตัวเลือก และกิจกรรมของท่านในระหว่างการเข้าใช้งาน เพื่อให้ท่านได้รับความสะดวก รวดเร็ว และประสบการณ์การใช้งานที่ดีเยี่ยม
+                    </p>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">2. ประเภทของคุกกี้ที่เราใช้งาน</h4>
+                    <p>บริษัทฯ มีการใช้งานคุกกี้บนเว็บไซต์ในประเภทต่างๆ ดังต่อไปนี้:</p>
+                    <div class="space-y-3 pt-1">
+                        <div class="p-3.5 rounded-xl bg-blue-50/60 border border-blue-200">
+                            <span class="font-bold text-blue-900 block mb-1">คุกกี้ที่จำเป็นอย่างยิ่ง (Strictly Necessary Cookies)</span>
+                            <span class="text-slate-600 text-xs">คุกกี้เหล่านี้จำเป็นอย่างยิ่งต่อการทำงานของเว็บไซต์ เพื่อให้ท่านสามารถท่องเว็บและใช้งานฟังก์ชันพื้นฐาน เช่น ระบบตรวจสอบสลิปโอนเงิน การจัดทำใบเสนอราคา และการจดจำความยินยอมตาม PDPA หากไม่มีคุกกี้นี้ เว็บไซต์จะไม่สามารถทำงานได้อย่างสมบูรณ์</span>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-slate-900 block mb-1">คุกกี้เพื่อการวิเคราะห์และวัดผล (Analytics & Performance Cookies)</span>
+                            <span class="text-slate-600 text-xs">คุกกี้ประเภทนี้ช่วยให้เราเก็บรวบรวมข้อมูลสถิติ เช่น จำนวนผู้เข้าชม หน้าเว็บไซต์ที่ได้รับความนิยม และข้อผิดพลาดที่เกิดขึ้น เพื่อนำมาวิเคราะห์และปรับปรุงประสิทธิภาพของเว็บไซต์</span>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                            <span class="font-bold text-slate-900 block mb-1">คุกกี้เพื่อการตลาดและการโฆษณา (Marketing & Targeting Cookies)</span>
+                            <span class="text-slate-600 text-xs">คุกกี้เหล่านี้อาจถูกตั้งค่าโดยบริษัทฯ หรือพันธมิตรผู้ให้บริการโฆษณา เพื่อสร้างโปรไฟล์เกี่ยวกับความสนใจของท่าน และนำเสนอโฆษณาบริการหรือแพ็กเกจซอฟต์แวร์ที่ตรงกับความสนใจของท่านบนเว็บไซต์อื่นๆ</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="space-y-3">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">3. รายการคุกกี้หลักที่ใช้งานบนเว็บไซต์</h4>
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2.5">ชื่อคุกกี้ / คีย์</th>
+                                    <th class="p-2.5">ผู้ให้บริการ</th>
+                                    <th class="p-2.5">วัตถุประสงค์</th>
+                                    <th class="p-2.5">ประเภท</th>
+                                    <th class="p-2.5">อายุการจัดเก็บ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 text-slate-600">
+                                <tr>
+                                    <td class="p-2.5 font-mono text-blue-700 font-medium">thai_ai_cookie_consent_v1</td>
+                                    <td class="p-2.5">Thai AI Solution</td>
+                                    <td class="p-2.5">บันทึกสถานะการตั้งค่าความยินยอมคุกกี้ของผู้ใช้</td>
+                                    <td class="p-2.5"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">จำเป็น</span></td>
+                                    <td class="p-2.5">1 ปี</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono text-blue-700 font-medium">thai_ai_orders</td>
+                                    <td class="p-2.5">Thai AI Solution</td>
+                                    <td class="p-2.5">จัดเก็บประวัติรายการสั่งซื้อและใบเสนอราคาสำหรับเบราว์เซอร์นี้</td>
+                                    <td class="p-2.5"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold text-[10px]">จำเป็น</span></td>
+                                    <td class="p-2.5">ถาวร (Local)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 font-mono text-blue-700 font-medium">_ga, _gid</td>
+                                    <td class="p-2.5">Google Analytics</td>
+                                    <td class="p-2.5">สถิติและวิเคราะห์พฤติกรรมการเข้าชมเว็บไซต์</td>
+                                    <td class="p-2.5"><span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold text-[10px]">วิเคราะห์</span></td>
+                                    <td class="p-2.5">24 ชม. - 2 ปี</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">4. การจัดการและลบคุกกี้ผ่านเว็บเบราว์เซอร์</h4>
+                    <p>
+                        ท่านสามารถเลือกที่จะลบหรือปิดการใช้งานคุกกี้ทั้งหมดหรือบางประเภทได้ตลอดเวลา ผ่านการตั้งค่าของเว็บเบราว์เซอร์ที่ท่านใช้งาน ดังนี้:
+                    </p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li><strong>Google Chrome:</strong> การตั้งค่า (Settings) &gt; ความเป็นส่วนตัวและความปลอดภัย &gt; คุกกี้และข้อมูลอื่นของไซต์</li>
+                        <li><strong>Apple Safari:</strong> การตั้งค่า (Preferences) &gt; ความเป็นส่วนตัว (Privacy) &gt; จัดการข้อมูลเว็บไซต์</li>
+                        <li><strong>Mozilla Firefox:</strong> ตัวเลือก (Options) &gt; ความเป็นส่วนตัวและความปลอดภัย &gt; คุกกี้และข้อมูลไซต์</li>
+                        <li><strong>Microsoft Edge:</strong> การตั้งค่า (Settings) &gt; คุกกี้และการอนุญาตไซต์</li>
+                    </ul>
+                    <p class="text-amber-700 bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs">
+                        ⚠️ <strong>หมายเหตุ:</strong> การปิดการใช้งานคุกกี้ที่จำเป็นอย่างยิ่ง อาจส่งผลให้คุณสมบัติและฟังก์ชันบางประการของเว็บไซต์ไม่สามารถทำงานได้อย่างสมบูรณ์
+                    </p>
+                </section>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-50 px-6 py-3.5 border-t border-slate-200 flex items-center justify-between shrink-0">
+                <button onclick="openCookiePreferencesModal(); closeCookiePolicyModal();" class="px-4 py-2 rounded-xl border border-blue-600 text-blue-700 hover:bg-blue-50 text-xs font-bold transition-all cursor-pointer">
+                    <i class="fa-solid fa-sliders mr-1.5"></i>ตั้งค่าคุกกี้เดี๋ยวนี้
+                </button>
+                <button onclick="closeCookiePolicyModal()" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold transition-all cursor-pointer">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="pdpa-terms-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm hidden flex justify-center items-center p-3 sm:p-6">
+        <div class="relative w-full max-w-3xl max-h-[90vh] flex flex-col bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden my-4 text-slate-800 animate-fadeIn">
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 px-6 py-4 flex items-center justify-between text-white shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-blue-300">
+                        <i class="fa-solid fa-file-contract text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold">เงื่อนไขและข้อตกลงการใช้บริการ (Terms of Service)</h3>
+                        <p class="text-xs text-slate-300">บริษัท ไทยเอไอ โซลูชั่น จำกัด (THAI AI SOLUTION CO., LTD.)</p>
+                    </div>
+                </div>
+                <button onclick="closeTermsModal()" class="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">1. การยอมรับข้อกำหนดและเงื่อนไข</h4>
+                    <p>
+                        ข้อตกลงและเงื่อนไขการใช้บริการนี้ ("ข้อตกลง") มีผลผูกพันทางกฎหมายระหว่างท่าน ("ผู้ใช้บริการ" หรือ "ลูกค้า") กับ บริษัท ไทยเอไอ โซลูชั่น จำกัด ("บริษัทฯ") การเข้าถึง ใช้งานเว็บไซต์ หรือการสั่งซื้อบริการใดๆ ถือว่าท่านได้รับทราบ เข้าใจ และตกลงที่จะปฏิบัติตามเงื่อนไขทั้งหมดในข้อตกลงนี้ รวมถึงนโยบายความเป็นส่วนตัว (Privacy Policy)
+                    </p>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">2. ขอบเขตการให้บริการ</h4>
+                    <p>บริษัทฯ ให้บริการด้านเทคโนโลยีสารสนเทศ การตลาด และปัญญาประดิษฐ์ ได้แก่:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li>บริการพัฒนาเว็บไซต์องค์กร, ระบบ E-Commerce, โมบายล์แอปพลิเคชัน, ซอฟต์แวร์ ERP / CRM</li>
+                        <li>บริการติดตั้งและพัฒนาโมเดล AI เฉพาะทาง, AI Chatbot 24 ชม., และระบบสแกนเอกสารอัจฉริยะ (AI OCR)</li>
+                        <li>บริการจัดจำหน่ายบัญชีโฆษณาแท้ (Ads Accounts) สำหรับการตลาดออนไลน์ที่มีประวัติความน่าเชื่อถือสูง</li>
+                    </ul>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">3. การสั่งซื้อ การชำระเงิน และการตรวจสอบสลิป</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li>ผู้ใช้บริการตกลงชำระเงินตามราคาที่ระบุไว้ในระบบ โดยโอนเงินเข้าบัญชีทางการของบริษัทฯ หรือกรรมการผู้มีอำนาจ (ธนาคารกสิกรไทย 097-1-85033-7 นาย อานันทชัย ทวีวัฒน์)</li>
+                        <li>ระบบของบริษัทฯ ใช้เทคโนโลยีสแกนและตรวจสอบข้อมูลสลิปโอนเงินจริง (PromptPay Mini QR Anti-Fraud) อัตโนมัติ โดยจะปฏิเสธสลิปปลอม สลิปที่ยอดเงินไม่ถูกต้อง หรือสลิปที่ใช้ซ้ำโดยเด็ดขาด</li>
+                        <li>เมื่อการตรวจสอบเสร็จสมบูรณ์ ระบบจะส่งมอบข้อมูลการเข้าใช้งานบัญชีโฆษณา หรือใบเสร็จ/ใบเสนอราคาทันที</li>
+                    </ul>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">4. ข้อห้ามในการใช้งาน</h4>
+                    <p>ผู้ใช้บริการตกลงว่าจะไม่ใช้บริการหรือระบบของบริษัทฯ ในลักษณะดังต่อไปนี้:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                        <li>การนำบัญชีโฆษณาไปใช้ในกิจกรรมที่ขัดต่อกฎหมายของประเทศไทย หรือกฎหมายระหว่างประเทศ เช่น การพนันออนไลน์ การฟอกเงิน การหลอกลวงประชาชน หรือสินค้าผิดกฎหมาย</li>
+                        <li>การพยายามเจาะระบบ (Hacking), ส่งไวรัส, มัลแวร์ หรือการกระทำใดๆ ที่ก่อให้เกิดความเสียหายต่อโครงสร้างพื้นฐานของบริษัทฯ</li>
+                        <li>การแอบอ้างเป็นบุคคลอื่น หรือให้ข้อมูลอันเป็นเท็จในการติดต่อหรือทำธุรกรรม</li>
+                    </ul>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">5. ทรัพย์สินทางปัญญา</h4>
+                    <p>
+                        เครื่องหมายการค้า โลโก้ ซอร์สโค้ด ข้อความ รูปภาพ งานออกแบบ และสิทธิบัตรซอฟต์แวร์ทั้งหมดบนเว็บไซต์นี้ เป็นทรัพย์สินทางปัญญาของ บริษัท ไทยเอไอ โซลูชั่น จำกัด ห้ามมิให้ผู้ใดคัดลอก ดัดแปลง ทำซ้ำ หรือนำไปเผยแพร่โดยไม่ได้รับความยินยอมเป็นลายลักษณ์อักษรจากบริษัทฯ
+                    </p>
+                </section>
+
+                <section class="space-y-2">
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base">6. กฎหมายที่ใช้บังคับและเขตอำนาจศาล</h4>
+                    <p>
+                        ข้อตกลงนี้ให้อยู่ภายใต้การบังคับใช้และการตีความตามกฎหมายแห่งราชอาณาจักรไทย ข้อพิพาทใดๆ ที่เกิดขึ้นจากหรือเกี่ยวข้องกับข้อตกลงนี้ ให้อยู่ในเขตอำนาจของศาลที่มีอำนาจในประเทศไทย
+                    </p>
+                </section>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-50 px-6 py-3.5 border-t border-slate-200 flex items-center justify-end shrink-0">
+                <button onclick="closeTermsModal()" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all cursor-pointer">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- Print CSS Optimization -->
