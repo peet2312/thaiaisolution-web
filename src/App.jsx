@@ -18,6 +18,10 @@ export default function App() {
   const getInitialPage = () => {
     const path = window.location.pathname.toLowerCase().replace(/\/+$/, '');
     const hash = window.location.hash.toLowerCase();
+    if (path === '/payroll' || hash === '#payroll') {
+      window.location.href = '/payroll/';
+      return 'home';
+    }
     if (path === '/admin' || hash === '#admin') return 'admin';
     if (path === '/services' || hash === '#services') return 'services';
     if (path === '/estimator' || hash === '#estimator') return 'estimator';

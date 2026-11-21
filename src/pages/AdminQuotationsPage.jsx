@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, FileText, Search, Download, Trash2, Edit, CheckCircle2, 
   Clock, AlertCircle, Phone, Mail, User, Building2, Eye, Printer, 
-  RefreshCw, Plus, Filter, MessageSquare, ChevronRight, TrendingUp, DollarSign 
+  RefreshCw, Plus, Filter, MessageSquare, ChevronRight, TrendingUp, DollarSign,
+  Banknote
 } from 'lucide-react';
 import { 
   getQuotations, updateQuotationStatus, deleteQuotation, exportQuotationsToCSV, saveQuotation 
@@ -126,6 +127,17 @@ export default function AdminQuotationsPage({ t, setPage }) {
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5">
+          <a
+            href="/payroll/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-blue-600/20 active:scale-95 transition-all"
+            title="ระบบจัดการเงินเดือน สลิป และหนังสือรับรองการทำงาน"
+          >
+            <Banknote className="w-4 h-4" />
+            <span>ระบบ Payroll & หนังสือรับรอง</span>
+          </a>
+
           <button
             onClick={() => exportQuotationsToCSV()}
             className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-emerald-600/20 active:scale-95 transition-all"
